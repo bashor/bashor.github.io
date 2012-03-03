@@ -32,6 +32,9 @@
     var OkCount = 0;
     var WrongCount = 0;
 
+    var maxQueueElLenIsOn = false;
+    var maxQueueElLen = 0;
+
     function step(state, r)
     {
       var retStates = [];
@@ -40,6 +43,7 @@
         f = state.indexOf(r[i].key)
         if (f >= 0) {
           var t = state.substring(0,f) + r[i].value + state.substring(f + r[i].key.length)
+          if (!maxQueueElLenIsOn || t.length <= maxQueueElLen)
           retStates.push(t);
         }
       };
@@ -122,8 +126,11 @@
 
       $("#G_OK_count").text("0");
       $("#G_WRONG_count").text("0")
-        OkCount = 0;
+      OkCount = 0;
       WrongCount = 0;
+
+      maxQueueElLenIsOn = $("#maxQueueElLenOn").is(":checked");
+      maxQueueElLen = parseInt($("#maxQueueElLen").val());
 
       $("#currentStep").text("0");
       currentStep = 0;
@@ -249,15 +256,16 @@
       <span>#<span id="currentStep">-</span></span>
     </div>
     <input id="printQueue" type="checkbox" checked>print queue<br>
+    <input id="maxQueueElLenOn" type="checkbox" checked>max legth for queue element = <input id="maxQueueElLen" type="text" size="3" value="10"/><br/>
     <!--input id="processDuplicates" type="checkbox">process duplicates<br-->
 
     <p>T=[<input id="T" type="text" size="40">]
     <p>R=<Br>
       <textarea id="R" cols="40" rows="20" style="margin-left: 20px;">S : a
 S : Sa</textarea>
-    <p>function userChecker(st) {<Br>
+    <p>function userChecker(st) {<br/>
       <textarea id="checker" cols="40" rows="3" style="margin-left: 20px">return true;</textarea>
-    <Br>}
+    <br/>}
     </p>
   </div>
   <div id="placeholder">&nbsp;</div>
