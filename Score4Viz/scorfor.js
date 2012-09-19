@@ -35,12 +35,12 @@ function SetupField(){
   }
   MoveCount = 0;
   paper = new Raphael(document.getElementById("field"), 850, 550);
-  paper.text(230, 520, White).attr({"font-size":20});
-  paper.text(430, 520, Black).attr({"font-size":20});
-  paper.text(630, 520, "Kat").attr({"font-size":20});
-  Player[0][0] = paper.text(280, 520, ""+Player[0][1]).attr({"font-size":20});
-  Player[1][0] = paper.text(480, 520, ""+Player[1][1]).attr({"font-size":20});
-  Player[2][0] = paper.text(670, 520, ""+Player[2][1]).attr({"font-size":20});
+  // paper.text(200, 520, "W").attr({"font-size":20});
+  // paper.text(400, 520, "B").attr({"font-size":20});
+  // paper.text(630, 520, "Kat").attr({"font-size":20});
+  // Player[0][0] = paper.text(280, 520, ""+Player[0][1]).attr({"font-size":20});
+  // Player[1][0] = paper.text(480, 520, ""+Player[1][1]).attr({"font-size":20});
+  // Player[2][0] = paper.text(670, 520, ""+Player[2][1]).attr({"font-size":20});
   for (i=0;i<5;i++){
     Grid[i] = new Array();
   for (k=0;k<5;k++){
@@ -58,7 +58,7 @@ function SetupField(){
   // if (Turn){
   //   PlayerName = White;
   // }
-  WhosTurn = paper.text(110, 20, "Current Player: "+PlayerName).attr({"font-size":18});
+  WhosTurn = paper.text(210, 20, ""+PlayerName).attr({"font-size":18});
 }
 
 function GetStart(Peg){
@@ -117,11 +117,13 @@ function buttonClick(e) {
     DropDown(PegArr[parseInt((posX-25)/50)], Turn,Lvl);
     Turn = !Turn;
     // if (Turn){
+    //   Player[0][0].attr({text: "  "+PlayerName});
     //   PlayerName = White;
     // } else {
+    //   Player[1][0].attr({text: "  "+PlayerName});
     //   PlayerName = Black;
     // }
-    WhosTurn.attr({text: "Current Player: "+PlayerName});
+    WhosTurn.attr({text: ""+PlayerName});
     MoveCount++;
     CheckIt();
 } }
@@ -201,17 +203,17 @@ function CheckIt(){
   }
   if (Winner[0] != ""){
     if (Winner[0] == "W"){
-      Player[0][1]++;
-      Player[0][0].attr({text: ""+Player[0][1]});
-      WhosTurn.attr({text: "Winner: " + PlayerName});
+      // Player[0][1]++;
+      // Player[0][0].attr({text: ""+PlayerName});
+      WhosTurn.attr({text: "" + PlayerName + " Win!"});
     } else if (Winner[0] == "B"){
-      Player[1][1]++;
-      Player[1][0].attr({text: ""+Player[1][1]});
-      WhosTurn.attr({text: "Winner: " + PlayerName});
+      // Player[1][1]++;
+      // Player[1][0].attr({text: ""+PlayerName});
+      WhosTurn.attr({text: "" + PlayerName + " Win!"});
     } else if (Winner[0] == "K"){
-      Player[2][1]++;
-      Player[2][0].attr({text: ""+Player[2][1]});
-      WhosTurn.attr({text: "Winner: Tie"});
+      // Player[2][1]++;
+      // Player[2][0].attr({text: ""+Player[2][1]});
+      WhosTurn.attr({text: "Tie"});
     }
     ShowWin(Winner[1]);
 } }
