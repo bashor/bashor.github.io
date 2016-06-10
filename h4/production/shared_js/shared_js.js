@@ -153,6 +153,57 @@
               };
             })
           }),
+          KuiSceneEvent: Kotlin.createClass(null, function (type) {
+            this.type = type;
+          }, /** @lends _.com.jetbrains.kui.KuiSceneEvent.prototype */ {
+            component1: function () {
+              return this.type;
+            },
+            copy_g8zm9b$: function (type) {
+              return new _.com.jetbrains.kui.KuiSceneEvent(type === void 0 ? this.type : type);
+            },
+            toString: function () {
+              return 'KuiSceneEvent(type=' + Kotlin.toString(this.type) + ')';
+            },
+            hashCode: function () {
+              var result = 0;
+              result = result * 31 + Kotlin.hashCode(this.type) | 0;
+              return result;
+            },
+            equals_za3rmp$: function (other) {
+              return this === other || (other !== null && (typeof other === 'object' && (Object.getPrototypeOf(this) === Object.getPrototypeOf(other) && Kotlin.equals(this.type, other.type))));
+            }
+          }, /** @lends _.com.jetbrains.kui.KuiSceneEvent */ {
+            Type: Kotlin.createEnumClass(function () {
+              return [Kotlin.Enum];
+            }, function $fun() {
+              $fun.baseInitializer.call(this);
+            }, function () {
+              return {
+                WINDOW_DEICONIFIED: function () {
+                  return new _.com.jetbrains.kui.KuiSceneEvent.Type();
+                },
+                WINDOW_ACTIVATED: function () {
+                  return new _.com.jetbrains.kui.KuiSceneEvent.Type();
+                },
+                WINDOW_DEACTIVATED: function () {
+                  return new _.com.jetbrains.kui.KuiSceneEvent.Type();
+                },
+                WINDOW_ICONIFIED: function () {
+                  return new _.com.jetbrains.kui.KuiSceneEvent.Type();
+                },
+                WINDOW_CLOSING: function () {
+                  return new _.com.jetbrains.kui.KuiSceneEvent.Type();
+                },
+                WINDOW_CLOSED: function () {
+                  return new _.com.jetbrains.kui.KuiSceneEvent.Type();
+                },
+                WINDOW_OPENED: function () {
+                  return new _.com.jetbrains.kui.KuiSceneEvent.Type();
+                }
+              };
+            })
+          }),
           KPoint: Kotlin.createClass(null, function (x, y) {
             this.x = x;
             this.y = y;

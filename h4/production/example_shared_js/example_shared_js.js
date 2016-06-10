@@ -21,10 +21,16 @@
         return Kotlin.modules['shared_js'].com.jetbrains.kui.KColor.Companion.hsb_6y0v78$(360.0 * x / closure$width, saturation, brightness);
       };
     },
+    showGradientScene_mr05rm$f_0: function (closure$opened) {
+      return function (it) {
+        if (it.type === Kotlin.modules['shared_js'].com.jetbrains.kui.KuiSceneEvent.Type.WINDOW_CLOSED)
+          closure$opened.v = false;
+      };
+    },
     calc: function (i, start, end) {
       return start * (1.0 - i) + i * end;
     },
-    showGradientScene_mr05rm$f_0: function (closure$au, closure$ay, closure$db, closure$sm, closure$zb) {
+    showGradientScene_mr05rm$f_1: function (closure$au, closure$ay, closure$db, closure$sm, closure$zb, closure$opened) {
       return function (ms) {
         var i = ms / 5000.0;
         if (i > 1.0)
@@ -35,7 +41,7 @@
         closure$db.location = new Kotlin.modules['shared_js'].com.jetbrains.kui.KPoint(calc(i, 900, 1111), calc(i, -40, 480));
         closure$sm.location = new Kotlin.modules['shared_js'].com.jetbrains.kui.KPoint(calc(i, -90, 1111), calc(i, -40, 520));
         closure$zb.location = new Kotlin.modules['shared_js'].com.jetbrains.kui.KPoint(calc(i, -90, 1111), calc(i, 600, 560));
-        return i < 1.0;
+        return i < 1.0 && closure$opened.v;
       };
     },
     showGradientScene_mr05rm$: function ($receiver, width, height) {
@@ -55,7 +61,9 @@
       unaryPlus.call(new Kotlin.modules['shared_js'].com.jetbrains.kui.KPath(Kotlin.modules['shared_js'].com.jetbrains.kui.KPoint_init_vux9f0$(100, 300), void 0, void 0, void 0, new Kotlin.modules['shared_js'].com.jetbrains.kui.KLinearGradient(Kotlin.modules['shared_js'].com.jetbrains.kui.KPoint_init_vux9f0$(100, 300), Kotlin.modules['shared_js'].com.jetbrains.kui.KPoint_init_vux9f0$(200, 200), [Kotlin.modules['stdlib'].kotlin.to_l1ob02$(0.0, blue1), Kotlin.modules['stdlib'].kotlin.to_l1ob02$(1.0, blue2)]), void 0, [new Kotlin.modules['shared_js'].com.jetbrains.kui.KPathValue.LineTo(Kotlin.modules['shared_js'].com.jetbrains.kui.KPoint_init_vux9f0$(200, 200)), new Kotlin.modules['shared_js'].com.jetbrains.kui.KPathValue.LineTo(Kotlin.modules['shared_js'].com.jetbrains.kui.KPoint_init_vux9f0$(300, 300))]));
       unaryPlus.call(new Kotlin.modules['shared_js'].com.jetbrains.kui.KText('UI', Kotlin.modules['shared_js'].com.jetbrains.kui.KPoint_init_vux9f0$(300, 300), new Kotlin.modules['shared_js'].com.jetbrains.kui.KFont(Kotlin.modules['shared_js'].com.jetbrains.kui.KFontName.SANS_SERIF, 280, true), blue2));
       scene.update();
-      scene.animation_401a2l$(_.showGradientScene_mr05rm$f_0(au, ay, db, sm, zb)).start_za3lpa$(30);
+      var opened = {v: true};
+      scene.addSceneEventListener_pfqo16$(_.showGradientScene_mr05rm$f_0(opened));
+      scene.animation_401a2l$(_.showGradientScene_mr05rm$f_1(au, ay, db, sm, zb, opened)).start_za3lpa$(30);
     },
     JetPoint: Kotlin.createClass(null, function (point, color, velX, velY) {
       this.point = point;
@@ -87,14 +95,14 @@
         closure$animations.add_za3rmp$(_.drawLine$f(p1, p2, line, strokeWidth_));
       };
     },
-    f: function (closure$cursor) {
+    f: function (closure$cursor, closure$opened) {
       return function (it) {
         var tmp$0, tmp$1;
         (tmp$1 = closure$cursor.v) != null ? (tmp$1.fill = Kotlin.equals((tmp$0 = closure$cursor.v) != null ? tmp$0.fill : null, Kotlin.modules['shared_js'].com.jetbrains.kui.KColor.Companion.WHITE) ? Kotlin.modules['shared_js'].com.jetbrains.kui.KColor.Companion.rgb_tjonv8$(0, 0, 0, 0) : Kotlin.modules['shared_js'].com.jetbrains.kui.KColor.Companion.WHITE) : null;
-        return true;
+        return closure$opened.v;
       };
     },
-    f_0: function (closure$animations) {
+    f_0: function (closure$animations, closure$opened) {
       return function (it) {
         var tmp$0;
         tmp$0 = closure$animations.iterator();
@@ -102,10 +110,10 @@
           var animation = tmp$0.next();
           animation(it);
         }
-        return true;
+        return closure$opened.v;
       };
     },
-    renderLogo_26bdom$f: function (closure$lines, closure$cursor) {
+    renderLogo_26bdom$f: function (closure$lines, closure$cursor, closure$opened) {
       return function () {
         this.rectangle_y4f9xb$(0, 0, this.sceneWidth, this.sceneHeight, void 0, void 0, Kotlin.modules['shared_js'].com.jetbrains.kui.KColor.Companion.gray_vux9f0$(100));
         var animations = Kotlin.modules['stdlib'].kotlin.collections.mutableListOf_9mqe4v$([]);
@@ -121,14 +129,14 @@
         closure$lines.add_za3rmp$(this.text_m6hqy6$('', 73, 153, font, Kotlin.modules['shared_js'].com.jetbrains.kui.KColor.Companion.WHITE));
         closure$lines.add_za3rmp$(this.text_m6hqy6$('', 73, 183, font, Kotlin.modules['shared_js'].com.jetbrains.kui.KColor.Companion.WHITE));
         closure$cursor.v = this.rectangle_y4f9xb$(73, 95, 15, 6, void 0, void 0, Kotlin.modules['shared_js'].com.jetbrains.kui.KColor.Companion.WHITE);
-        this.animation_401a2l$(_.f(closure$cursor)).start_za3lpa$(4);
-        this.animation_401a2l$(_.f_0(animations)).start_za3lpa$(10);
+        this.animation_401a2l$(_.f(closure$cursor, closure$opened)).start_za3lpa$(4);
+        this.animation_401a2l$(_.f_0(animations, closure$opened)).start_za3lpa$(10);
       };
     },
-    renderLogo_26bdom$f_1: function (closure$codeGroup) {
+    renderLogo_26bdom$f_1: function (closure$codeGroup, closure$opened) {
       return function (ms) {
         closure$codeGroup.location = new Kotlin.modules['shared_js'].com.jetbrains.kui.KPoint(300.0, 800.0 - ms / 60.0);
-        return true;
+        return closure$opened.v;
       };
     },
     keyEventListener$line: function (closure$OFFSET_LINE, closure$cursor_pos_column, closure$SYMBOL_WIDTH) {
@@ -175,19 +183,25 @@
         }
       };
     },
-    type$f: function (closure$text, closure$i, closure$keyEventListener, closure$next) {
+    type$f: function (closure$text, closure$i, closure$keyEventListener, closure$next, closure$opened) {
       return function (it) {
         closure$keyEventListener(new Kotlin.modules['shared_js'].com.jetbrains.kui.KuiKeyEvent(Kotlin.modules['shared_js'].com.jetbrains.kui.KuiKeyEvent.Type.KEY_UP, closure$text.charAt(closure$i.v++).charCodeAt(0)));
         var $receiver = closure$i.v < closure$text.length;
         if (!$receiver)
           closure$next();
-        return $receiver;
+        return $receiver && closure$opened.v;
       };
     },
-    renderLogo_26bdom$type: function (closure$scene, closure$keyEventListener) {
+    renderLogo_26bdom$type: function (closure$scene, closure$keyEventListener, closure$opened) {
       return function (text, fps, next) {
         var i = {v: 0};
-        closure$scene.animation_401a2l$(_.type$f(text, i, closure$keyEventListener, next)).start_za3lpa$(fps);
+        closure$scene.animation_401a2l$(_.type$f(text, i, closure$keyEventListener, next, closure$opened)).start_za3lpa$(fps);
+      };
+    },
+    renderLogo_26bdom$f_2: function (closure$opened) {
+      return function (it) {
+        if (it.type === Kotlin.modules['shared_js'].com.jetbrains.kui.KuiSceneEvent.Type.WINDOW_CLOSED)
+          closure$opened.v = false;
       };
     },
     f_2: function (closure$scene, closure$keyEventListener) {
@@ -200,45 +214,46 @@
         closure$type(closure$jb, 10, _.f_2(closure$scene, closure$keyEventListener));
       };
     },
-    f_4: function (closure$wakeUp, closure$hackers, closure$jb, closure$scene, closure$keyEventListener, closure$type) {
+    f_4: function (closure$wakeUp, closure$hackers, closure$jb, closure$scene, closure$keyEventListener, closure$type, closure$opened) {
       return function (it) {
         var t = 1500;
         if (it > t) {
           closure$type(Kotlin.modules['stdlib'].kotlin.text.repeat_kljjvw$('\b', (closure$wakeUp + closure$hackers).length), 35, _.f_3(closure$jb, closure$scene, closure$keyEventListener, closure$type));
         }
-        return it < t;
+        return it < t && closure$opened.v;
       };
     },
-    f_5: function (closure$scene, closure$wakeUp, closure$hackers, closure$jb, closure$keyEventListener, closure$type) {
+    f_5: function (closure$scene, closure$wakeUp, closure$hackers, closure$jb, closure$keyEventListener, closure$type, closure$opened) {
       return function () {
-        closure$scene.animation_401a2l$(_.f_4(closure$wakeUp, closure$hackers, closure$jb, closure$scene, closure$keyEventListener, closure$type)).start_za3lpa$(30);
+        closure$scene.animation_401a2l$(_.f_4(closure$wakeUp, closure$hackers, closure$jb, closure$scene, closure$keyEventListener, closure$type, closure$opened)).start_za3lpa$(30);
       };
     },
-    f_6: function (closure$hackers, closure$scene, closure$wakeUp, closure$jb, closure$keyEventListener, closure$type) {
+    f_6: function (closure$hackers, closure$scene, closure$wakeUp, closure$jb, closure$keyEventListener, closure$type, closure$opened) {
       return function () {
-        closure$type(closure$hackers, 5, _.f_5(closure$scene, closure$wakeUp, closure$hackers, closure$jb, closure$keyEventListener, closure$type));
+        closure$type(closure$hackers, 5, _.f_5(closure$scene, closure$wakeUp, closure$hackers, closure$jb, closure$keyEventListener, closure$type, closure$opened));
       };
     },
-    renderLogo_26bdom$f_2: function (closure$hackers, closure$scene, closure$wakeUp, closure$jb, closure$keyEventListener, closure$type) {
+    renderLogo_26bdom$f_3: function (closure$hackers, closure$scene, closure$wakeUp, closure$jb, closure$keyEventListener, closure$type, closure$opened) {
       return function () {
-        closure$type(Kotlin.modules['stdlib'].kotlin.text.repeat_kljjvw$('\b', 3), 20, _.f_6(closure$hackers, closure$scene, closure$wakeUp, closure$jb, closure$keyEventListener, closure$type));
+        closure$type(Kotlin.modules['stdlib'].kotlin.text.repeat_kljjvw$('\b', 3), 20, _.f_6(closure$hackers, closure$scene, closure$wakeUp, closure$jb, closure$keyEventListener, closure$type, closure$opened));
       };
     },
     renderLogo_26bdom$: function ($receiver) {
       var lines = Kotlin.modules['stdlib'].kotlin.collections.mutableListOf_9mqe4v$([]);
       var cursor = {v: null};
-      var scene = Kotlin.modules['shared_js'].com.jetbrains.kui.createScene_nu0d4f$($receiver, 1440, 600, _.renderLogo_26bdom$f(lines, cursor));
+      var opened = {v: true};
+      var scene = Kotlin.modules['shared_js'].com.jetbrains.kui.createScene_nu0d4f$($receiver, 1440, 600, _.renderLogo_26bdom$f(lines, cursor, opened));
       var codeFont = new Kotlin.modules['shared_js'].com.jetbrains.kui.KFont(Kotlin.modules['shared_js'].com.jetbrains.kui.KFontName.MONOSPACED, 20);
       var codeGroup = new Kotlin.modules['shared_js'].com.jetbrains.kui.KGroup(Kotlin.modules['shared_js'].com.jetbrains.kui.KPoint_init_vux9f0$(1000, 1000));
       var tmp$0;
       var index = 0;
-      tmp$0 = Kotlin.modules['stdlib'].kotlin.text.lineSequence_gw00vq$(Kotlin.modules['stdlib'].kotlin.text.trimIndent_pdl1w0$('\n    scene.root.add(codeGroup)\n    scene.animation { ms ->\n        codeGroup.location = KPoint(300.0 , 800.0 - ms / 40.0)\n        true\n    }.start(20)\n\n\n\n\n\n\n\n\n\n\n    interface KToolKit<out TKScene : KScene> {\n        fun createScene(w : Int, h : Int): TKScene\n        fun createImage(w: Int, h: Int, c: (x: Int, y: Int) -> KColor): KImage\n        fun loadImage(url : String) : KImage\n    }\n\n\n\n\n\n\n\n\n\n\n    interface KScene: KParent {\n        var root: KGroup\n        var width: Int\n        var height: Int\n        fun update()\n        fun animation(f: (millisecondsSinceStarted: Int) -> Boolean): KAnimation\n        fun addKeyEventListener(l: (e: KuiKeyEvent) -> Unit)\n        fun addMouseEventListener(l: (e: KuiMouseEvent) -> Unit)\n    }\n\n\n\n\n\n    ')).iterator();
+      tmp$0 = Kotlin.modules['stdlib'].kotlin.text.lineSequence_gw00vq$(Kotlin.modules['stdlib'].kotlin.text.trimIndent_pdl1w0$('\n    interface KToolKit<out TKScene : KScene> {\n        fun createScene(w : Int, h : Int): TKScene\n        fun createImage(w: Int, h: Int, c: (x: Int, y: Int) -> KColor): KImage\n        fun loadImage(url : String) : KImage\n        fun loadResourceImage(path: String) : KImage\n    }\n\n\n\n    GameOfCodesJVM.kt :\n\n    fun main(args: Array<String>) = gameot(J2DToolKit())\n\n\n\n\n    GameOfCodesJS.kt :\n\n    fun gameot() = gameot(JsToolKit("kui2", "../example_shared_js"))\n\n\n\n\n\n\n    KScene {\n        KGroup {\n            KNode -> KImageNode or KShape like KCircle, KRectangle, KPath and others\n            ...\n            KGroup {...}\n            ...\n        }\n    }\n\n\n\n\n\n\n    scene.animation { ms ->\n        codeGroup.location = KPoint(300.0 , 800.0 - ms / 40.0)\n        true\n    }.start(20)\n\n\n\n\n\n\n    +KImageNode(createImage(width, height, { x, y ->\n        val level = 2.0 * y / height\n        val saturation = if (level > 1.0) 1.0 else level\n        val brightness = if (level > 1.0) 2.0 - level else 1.0\n        KColor.hsb(360.0 * x / width, saturation, brightness)\n    }))\n    ')).iterator();
       while (tmp$0.hasNext()) {
         var item = tmp$0.next();
         codeGroup.add_snb51j$(new Kotlin.modules['shared_js'].com.jetbrains.kui.KText(item, Kotlin.modules['shared_js'].com.jetbrains.kui.KPoint_init_vux9f0$(0, 30 * index++), codeFont, Kotlin.modules['shared_js'].com.jetbrains.kui.KColor.Companion.WHITE));
       }
       scene.root.add_snb51j$(codeGroup);
-      scene.animation_401a2l$(_.renderLogo_26bdom$f_1(codeGroup)).start_za3lpa$(20);
+      scene.animation_401a2l$(_.renderLogo_26bdom$f_1(codeGroup, opened)).start_za3lpa$(20);
       var OFFSET_LINE = 73;
       var OFFSET_COLUMN = 95;
       var SYMBOL_WIDTH = 16;
@@ -246,12 +261,13 @@
       var cursor_pos_column = {v: 0};
       var cursor_pos_line = {v: 0};
       var keyEventListener = _.renderLogo_26bdom$keyEventListener(OFFSET_LINE, cursor_pos_column, SYMBOL_WIDTH, OFFSET_COLUMN, cursor_pos_line, SYMBOL_HEIGHT, lines, scene, cursor);
-      var type = _.renderLogo_26bdom$type(scene, keyEventListener);
+      var type = _.renderLogo_26bdom$type(scene, keyEventListener, opened);
       var wakeUp = 'WAKE UP\n';
       var neo = 'NEO!';
       var hackers = 'HACKERS\n';
       var jb = 'JIT\n\b\b\bET\nBRAINS\n__';
-      type(wakeUp + neo, 5, _.renderLogo_26bdom$f_2(hackers, scene, wakeUp, jb, keyEventListener, type));
+      scene.addSceneEventListener_pfqo16$(_.renderLogo_26bdom$f_2(opened));
+      type(wakeUp + neo, 5, _.renderLogo_26bdom$f_3(hackers, scene, wakeUp, jb, keyEventListener, type, opened));
     },
     arcanoid_98h5cc$: function (toolkit) {
       var game = new _.ArcGame(toolkit);
@@ -262,10 +278,12 @@
       this.handler = new _.ArcHandler();
       this.scene_51gl9a$ = this.toolkit.createScene_vux9f0$(_.ArcGame.Companion.WIDTH, _.ArcGame.Companion.HEIGHT);
       this.running = false;
+      this.opened = true;
       var KeyEventVK_A = 65;
       var KeyEventVK_D = 68;
       var KeyEventVK_W = 87;
       this.scene_51gl9a$.addKeyEventListener_6dloon$(_.ArcGame.ArcGame$f(this, KeyEventVK_A, KeyEventVK_D, KeyEventVK_W));
+      this.scene_51gl9a$.addSceneEventListener_pfqo16$(_.ArcGame.ArcGame$f_0(this));
       this.handler.createLevel();
     }, /** @lends _.ArcGame.prototype */ {
       start: function () {
@@ -282,7 +300,7 @@
         return function (it) {
           this$ArcGame.tick();
           this$ArcGame.render();
-          return true;
+          return this$ArcGame.opened;
         };
       },
       Companion: Kotlin.createObject(null, function () {
@@ -339,6 +357,12 @@
               }
             }
           }
+        };
+      },
+      ArcGame$f_0: function (this$ArcGame) {
+        return function (it) {
+          if (it.type === Kotlin.modules['shared_js'].com.jetbrains.kui.KuiSceneEvent.Type.WINDOW_CLOSED)
+            this$ArcGame.opened = false;
         };
       }
     }),
@@ -458,6 +482,7 @@
       this.gem = new _.Sprite(4, 1, this.sprites);
       this.lambda = new _.Sprite(5, 1, this.sprites);
       this.handler = new _.Handler(this);
+      this.opened = true;
       this.scene_pt3rn4$ = this.tk.createScene_vux9f0$(_.Game.Companion.WIDTH, _.Game.Companion.HEIGHT);
       tmp$0 = Kotlin.modules['stdlib'].kotlin.collections.get_indices_eg9ybj$(_.Game.Companion.player), tmp$1 = tmp$0.first, tmp$2 = tmp$0.last, tmp$3 = tmp$0.step;
       for (var i = tmp$1; i <= tmp$2; i += tmp$3) {
@@ -480,6 +505,7 @@
       var KeyEventVK_W = 87;
       var KeyEventVK_SP = 32;
       this.scene_pt3rn4$.addKeyEventListener_6dloon$(_.Game.Game$f(this, KeyEventVK_W, KeyEventVK_A, KeyEventVK_D, KeyEventVK_SP));
+      this.scene_pt3rn4$.addSceneEventListener_pfqo16$(_.Game.Game$f_0(this));
     }, /** @lends _.Game.prototype */ {
       render_zeepit$: function (g) {
         var tmp$0, tmp$1;
@@ -545,7 +571,7 @@
         return function (it) {
           this$Game.tick();
           this$Game.render_zeepit$(this$Game.scene_pt3rn4$);
-          return true;
+          return this$Game.opened;
         };
       },
       Game$f: function (this$Game, closure$KeyEventVK_W, closure$KeyEventVK_A, closure$KeyEventVK_D, closure$KeyEventVK_SP) {
@@ -596,6 +622,12 @@
             }
           }
         };
+      },
+      Game$f_0: function (this$Game) {
+        return function (it) {
+          if (it.type === Kotlin.modules['shared_js'].com.jetbrains.kui.KuiSceneEvent.Type.WINDOW_CLOSED)
+            this$Game.opened = false;
+        };
       }
     }),
     Handler: Kotlin.createClass(null, function (game) {
@@ -645,7 +677,7 @@
       },
       createLevel: function () {
         var tmp$0, tmp$1;
-        var levelData = ['EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEES', 'EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEES', 'EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEES', 'EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEES', 'EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEESSSEGEEEEEEEEEEEEEEES', 'SEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEESESSSEGEEEEEEEEEEEEEGGS', 'SEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEWEEEESSSEGEEEEEEEEEEEEEGGS', 'SEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEESSSEEESSSEGEEEEEEEEEEEEEGSS', 'SEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEESSSEEESSSEGEEEEEEEEEEEEESSS', 'SEEEEEEEEEEEEEEEEEEEEEEEEEEEEESSESSSEEESSSEGEEEEEEEEEEEEEGGS', 'SEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEESSSEEESSSEGEEEEEEEEEEEWEGGS', 'SEEEEEEEEEEEEEEEEEEEEESSSESSEEEEESSSEEESSSEEEEEEEEEEEEESSGGS', 'SEEEEEEEEEEEEEEEEEEEEESSSEEEEEEESSSSEEESSSSSEEEEEEEEEEESSGGS', 'SEEEEEAEEEEEEEEEEEEWWEWEEEEEEEEESSSSEEESSSSSEGEEEEEEEEEGGGGS', 'SSEEEEEEEEEEEEEEESSSSSSSSEEEEEESSSSSGGGEEEEEEGEEEEEEEEEGGGGS', 'SSEEEEEEEEEEEEEESSSSSSSSSEEEEEESSSSSEEEEEEEEEGEEEEEEEEEGGSSS', 'SSEEPEEEESSEEWEEEEEEEEEEEEEEEEESSSSSEEWEEEEEEGEEEEEEEEEGGSSS', 'SSEEEEEESSSEEEEEEEEEEEEEEEEEESSSSSSSSSSSSSSSEEEEEEWEEEEGGSSS', 'SSRRRRRRSSSRRRRRRRRRRRRRRRRRRSSSSSSSSSSSSSSSRRRRRRRRRRRRRSSS', 'DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD'];
+        var levelData = ['EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEES', 'EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEES', 'EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEES', 'EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEES', 'EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEESSSEGEEEEEEEEEEEEEEES', 'SEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEESESDSEGEEEEEEEEEEEEEEES', 'SEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEWEEEESDSEGEEEEEEEEEEEEEEES', 'SEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEESSSEEESDSEGEEEEEEEEEEEEEEES', 'SEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEESSSEEESDSEGEEEEEEEEEEEEEGSS', 'SEEEEEEEEEEEEEEEEEEEEEEEEEESSDSSESSSEEESDSEGEEEEEEEEEEEEESSS', 'SEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEESSSEEESDSEGEEEEEEEEEEEWEGGS', 'SEEEEEEEEEEEEEEEEEEEEESSSEEEEEEEESSSEEESDSEEEEEEEEEEEEEEEGGS', 'SEEEEEEEEEEEEEEEEEGGEESSSEEEEEEESSSSEEESDSSSEEEEEEEEEEESSGGS', 'SEEEEEEAEEEEGGGEEEEWEEWEEEEEEEEESSSSEEESDSSSEGEEEEEEEEEGGGGS', 'SSEEEEEEEEEEEEEEESSSSSSSSEEEEEESSSSSGGGEEEEEEGEEEEEEEEEGGGGS', 'SSEEEEEEEEEEEEEESSSSSSSSSEEEEEESSSSSEEEEEEEEEGEEEEEEEEEGGSSS', 'SSEEPEEEESSEEWEEEEEEEEEEEEEEEEESSSSSEEWEEEEEEGEEEEEEEEEGGSSS', 'SSEEEEEESSSEEEEEEEEEEEEEEEEEESSSSSSSSSSSSSSSEEEEEEWEEEEGGSSS', 'SSRRRRRRSSSRRRRRRRRRRRRRRRRRRSSSSSSSSSSSSSSSRRRRRRRRRRRRRSSS', 'DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD'];
         var width = levelData[0].length;
         var height = levelData.length;
         tmp$0 = height - 1;
@@ -956,7 +988,7 @@
         }
       },
       tick: function () {
-        var tmp$0, tmp$1, tmp$2;
+        var tmp$0, tmp$1, tmp$2, tmp$3;
         this.x += this.velX;
         this.y += this.velY;
         this.ableToJump = false;
@@ -980,7 +1012,7 @@
             }
              else {
               if (!this.falling && !this.jumping) {
-                this.gravity = 0.0;
+                this.gravity = 0.2;
                 this.falling = true;
               }
             }
@@ -1028,8 +1060,8 @@
         }
         if (this.falling) {
           this.gravity += 0.3;
-          if (this.gravity < 5)
-            this.velY = this.gravity * 1.5 | 0;
+          this.gravity = (tmp$3 = Kotlin.modules['stdlib'].kotlin.collections.min_bvy38t$([this.gravity, 5.0])) != null ? tmp$3 : Kotlin.throwNPE();
+          this.velY = this.gravity * 1.5 | 0;
         }
         if (this.velX !== 0) {
           this.frameDelay++;

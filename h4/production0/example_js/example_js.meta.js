@@ -1,0 +1,1 @@
+// Kotlin.kotlin_module_metadata(3, "example_js", "H4sIAAAAAAAAADXLsQ7CIBRAUYpIyIsDaRxMJxNnTUcnJz/AxZk8CyVYCoY+/19N63SWe+EMW3N1Pb4j3bAb0LvT8JzGet9IzRreVl9Xi2Jx/RMcHOw8Hl//M1MMyUxUQvKG8BFdfWlBYekw5WBBzgWIewoE0uPoMoHyBW1wiUDE7PMGuK5AKqb5jn0A5vGk+KEAAAA=");

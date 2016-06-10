@@ -35,6 +35,8 @@
               this.canvas = canvas;
               this.$root_rxnan2$ = new Kotlin.modules['shared_js'].com.jetbrains.kui.KGroup(Kotlin.modules['shared_js'].com.jetbrains.kui.KPoint_init_vux9f0$(0, 0));
             }, /** @lends _.com.jetbrains.kui.js.JsScene.prototype */ {
+              addSceneEventListener_pfqo16$: function (l) {
+              },
               addMouseEventListener_tlok9b$: function (l) {
                 var tmp$0;
                 tmp$0 = Kotlin.modules['stdlib'].kotlin.collections.listOf_9mqe4v$([new Kotlin.modules['stdlib'].kotlin.Pair('mousedown', Kotlin.modules['shared_js'].com.jetbrains.kui.KuiMouseEvent.Type.MOUSE_PRESSED), new Kotlin.modules['stdlib'].kotlin.Pair('mouseup', Kotlin.modules['shared_js'].com.jetbrains.kui.KuiMouseEvent.Type.MOUSE_RELEASED), new Kotlin.modules['stdlib'].kotlin.Pair('click', Kotlin.modules['shared_js'].com.jetbrains.kui.KuiMouseEvent.Type.MOUSE_CLICKED), new Kotlin.modules['stdlib'].kotlin.Pair('dblclick', Kotlin.modules['shared_js'].com.jetbrains.kui.KuiMouseEvent.Type.MOUSE_CLICKED), new Kotlin.modules['stdlib'].kotlin.Pair('mousemove', Kotlin.modules['shared_js'].com.jetbrains.kui.KuiMouseEvent.Type.MOUSE_MOVED), new Kotlin.modules['stdlib'].kotlin.Pair('mouseenter', Kotlin.modules['shared_js'].com.jetbrains.kui.KuiMouseEvent.Type.MOUSE_ENTERED), new Kotlin.modules['stdlib'].kotlin.Pair('mouseleave', Kotlin.modules['shared_js'].com.jetbrains.kui.KuiMouseEvent.Type.MOUSE_EXITED)]).iterator();
@@ -106,6 +108,7 @@
                 return function (event) {
                   var tmp$0;
                   closure$l(new Kotlin.modules['shared_js'].com.jetbrains.kui.KuiKeyEvent(closure$p.second, (Kotlin.isType(tmp$0 = event, KeyboardEvent) ? tmp$0 : Kotlin.throwCCE()).keyCode));
+                  event.preventDefault();
                 };
               },
               update$drawTheTree: function (this$JsScene) {
