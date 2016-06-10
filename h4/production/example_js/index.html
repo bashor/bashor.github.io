@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="lib/kotlin.js"></script>
+    <script src="../shared_js/shared_js.js"></script>
+    <script src="../js/js.js"></script>
+    <script src="../example_shared_js/example_shared_js.js"></script>
+</head>
+<body>
+
+1.<a onclick='window.location.reload();' href="#gradient">gradient</a>&nbsp; &nbsp; &nbsp;
+2.<a onclick='window.location.reload();' href="#logo">logo</a>&nbsp; &nbsp; &nbsp;
+3.<a onclick='window.location.reload();' href="#arcanoid">arkanoid</a>&nbsp; &nbsp; &nbsp;
+4.<a onclick='window.location.reload();' href="#gameot">GoT</a>&nbsp; &nbsp; &nbsp;
+
+<br>
+
+<canvas id="kui" width="1440" height="600" style="border:1px solid #000000;display: none">
+</canvas>
+<canvas id="kui2" width="960" height="540" style="border:1px solid #000000;display: none">
+</canvas>
+
+<script src="example_js.js"></script>
+
+<script language="JavaScript">
+    function visibility(el, visible) {
+        el.style.display = visible ? 'block' : 'none'
+    }
+
+    if (window.location.hash.length > 1) {
+        var mode = window.location.hash.substring(1);
+        var isGoT = mode === "gameot";
+        visibility(document.getElementById("kui"), !isGoT);
+        visibility(document.getElementById("kui2"), isGoT);
+        Kotlin.modules["example_js"][mode]()
+    }
+</script>
+</body>
+</html>
