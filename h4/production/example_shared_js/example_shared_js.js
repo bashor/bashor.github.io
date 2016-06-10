@@ -30,17 +30,17 @@
     calc: function (i, start, end) {
       return start * (1.0 - i) + i * end;
     },
-    showGradientScene_mr05rm$f_1: function (closure$au, closure$ay, closure$db, closure$sm, closure$zb, closure$opened) {
+    showGradientScene_mr05rm$f_1: function (closure$width, closure$height, closure$au, closure$ay, closure$db, closure$sm, closure$zb, closure$opened) {
       return function (ms) {
         var i = ms / 5000.0;
         if (i > 1.0)
           i = 1.0;
         var calc = _.calc;
-        closure$au.location = new Kotlin.modules['shared_js'].com.jetbrains.kui.KPoint(calc(i, 400, 1111), calc(i, -40, 400));
-        closure$ay.location = new Kotlin.modules['shared_js'].com.jetbrains.kui.KPoint(calc(i, -90, 1111), calc(i, 300, 440));
-        closure$db.location = new Kotlin.modules['shared_js'].com.jetbrains.kui.KPoint(calc(i, 900, 1111), calc(i, -40, 480));
-        closure$sm.location = new Kotlin.modules['shared_js'].com.jetbrains.kui.KPoint(calc(i, -90, 1111), calc(i, -40, 520));
-        closure$zb.location = new Kotlin.modules['shared_js'].com.jetbrains.kui.KPoint(calc(i, -90, 1111), calc(i, 600, 560));
+        closure$au.location = new Kotlin.modules['shared_js'].com.jetbrains.kui.KPoint(calc(i, 400, closure$width - 280), calc(i, -40, closure$height - 200));
+        closure$ay.location = new Kotlin.modules['shared_js'].com.jetbrains.kui.KPoint(calc(i, -90, closure$width - 280), calc(i, 300, closure$height - 160));
+        closure$db.location = new Kotlin.modules['shared_js'].com.jetbrains.kui.KPoint(calc(i, 900, closure$width - 280), calc(i, -40, closure$height - 120));
+        closure$sm.location = new Kotlin.modules['shared_js'].com.jetbrains.kui.KPoint(calc(i, -90, closure$width - 280), calc(i, -40, closure$height - 80));
+        closure$zb.location = new Kotlin.modules['shared_js'].com.jetbrains.kui.KPoint(calc(i, -90, closure$width - 280), calc(i, 600, closure$height - 40));
         return i < 1.0 && closure$opened.v;
       };
     },
@@ -63,7 +63,7 @@
       scene.update();
       var opened = {v: true};
       scene.addSceneEventListener_pfqo16$(_.showGradientScene_mr05rm$f_0(opened));
-      scene.animation_401a2l$(_.showGradientScene_mr05rm$f_1(au, ay, db, sm, zb, opened)).start_za3lpa$(30);
+      scene.animation_401a2l$(_.showGradientScene_mr05rm$f_1(width, height, au, ay, db, sm, zb, opened)).start_za3lpa$(30);
     },
     JetPoint: Kotlin.createClass(null, function (point, color, velX, velY) {
       this.point = point;
@@ -135,7 +135,7 @@
     },
     renderLogo_26bdom$f_1: function (closure$codeGroup, closure$opened) {
       return function (ms) {
-        closure$codeGroup.location = new Kotlin.modules['shared_js'].com.jetbrains.kui.KPoint(300.0, 800.0 - ms / 60.0);
+        closure$codeGroup.location = new Kotlin.modules['shared_js'].com.jetbrains.kui.KPoint(300.0, 800.0 - ms / 50.0);
         return closure$opened.v;
       };
     },
@@ -516,8 +516,6 @@
         if (!_.Game.Companion.showWelcomScreen) {
           var img = new Kotlin.modules['shared_js'].com.jetbrains.kui.KImageNode(this.gem.bufferedImage, Kotlin.modules['shared_js'].com.jetbrains.kui.KSize_init_vux9f0$(50, 50));
           img.location = Kotlin.modules['shared_js'].com.jetbrains.kui.KPoint_init_vux9f0$(_.Game.Companion.WIDTH - 180, 20);
-          g.root.add_snb51j$(img);
-          g.root.add_snb51j$(new Kotlin.modules['shared_js'].com.jetbrains.kui.KText('x' + _.Game.Companion.gems, Kotlin.modules['shared_js'].com.jetbrains.kui.KPoint_init_vux9f0$(_.Game.Companion.WIDTH - 100, 80), font));
         }
         if (_.Game.Companion.showWelcomScreen) {
           var img_0 = new Kotlin.modules['shared_js'].com.jetbrains.kui.KImageNode(this.welcomeScreenImage, Kotlin.modules['shared_js'].com.jetbrains.kui.KSize_init_vux9f0$(_.Game.Companion.WIDTH, _.Game.Companion.HEIGHT));
@@ -677,7 +675,7 @@
       },
       createLevel: function () {
         var tmp$0, tmp$1;
-        var levelData = ['EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEES', 'EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEES', 'EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEES', 'EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEES', 'EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEESSSEGEEEEEEEEEEEEEEES', 'SEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEESESDSEGEEEEEEEEEEEEEEES', 'SEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEWEEEESDSEGEEEEEEEEEEEEEEES', 'SEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEESSSEEESDSEGEEEEEEEEEEEEEEES', 'SEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEESSSEEESDSEGEEEEEEEEEEEEEGSS', 'SEEEEEEEEEEEEEEEEEEEEEEEEEESSDSSESSSEEESDSEGEEEEEEEEEEEEESSS', 'SEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEESSSEEESDSEGEEEEEEEEEEEWEGGS', 'SEEEEEEEEEEEEEEEEEEEEESSSEEEEEEEESSSEEESDSEEEEEEEEEEEEEEEGGS', 'SEEEEEEEEEEEEEEEEEGGEESSSEEEEEEESSSSEEESDSSSEEEEEEEEEEESSGGS', 'SEEEEEEAEEEEGGGEEEEWEEWEEEEEEEEESSSSEEESDSSSEGEEEEEEEEEGGGGS', 'SSEEEEEEEEEEEEEEESSSSSSSSEEEEEESSSSSGGGEEEEEEGEEEEEEEEEGGGGS', 'SSEEEEEEEEEEEEEESSSSSSSSSEEEEEESSSSSEEEEEEEEEGEEEEEEEEEGGSSS', 'SSEEPEEEESSEEWEEEEEEEEEEEEEEEEESSSSSEEWEEEEEEGEEEEEEEEEGGSSS', 'SSEEEEEESSSEEEEEEEEEEEEEEEEEESSSSSSSSSSSSSSSEEEEEEWEEEEGGSSS', 'SSRRRRRRSSSRRRRRRRRRRRRRRRRRRSSSSSSSSSSSSSSSRRRRRRRRRRRRRSSS', 'DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD'];
+        var levelData = ['EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEES', 'EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEES', 'EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEES', 'EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEES', 'EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEESSSEGEEEEEEEEEEEEEEES', 'SEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEESESDSEGEEEEEEEEEEEEEEES', 'SEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEWEEEESDSEGEEEEEEEEEEEEEEES', 'SEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEESSSEEESDSEGEEEEEEEEEEEEEEES', 'SEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEESSSEEESDSEGEEEEEEEEEEEEEGSS', 'SEEEEEEEEEEEEEEEEEEEEEEEEEESSDSEESSSEEESDSEGEEEEEEEEEEEEESSS', 'SEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEESSSEEESDSEGEEEEEEEEEEEWEGGS', 'SEEEEEEEEEEEEEEEEEEEEESSSEEEEEEEESSSEEESDSEEEEEEEEEEEEEEEGGS', 'SEEEEEEEEEEEEEEEEEGGEESSSEEEEEEESSSSEEESDSSSEEEEEEEEEEESSGGS', 'SEEEEEEAEEEEGGGEEEEWEEWEEEEEEEEESSSSEEESDSSSEGEEEEEEEEEGGGGS', 'SSEEEEEEEEEEEEEEESSSSSSSSEEEEEESSSSSGGGEEEEEEGEEEEEEEEEGGGGS', 'SSEEEEEEEEEEEEEESSSSSSSSSEEEEEESSSSSEEEEEEEEEGEEEEEEEEEGGSSS', 'SSEEPEEEESSEEWEEEEEEEEEEEEEEEEESSSSSEEWEEEEEEGEEEEEEEEEGGSSS', 'SSEEEEEESSSEEEEEEEEEEEEEEEEEESSSSSSSSSSSSSSSEEEEEEWEEEEGGSSS', 'SSRRRRRRSSSRRRRRRRRRRRRRRRRRRSSSSSSSSSSSSSSSRRRRRRRRRRRRRSSS', 'DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD'];
         var width = levelData[0].length;
         var height = levelData.length;
         tmp$0 = height - 1;
