@@ -26,6 +26,26 @@
         font-size: 0.9em;
       }
 
+        @page {
+          /* 16:9 */
+          size: 1210px 681px;
+          /* 16:9 high */
+          /*size: 1920px 1080px;*/
+          /* 4:3 */
+          /* size: 908px 681px; */
+          margin: 0;
+        }
+
+        @media print {
+          .remark-slide-scaler {
+            width: 100% !important;
+            height: 100% !important;
+            transform: scale(1) !important;
+            top: 0 !important;
+            left: 0 !important;
+          }
+        }
+
   /* use image as label for code blocks */
       .hljs.remark-code {
           background-size: 50px 50px;
@@ -97,7 +117,7 @@
           width: 47%;
       }
       .compare-js-to-kotlin-v .typescript.hljs.remark-code {
-          float: left;
+          float: right;
           width: 47%;
       }
 
@@ -187,6 +207,12 @@
       .kotlin-is-lang img {
           width: 900px;
       }
+      .gray {
+          color: rgba(128, 128, 128, 0.75)
+      }
+      li .focus {
+          font-weight: 900;
+      }
     </style>
   </head>
   <body>
@@ -210,13 +236,14 @@ class: kotlin-is
 ???
 Что же такое котлин?
 
-Если верить википедии есть такой остаров в финском заливе.
 --
 Остров в Финском заливе:
 
 ![](kotlin-island.jpg)
 
 ???
+Если верить википедии есть такой остаров в финском заливе.
+
 И на нем распологается город Кронштадт
 ---
 class: kotlin-is
@@ -289,7 +316,7 @@ ratio: 16:9
 <br/>
 <br/>
 .link-to-slides[
-Cсылка на слайды: [zal.im/slides/holyjs17](http://zal.im/slides/holyjs17)
+Временная ссылка на слайды: [zal.im/s](http://zal.im/slides/holyjs17)
 ]
 
 ???
@@ -384,6 +411,9 @@ TIOBE?
 ???
 также, с недавних пор, котлин компилируется в нативный код
 и программа написанная на котлине может быть запущена независимо от наличия виртуальной машины
+
+***
+raspberry pi, ios?
 ---
 # Kotlin JS
 
@@ -399,7 +429,6 @@ TIOBE?
     * поддержка более поздних версий ECMAScript запланирована
 ???
 Мы плнируем в будущем поддержат более поздние версии ECMAScript
-И конечно же это будет сделанно
 
 --
 * всегда содержит "use strict"
@@ -410,13 +439,13 @@ TIOBE?
 
 Данная директива включает дполонительные ограничения на код который выполняется в JS VM.
 
-Что в первых делает код безопаснее, а во-вторых может помочь VM в нелегком деле оптимизации.
+Что во-первых делает код безопаснее, а во-вторых может помочь VM лучше оптимизировать код.
 
 --
 * быстрый
 
 ???
-Мы очень стараемся пораждать код который хорошо оптимизировался современными JS VM
+Мы очень стараемся пораждать код который хорошо оптимизируетсяся современными JS VM
 
 --
 * читаемый (на сколько это возможно)
@@ -426,13 +455,13 @@ TIOBE?
 но к сожалению, этот пункт страдает чаще остальных.
 
 В основном это связано с различием в семантике языков.
-Например, в котлине можно перегружать функции, т.е. иметь несколько функций с одним и тем же названием
-А в JS такого нет.
+Например, в котлине можно перегружать функции, т.е. иметь несколько функций с одним и тем же названием,
+а в JS такого нет.
 
 Эту проблему можно решить по разному.
 
-Например, можно эмулировать это поведение проверяя тип аргументов на рантайме.
-Как часто делают разные библиотеки.
+Например, можно эмулировать это поведение проверяя тип аргументов на рантайме,
+как часто делают в JS.
 
 А можно генерировать индивидуальное имя для каждой функции.
 
@@ -461,6 +490,8 @@ class: center middle
 
 ???
 Давайте, для начала, немного изучим Котлин.
+
+И будем мы это делать на примерх.
 ---
 
 layout: true
@@ -502,7 +533,7 @@ class: compare-kotlin-to-js-h
 
 ---
 
-# Замечание про примеры
+# Замечания
 
 ???
 Но прежде чем мы начнем хочется отметить что
@@ -523,8 +554,18 @@ class: compare-kotlin-to-js-h
 * Результат трансляции может отличаться
 
 ???
-Результат компиляции фрагмената на Котлине может отличаться
+Результат трансляции фрагмената на Котлине может отличаться
 от того кода который приведен как пример на JavaScript.
+
+--
+* Это не весь Kotlin
+
+???
+Ввиду ограниченности времени я не могу рассказать все про Котлин, я расскажу только про маленькую часть языка.
+
+Так же, некоторые примеры, осознано упрощены, или буду умалчивать какие-то детали.
+
+Но вы не пугайтесь, язык простой!
 
 ---
 
@@ -644,9 +685,14 @@ var foo = 1`;`
 ```kotlin
 var foo = 1
 ```
+
+```javascript
+var foo = 1;
+```
+
 .ES2015[
 ```javascript
-let foo = 1;
+`let` foo = 1;
 ```
 ]
 
@@ -661,6 +707,12 @@ let foo = 1;
 в JS это объемлющая функция, а в Котлине это объемлющий блок.
 
 Более близкий аналог это let добавленный в ES2015.
+
+Так же, стоит отметить что в JS инициализатор для переменных не объязателен и тогда значением переменной будет undefined
+
+Хотя и считается плохим тоном(???). проверятеся линтерами ???
+
+В Котлине переменную можно не инициализировать переменную сразу, достаточно это сделать до первого использования.
 
 ---
 # Неизменяемая переменная
@@ -683,6 +735,55 @@ const foo = 1;
 но const всегда должен быть с инициализатором, а val в Котлине можно инициализировать позже.
 
 Главное сделать это перед первым использованием.
+
+---
+# Nullable/not-null types
+
+```kotlin
+val a: String = "ok?" // OK
+val b: String = null  // Ошибка компиляции
+```
+
+--
+```kotlin
+val c: String? = "ok?" // OK
+val d: String? = null  // OK
+```
+
+---
+# Удобная работа с nullable значениями
+
+### Safe call
+```kotlin
+var foo: String? = ...
+val a = foo`?.`length
+val b = foo`?.`substring(1)
+```
+
+```js
+var foo = ...
+var a;
+if (foo != null) a = foo.length else a = null
+var b;
+if (foo != null) b = foo.substring(1) else b = null
+```
+---
+# Удобная работа с nullable значениями
+
+### Elvis operator
+```kotlin
+var foo: String? = ...
+val a = foo `?:` "foo is null"
+val b = foo?.substring(1) `?:` "Kool"
+```
+
+```js
+var foo = ...
+var a;
+if (foo != null) a = foo else a = "foo is null"
+var b;
+if (foo != null) b = foo.substring(1) else b = "Kool"
+```
 ---
 # Функция
 
@@ -732,7 +833,7 @@ fun sum(a: Int, b: Int)`: Int`
 ```
 
 ???
-И в конуе указывается тип возвращаемого значения
+И в конце указывается тип возвращаемого значения
 
 Если функция ничего не возвращает, можно ничего не писать
 
@@ -809,7 +910,14 @@ function sum(a, b) {
 }
 ```
 ???
-Пример на JS тоже можно конечно переписать, но семнтика немного поменяется
+Пример на JS тоже можно конечно переписать, но семнтика немного поменяется.
+
+А именно
+
+С помощью такой стрелочной функции невозможно написать мембер класса который работал бы с this.
+
+А для статических функций разница не значительная -- в функция не будет доступен до инициализации, но это больше про семантику const.
+
 
 --
 
@@ -828,7 +936,7 @@ const sum = (a, b) => a + b
 
 Во многих современных языках можно использовать функцию как значение.
 
-Котлин не исключение.
+И Котлин не исключение.
 
 В разных языках такие функции называются по разному где-то
 function expression, где-то closure, где-то еще как-то, я буду называть из lambda
@@ -842,7 +950,7 @@ val lambda = `{` i: Int, s: String -> doSomething() `}`
 ```
 
 ```javascript
-const lambda = (i, s) => { doSomething() };
+const lambda = `(`i, s) => { doSomething() `}`;
 ```
 
 ???
@@ -857,7 +965,7 @@ val lambda = { i: Int, s: String `->` doSomething() }
 ```
 
 ```javascript
-const lambda = (i, s) => { doSomething() };
+const lambda = (i, s) `=>` { doSomething() };
 ```
 
 ???
@@ -872,7 +980,7 @@ val lambda = { i: Int`,` s: String -> doSomething() }
 ```
 
 ```javascript
-const lambda = (i, s) => { doSomething() };
+const lambda = (i`,` s) => { doSomething() };
 ```
 
 ???
@@ -1262,6 +1370,7 @@ val message = when (timeOfDay) {
 }
 ```
 
+.ES2015[
 ```js
 let message;
 switch(timeOfDay) {
@@ -1270,6 +1379,7 @@ switch(timeOfDay) {
     default: message = null;
 }
 ```
+]
 
 ???
 В данном слуае можно воспользоваться switch но не всегда это возможно из-за семантики сравнения в JS switch
@@ -1287,16 +1397,129 @@ switch(timeOfDay) {
 ???
 
 ---
-exclude: true
-<!-- TODO  -->
+# Циклы: while
 
-loops
+```kotlin
+while (condition) {
+    // do something
+}
+
+```
+
+```js
+while (condition) {
+    // do something
+}
+```
 
 ---
-exclude: true
-<!-- TODO  -->
+# Циклы: do while
 
-string templates
+```kotlin
+do {
+    // do something
+} while (condition)
+```
+
+```js
+do {
+    // do something
+} while (condition)
+```
+
+---
+# Циклы: do while (2)
+
+```kotlin
+do {
+    `val foo = ...`
+    // do something
+} while (`foo == 0`)
+```
+
+```js
+{
+    `let foo = ...`
+    do {
+        // do something
+    } while (`foo === 0`)
+}
+```
+
+---
+# Циклы: for (1)
+
+```kotlin
+for (`i in 0..10`) {
+    // do something
+}
+```
+
+```js
+for (var i = 0; i <= 10; i++) {
+    // do something
+}
+```
+
+---
+# Циклы: for (2)
+
+```kotlin
+for (`element in collection`) {
+    // do something
+}
+```
+
+.ES2015[
+```js
+for (element of collection) {
+    // do something
+}
+```
+]
+---
+# Строки
+
+```kotlin
+"Hello, HolyJS!"
+```
+
+```js
+"Hello, HolyJS!"
+```
+
+---
+# Многострочные строки
+
+```kotlin
+"""Hello,
+HolyJS!"""
+```
+
+.ES2015[
+```js
+`Hello,
+HolyJS!`
+```
+]
+
+---
+# Строковые шаблоны
+###(template literals, string interpolation)
+
+```kotlin
+val name = ...
+"Hello, $name"
+"Hello, ${name.firstChar()}"
+```
+
+.ES2015[
+```js
+const name = ...
+"Hello, ${name}"
+"Hello, ${name.firstChar()}"
+```
+]
 
 ---
 exclude: true
@@ -1777,8 +2000,9 @@ interface C {
     bar: number
 }
 
-class D extends C {
-    constructor() {
+class D extends B implements C {
+	constructor() {
+		super()
         this.bar = 2
     }
     foo() {
@@ -1793,6 +2017,7 @@ interface A {
 }
 
 class B {
+	bar: number
     constructor() {
         this.bar = 1
     }
@@ -1928,13 +2153,18 @@ error: JavaScript: missing ; before statement
 ```
 
 ---
-# Тип `dynamic` *
+# Тип `dynamic`
 
 ???
-В статический типизированный язык для удобного взаимодействия с JavaScript'ом добавили специальный динамичиский тип
-
-Данный тип доступен только при компиляции в JS
+для удобного взаимодействия с JavaScript'ом добавили специальный динамичиский тип
 --
+* Доступен только в Kotlin JS
+???
+Данный тип доступен только при компиляции в JS
+---
+# Тип `dynamic`
+
+* .gray[ Доступен только в Kotlin JS ]
 * Значение типа `dynamic` можно присваивать куда угодно
 
 ```kotlin
@@ -1948,12 +2178,12 @@ var d: dynamic = ...; var i: Int = 1; var s: String = ""
 ```
 
 ???
-есть следующие особенности
 Значение типа `dynamic` можно присваивать куда угодно
 ---
-# Тип `dynamic"` *
+# Тип `dynamic`
 
-* Значение типа `dynamic` можно присваивать куда угодно
+* .gray[ Доступен только в Kotlin JS ]
+* .gray[ Значение типа `dynamic` можно присваивать куда угодно ]
 * В переменную типа `dynamic` можно писать что угодно
 
 ```kotlin
@@ -1967,10 +2197,11 @@ var d: dynamic = ...; var i: Int = 1; var s: String = ""
 ???
 В переменную типа `dynamic` можно писать что угодно
 ---
-# Тип `dynamic"` *
+# Тип `dynamic`
 
-* Значение типа `dynamic` можно присваивать куда угодно
-* В переменную типа `dynamic` можно писать что угодно
+* .gray[ Доступен только в Kotlin JS ]
+* .gray[ Значение типа `dynamic` можно присваивать куда угодно ]
+* .gray[ В переменную типа `dynamic` можно писать что угодно ]
 * Можно вызывать любую функцию и обращаться к любому полю
 
 ```kotlin
@@ -1990,11 +2221,12 @@ var d: dynamic = ...;
 ---
 class: compare-kotlin-to-js-v
 
-# Тип `dynamic"` *
+# Тип `dynamic`
 
-* Значение типа `dynamic` можно присваивать куда угодно
-* В переменную типа `dynamic` можно писать что угодно
-* Можно вызывать любую функцию и обращаться к любому полю
+* .gray[ Доступен только в Kotlin JS ]
+* .gray[ Значение типа `dynamic` можно присваивать куда угодно ]
+* .gray[ В переменную типа `dynamic` можно писать что угодно ]
+* .gray[ Можно вызывать любую функцию и обращаться к любому полю ]
 * Операторные вызовы компилируются как есть
 
 ```kotlin
@@ -2014,15 +2246,14 @@ d > 1;
 
 Найдите три отличия!
 ---
+# Тип `dynamic`
 
-# Тип `dynamic"` *
-
+* Доступен только в Kotlin JS
 * Значение типа `dynamic` можно присваивать куда угодно
 * В переменную типа `dynamic` можно писать что угодно
 * Можно вызывать любую функцию и обращаться к любому полю
 * Операторные вызовы компилируются как есть
 
-*есть только в Kotlin JS
 
 ---
 # Типизированные декларации
@@ -2032,7 +2263,9 @@ d > 1;
 * Из external декларации не порождается никакой код
 
 ???
-Используя ключевое слово external и вспомогательные аннотации можно описать доступные на рантйме сущности в терминах котлина
+Используя ключевое слово external и вспомогательные аннотации можно описать доступные на рантйме сущности в терминах котлина.
+
+Похожая возможнасть есть и в TypeScript. (Declaration File -- d.ts)
 
 И использовать их из кода на котлине.
 
@@ -2059,6 +2292,17 @@ external var property: Int
 
 ???
 На котлине это будет вглядить так
+
+--
+exclude: true
+
+```typescript
+declare var property: number
+```
+
+???
+та же самая декларация на TS
+
 ---
 class: compare-js-to-kotlin-v
 
@@ -2211,7 +2455,7 @@ JsQualifier
 
 ***
 
-JsName
+Js:
 JS module systems
 
 ---
@@ -2416,21 +2660,14 @@ TODO Важный аспект: язык разрабатывается c огл
 ---
 #  Инструменты сборки
 
+* gradle
+    * kotlin-frontend-plugin
+* maven
+* ant
+* webpack (через kotlin-frontend-plugin)
+
 ???
 На данным момент мы предлагаем следующие инструменты для сборки
---
-* gradle
-
---
-    * kotlin-frontend-plugin
---
-* maven
-
---
-* ant
-
---
-* webpack (через kotlin-frontend-plugin)
 
 ---
 exclude: true
@@ -2512,6 +2749,7 @@ DSL, Type safe HTML builders (см пример для react)
 * Сайт Kotlin: [kotlinlang.org](https://kotlinlang.org)
     * документация: [kotlinlang.org/docs/reference/](http://kotlinlang.org/docs/reference/)
     * Try Kotlin: [try.kotl.in](https://try.kotl.in)
+    * Kotlin Koans: [try.kotl.in/koans](http://try.kotl.in/koans)
 
 * Slack: [kotlinlang.slack.com](https://kotlinlang.slack.com)
     * регистрация [slack.kotl.in](http://slack.kotl.in)
@@ -2538,8 +2776,13 @@ zalim.bashorov@jetbrans.com
 .twi[[![](twitter.png)@bashorov](https://twitter.com/bashorov)]
 
 .link-to-slides[
-Cсылка на слайды: [zal.im/slides/holyjs17](http://zal.im/slides/holyjs17)
+Ссылка на слайды: [zal.im/slides/holyjs17](http://zal.im/slides/holyjs17)
 ]
+
+.link-to-slides[
+Временная ссылка на слайды: [zal.im/s](http://zal.im/slides/holyjs17)
+]
+
 
 ???
 
