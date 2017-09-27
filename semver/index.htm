@@ -3,6 +3,7 @@
   <head>
     <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
   </head>
+  <title>NPM SemVer Sorter</title>
   <body>
   <table style="height:100%;">
   	<tr><td valign="top">
@@ -32,7 +33,9 @@
   		var invalids = document.getElementById("invalids");
   		
   		function update() {
-			var versions = input.value.split("\n");
+  			var value = input.value
+  			location.hash = encodeURIComponent(value);
+			var versions = value.split("\n");
   			var validVersions = versions.filter((s) => semver.valid(s));
   			var invalidVersions = versions.filter((s) => !semver.valid(s));
   			var sortedValidVersions = semver.sort(validVersions);
@@ -40,6 +43,10 @@
   			output.textContent = sortedValidVersions.join("\n")
   			invalids.textContent = invalidVersions.join("\n")
   		}
+
+		if (location.hash.length > 1) {
+			input.value = decodeURIComponent(location.hash.substr(1));
+		}
 
   		input.onkeyup = update;
 
