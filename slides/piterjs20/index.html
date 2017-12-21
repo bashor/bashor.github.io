@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>My Awesome Presentation</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <style type="text/css">
+      @import url(https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz);
+      /*@import url(https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic);*/
+      /*@import url(https://fonts.googleapis.com/css?family=Lora:400,700,400italic);*/
+      @import url(https://fonts.googleapis.com/css?family=Open+Sans:400,700,400italic);
+      @import url(https://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700,400italic);
+
+      /*body { font-family: 'Open Sans'; }*/
+      h1, h2, h3 {
+        font-family: 'Yanone Kaffeesatz';
+        font-weight: normal;
+      }
+      .remark-code, .remark-inline-code { font-family: 'Ubuntu Mono'; }
+
+      .remark-slide-content h1 { font-size: 2.2em; }
+      .remark-slide-content h2 { font-size: 1.9em; }
+      .remark-slide-content h3 { font-size: 1.5em; }
+      .remark-slide-content { font-size: 30px; }
+
+      .remark-slide-content pre code {
+        font-size: 0.9em;
+      }
+
+        @page {
+          /* 16:9 */
+          size: 1210px 681px;
+          /* 16:9 high */
+          /*size: 1920px 1080px;*/
+          /* 4:3 */
+          /* size: 908px 681px; */
+          margin: 0;
+        }
+
+        @media print {
+          .remark-slide-scaler {
+            width: 100% !important;
+            height: 100% !important;
+            transform: scale(1) !important;
+            top: 0 !important;
+            left: 0 !important;
+          }
+        }
+
+  /* use image as label for code blocks */
+      .hljs.remark-code {
+          background-size: 50px 50px;
+          background-repeat: no-repeat;
+          background-position: right top;
+      }
+      .kotlin.hljs.remark-code {
+          background-image: url(kotlin.png);
+      }
+      .javascript.hljs.remark-code {
+          background-image: url(js.jpg);
+      }
+      .ES2015 .javascript.hljs.remark-code {
+          /*TODO image for ES2015*/
+          background-image: url(es2015.png);
+      }
+      .typescript.hljs.remark-code {
+          background-image: url(ts.png);
+      }
+
+  /* use text label for code blocks */
+      /*.hljs.remark-code::before {
+          position: relative;
+          float: right;
+      }
+
+      .kotlin.hljs.remark-code::before {
+          content: " Kotlin ";
+          background-color: blue;
+          color: white;
+      }
+
+      .javascript.hljs.remark-code::before {
+          content: "  ES 5  ";
+          background-color: yellow;
+          color: black;
+      }
+
+      .ES2015 .javascript.hljs.remark-code::before {
+          content: " ES2105 ";
+      }
+
+      .typescript.hljs.remark-code::before {
+          content: "  TS    ";
+          background-color: #3CA7F2;
+          color: white;
+      }*/
+
+  /* vertical layout for code blocks when comparing*/
+      .compare-kotlin-to-js-v .kotlin.hljs.remark-code {
+          float: left;
+          width: 47%;
+      }
+      .compare-kotlin-to-js-v .javascript.hljs.remark-code {
+          float: right;
+          width: 47%;
+      }
+      .compare-kotlin-to-js-v .typescript.hljs.remark-code {
+          float: right;
+          width: 47%;
+      }
+
+      .compare-js-to-kotlin-v .kotlin.hljs.remark-code {
+          float: right;
+          width: 47%;
+      }
+      .compare-js-to-kotlin-v .javascript.hljs.remark-code {
+          float: left;
+          width: 47%;
+      }
+      .compare-js-to-kotlin-v .typescript.hljs.remark-code {
+          float: right;
+          width: 47%;
+      }
+
+  /* horisontal layout for code blocks when comparing*/
+      .compare-kotlin-to-js-h .kotlin.hljs.remark-code,
+      .compare-kotlin-to-js-h .javascript.hljs.remark-code,
+      .compare-kotlin-to-js-h .typescript.hljs.remark-code {
+          /*height: 190px;*/
+      }
+
+  /**/
+      .forece-3line .hljs.remark-code {
+          height: 81px;
+      }
+
+      .link-to-slides {
+          /*bottom: 12px;*/
+          /*font-size: 30px;*/
+          /*left: 20px;*/
+          /*opacity: .9;*/
+          /*position: absolute;*/
+      }
+
+      .footnote {
+          bottom: 12px;
+          font-size: 20px;
+          left: 50px;
+          opacity: .6;
+          position: absolute;
+      }
+
+      .twi img {
+          width: 25px;
+      }
+      .twi a {
+          text-decoration: none;
+      }
+
+      .my-avatar,
+      .about-me-kotlin,
+      .about-me-jetbrains,
+      .about-me-jetbrains-min,
+      .about-me-placeholder {
+          background-size: 70px;
+          background-repeat: no-repeat;
+          background-position: 0px 0px;
+          display: inline-block;
+          width: 70px;
+          height: 70px;
+      }
+
+      .my-avatar {
+          background-image: url(z3.png);
+      }
+      .about-me-kotlin {
+          background-image: url(kotlin-logo.png);
+      }
+      .about-me-jetbrains-min {
+          background-image: url(jetbrains-min.logo);
+          background-size: 115px;
+          background-position: -20px -24px;
+      }
+      .about-me-jetbrains {
+          position: absolute;
+          background-size: 150px;
+          background-image: url(jetbrains.png);
+          height: 150px;
+          width: 150px;
+          left: 640px;
+          top: 114px;
+      }
+
+      .kotlin-bg {
+          background-image: url(kotlin-bg.jpg);
+          background-repeat: no-repeat;
+          /*background-size: cover;*/
+          background-color: #224455;
+      }
+
+      .title {
+          color: white;
+      }
+
+      .kotlin-is img {
+          height: 400px;
+      }
+      .kotlin-is-lang img {
+          width: 900px;
+      }
+      .gray {
+          color: rgba(128, 128, 128, 0.75)
+      }
+      li .focus {
+          font-weight: 900;
+      }
+    </style>
+  </head>
+  <body>
+    <textarea id="source">
+class: center middle kotlin-bg
+
+# .title[Петербургски язык программирования]
+
+---
+class: center, middle
+ratio: 16:9
+
+# Kotlin 101
+### Залим Башоров
+.twi[[![](twitter.png)@bashorov](https://twitter.com/bashorov)]
+<br/>
+<br/>
+<br/>
+.link-to-slides[
+Временная ссылка на слайды: [zal.im/s](http://zal.im/slides/piterjs20)
+]
+
+???
+Я вам расскажу про Котлин и о том как использовать его для разработки фронтенда
+
+***
+кто слышал про котлин?
+кто программировал?
+кто слышал Kotlin JS
+кто использовал Kotlin JS?
+кто знаком с ES 2015?
+кто знаком с TS?
+
+---
+class: center middle
+
+<!-- .about-me-jetbrains[] -->
+.my-avatar[]
+.about-me-kotlin[]
+.about-me-jetbrains-min[]
+<!-- .about-me-placeholder[] -->
+
+### Залим Башоров
+
+zalim.bashorov@jetbrains.com
+
+.twi[[![](twitter.png)@bashorov](https://twitter.com/bashorov)]
+
+<!-- Руковожу направлением Kotlin JS -->
+<!-- Разработчик в команде Kotlin ([kotl.in](https://kotlinlang.org)) -->
+
+<!-- 9 лет профессиональной разработки -->
+
+<!-- 5 лет разрабатываю на Kotlin -->
+
+???
+Я работаю в команде Kotlin в компании JetBrains.
+
+Разработываю Котлин на Котлине уже почти 5 лет.
+
+Руковожу направлением Kotlin JS.
+
+---
+# Kotlin
+
+--
+
+- Статически типизированный
+--
+
+- Современный
+--
+
+- Прагматичный
+
+???
+0
+***
+Выразительный
+Безопасный
+Гибкий
+
+- modern
+-- concise
+-- safe
+--- billion dollar mistake
+---- compile time error instead of runtime
+-- expressive
+- progmatic
+-- tooling
+--- IDE (completion, navigation, refactorings, inspections)
+-- interop
+
+TIOBE?
+---
+
+# Kotlin targets
+
+--
+- Java byte code
+
+???
+Котлин может компилироваться в Java byte code и запускаться на JVM, будь это сервер, или андроид устройство
+--
+    - Официальный язык разработки для Android
+--
+- JavaScript
+
+???
+может компилироваться в JavaScript и соответственно запускаться везде где есть JavaScript
+--
+- Native
+
+???
+также, с недавних пор, котлин компилируется в нативный код
+и программа написанная на котлине может быть запущена независимо от наличия виртуальной машины
+
+***
+raspberry pi, ios?
+---
+# Kotlin JS
+
+--
+Генерируемый код
+* совместим с ECMAScript 5.1
+
+???
+Сейчас компилятор Kotlinа умеет генерировать код только для ECMAScript 5.1,
+Это позволяет запускать скомпилированный код на большом спектре браузеров / устройств
+
+--
+    * поддержка более поздних версий ECMAScript запланирована
+???
+Мы плнируем в будущем поддержат более поздние версии ECMAScript
+
+--
+* всегда содержит "use strict"
+
+???
+Генерируемый код совместим со "strict mode"
+И всегда содежит "use strict"
+
+Данная директива включает дполонительные ограничения на код который выполняется в JS VM.
+
+Что во-первых делает код безопаснее, а во-вторых может помочь VM лучше оптимизировать код.
+
+--
+* быстрый
+
+???
+Мы очень стараемся пораждать код который хорошо оптимизируетсяся современными JS VM
+
+--
+* читаемый (на сколько это возможно)
+
+???
+Так же, мы стараемся не обделять вниманием и читаемость получаемого кода,
+но к сожалению, этот пункт страдает чаще остальных.
+
+В основном это связано с различием в семантике языков.
+Например, в котлине можно перегружать функции, т.е. иметь несколько функций с одним и тем же названием,
+а в JS такого нет.
+
+Эту проблему можно решить по разному.
+
+Например, можно эмулировать это поведение проверяя тип аргументов на рантайме,
+как часто делают в JS.
+
+А можно генерировать индивидуальное имя для каждой функции.
+
+У каждого метода есть свои плюсы и минусы. Мы выбрали второй потому что он быстрее и надежнее.
+
+
+<!--
+Мой любимы пример это то что в котлине некоторые вещи происходят лениво,
+например инициализация классов и объектов, или инициализация пропертей в файле.
+
+Другой пример, который больше бросается в глаза -->
+--
+
+
+* есть поддержка SourceMaps
+
+???
+Есть поддержка SourceMaps.
+
+Это означает что можно взять любой JavaScript дебагер, поддерживающий sourcemaps,
+и дебажить вашу программу прямо по котлиновским сорцам и не важно что там на самом деле сгенерилось.
+
+---
+
+class: center, middle
+
+# Let's kode!
+
+---
+# Полезные ссылки
+
+* Сайт Kotlin: [kotlinlang.org](https://kotlinlang.org)
+    * документация: [kotlinlang.org/docs/reference/](http://kotlinlang.org/docs/reference/)
+    * Try Kotlin: [try.kotl.in](https://try.kotlinlang.org)
+    * Kotlin Koans: [try.kotl.in/koans](http://try.kotlinlang.org/koans)
+
+* Slack: [kotlinlang.slack.com](https://kotlinlang.slack.com)
+    * регистрация [slack.kotl.in](http://slack.kotl.in)
+    * канал про Kotlin JS: [#javascript](https://kotlinlang.slack.com/messages/C0B8L3U69/)
+
+???
+Набор полезных ссылок, в конце будет ссылка на слайды
+
+С вопросами и предложениями приходите к нам в Slack, в канал #javascript
+
+---
+class: center middle
+
+# Спасибо!
+
+---
+class: center middle
+### Залим Башоров
+
+Kotlin ([kotl.in](https://kotlinlang.org))
+
+zalim.bashorov@jetbrains.com
+
+.twi[[![](twitter.png)@bashorov](https://twitter.com/bashorov)]
+
+.link-to-slides[
+Ссылка на слайды: [zal.im/slides/piterjs20](http://zal.im/slides/piterjs20)
+]
+
+.link-to-slides[
+Временная ссылка на слайды: [zal.im/s](http://zal.im/slides/piterjs20)
+]
+
+
+???
+
+kotlinx.html
+
+kotlin-wrappers
+https://github.com/JetBrains/kotlin-wrappers
+
+kotlinx.coroutines
+
+
+
+    </textarea>
+    <script src="remark.js" type="text/javascript">
+    </script>
+    <script type="text/javascript">
+      var slideshow = remark.create({
+          ratio: '16:9',
+          highlightLines: true,
+          highlightSpans: true,
+          highlightStyle: "default"
+      });
+    </script>
+  </body>
+</html>
