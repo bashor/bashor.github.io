@@ -13,10 +13,10 @@
 <img src="../example_shared_js/bg.png" hidden="hidden">
 <img src="../example_shared_js/welcomeScreen.png" hidden="hidden">
 
-1.<a onclick='window.location.reload();' href="#gradient">gradient</a>&nbsp; &nbsp; &nbsp;
-2.<a onclick='window.location.reload();' href="#logo">logo</a>&nbsp; &nbsp; &nbsp;
-3.<a onclick='window.location.reload();' href="#arcanoid">arkanoid</a>&nbsp; &nbsp; &nbsp;
-4.<a onclick='window.location.reload();' href="#gameot">GoT</a>&nbsp; &nbsp; &nbsp;
+1.<a onclick='init();' href="#gradient">gradient</a>&nbsp; &nbsp; &nbsp;
+2.<a onclick='init();' href="#logo">logo</a>&nbsp; &nbsp; &nbsp;
+3.<a onclick='init();' href="#arcanoid">arkanoid</a>&nbsp; &nbsp; &nbsp;
+4.<a onclick='init();' href="#gameot">GoT</a>&nbsp; &nbsp; &nbsp;
 
 <br>
 
@@ -32,16 +32,18 @@
 <script src="example_js.js"></script>
 
 <script language="JavaScript">
-    function visibility(el, visible) {
-        el.style.display = visible ? 'block' : 'none'
-    }
+    function init() {
+        function visibility(el, visible) {
+            el.style.display = visible ? 'block' : 'none'
+        }
 
-    if (window.location.hash.length > 1) {
-        var mode = window.location.hash.substring(1);
-        var isGoT = mode === "gameot";
-        visibility(document.getElementById("kui"), !isGoT);
-        visibility(document.getElementById("kui2"), isGoT);
-        Kotlin.modules["example_js"][mode]()
+        if (window.location.hash.length > 1) {
+            var mode = window.location.hash.substring(1);
+            var isGoT = mode === "gameot";
+            visibility(document.getElementById("kui"), !isGoT);
+            visibility(document.getElementById("kui2"), isGoT);
+            Kotlin.modules["example_js"][mode]()
+        }
     }
 </script>
 </body>
