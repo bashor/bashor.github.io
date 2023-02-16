@@ -1,5 +1,5 @@
 
-export async function instantiate(imports={}, runInitializer=true) {
+export async function instantiate(skiaPromise, runInitializer=true) {
     const externrefBoxes = new WeakMap();
     // ref must be non-null
     function tryGetOrSetExternrefBox(ref, ifNotCached) {
@@ -9,12 +9,6 @@ export async function instantiate(imports={}, runInitializer=true) {
         externrefBoxes.set(ref, ifNotCached);
         return ifNotCached;
     }
-    
-    async function _importModule(x) { 
-        return imports[x] ?? await import(x);
-    }
-
-
     
     const js_code = {
         'kotlin.captureStackTrace_-1656384494' : () => new Error().stack,
@@ -193,7 +187,7 @@ export async function instantiate(imports={}, runInitializer=true) {
         'org.jetbrains.skia.impl.get_1762293848' : (dest, index) => dest[index],
         'org.jetbrains.skia.impl.set_2028910374' : (dest, index, value) => dest[index] = value,
         'org.jetbrains.skia.impl.set_-922087141' : (dest, index, value) => dest[index] = value,
-        'org.jetbrains.skia.impl.get_1415253669' : (dest, index) => dest[index],
+        // 'org.jetbrains.skia.impl.get_1415253669' : (dest, index) => dest[index], // TODO
         'org.jetbrains.skiko.wasm.createDefaultContextAttributes_1141515115' : () => {
             return {
                 alpha: 1,
@@ -225,36 +219,23 @@ export async function instantiate(imports={}, runInitializer=true) {
     if (!isNodeJs && !isD8 && !isBrowser) {
       throw "Supported JS engine not detected";
     }
-    
+
+    if (!isBrowser) {
+        throw Error("It's not browser.")
+    }
+
     const wasmFilePath = './myapp.wasm';
+    
+    const modulePromise = WebAssembly.compileStreaming(fetch(wasmFilePath));
+    
+    const [skia, m] = await Promise.all([skiaPromise, modulePromise])
+
     const importObject = {
         js_code,
-        'skia': await _importModule('skia'),
-
+        'skia': Module['asm'],
     };
-    
-    if (isNodeJs) {
-      const module = await import(/* webpackIgnore: true */'node:module');
-      require = module.default.createRequire(import.meta.url);
-      const fs = require('fs');
-      const path = require('path');
-      const url = require('url');
-      const filepath = url.fileURLToPath(import.meta.url);
-      const dirpath = path.dirname(filepath);
-      const wasmBuffer = fs.readFileSync(path.resolve(dirpath, wasmFilePath));
-      const wasmModule = new WebAssembly.Module(wasmBuffer);
-      wasmInstance = new WebAssembly.Instance(wasmModule, importObject);
-    }
-    
-    if (isD8) {
-      const wasmBuffer = read(wasmFilePath, 'binary');
-      const wasmModule = new WebAssembly.Module(wasmBuffer);
-      wasmInstance = new WebAssembly.Instance(wasmModule, importObject);
-    }
-    
-    if (isBrowser) {
-      wasmInstance = (await WebAssembly.instantiateStreaming(fetch(wasmFilePath), importObject)).instance;
-    }
+
+    wasmInstance = await WebAssembly.instantiate(m, importObject);
     
     wasmExports = wasmInstance.exports;
     if (runInitializer) {
