@@ -1,5 +1,5 @@
 import { instantiate } from './myapp.uninstantiated.mjs';
 
-instantiate(wasmSetup);
+instantiate(wasmSetup, { skia: {} });
 
 console.log("Ready " +  performance.now());
