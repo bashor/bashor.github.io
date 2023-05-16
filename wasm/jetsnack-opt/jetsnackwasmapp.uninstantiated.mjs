@@ -17,19 +17,19 @@ export async function instantiate(imports={}, runInitializer=true) {
 
     
     const js_code = {
-        'kotlin.captureStackTrace_1991666313' : () => new Error().stack,
-        'kotlin.wasm.internal.throwJsError_-2133136283' : (message, wasmTypeName, stack) => { 
+        'kotlin.captureStackTrace_1220676118' : () => new Error().stack,
+        'kotlin.wasm.internal.throwJsError_-798473641' : (message, wasmTypeName, stack) => { 
                 const error = new Error();
                 error.message = message;
                 error.name = wasmTypeName;
                 error.stack = stack;
                 throw error;
            },
-        'kotlin.wasm.internal.getJsEmptyString_-1132809799' : () => '',
-        'kotlin.wasm.internal.getJsTrue_1848441867' : () => true,
-        'kotlin.wasm.internal.getJsFalse_509560500' : () => false,
-        'kotlin.wasm.internal.stringLength_1527691770' : x => x.length,
-        'kotlin.wasm.internal.jsExportStringToWasm_-862317556' :  (src, srcOffset, srcLength, dstAddr) => {
+        'kotlin.wasm.internal.getJsEmptyString_-1903799994' : () => '',
+        'kotlin.wasm.internal.getJsTrue_1077451672' : () => true,
+        'kotlin.wasm.internal.getJsFalse_-261429695' : () => false,
+        'kotlin.wasm.internal.stringLength_-672267814' : x => x.length,
+        'kotlin.wasm.internal.jsExportStringToWasm_-1695027573' :  (src, srcOffset, srcLength, dstAddr) => {
                 const mem16 = new Uint16Array(wasmExports.memory.buffer, dstAddr, srcLength);
                 let arrayIndex = 0;
                 let srcIndex = srcOffset;
@@ -40,17 +40,17 @@ export async function instantiate(imports={}, runInitializer=true) {
                 }
             }
         ,
-        'kotlin.wasm.internal.newJsArray_1262238344' : () => [],
-        'kotlin.wasm.internal.jsArrayPush_-9104433' : (array, element) => { array.push(element); },
-        'kotlin.wasm.internal.importStringFromWasm_-1447138291' : (address, length, prefix) => {
+        'kotlin.wasm.internal.newJsArray_491248149' : () => [],
+        'kotlin.wasm.internal.jsArrayPush_1248182830' : (array, element) => { array.push(element); },
+        'kotlin.wasm.internal.importStringFromWasm_-1386271347' : (address, length, prefix) => {
             const mem16 = new Uint16Array(wasmExports.memory.buffer, address, length);
             const str = String.fromCharCode.apply(null, mem16);
             return (prefix == null) ? str : prefix + str;
         }
         ,
-        'kotlin.wasm.internal.externrefToString_-65860996' : ref => String(ref),
-        'kotlin.wasm.internal.externrefEquals_857452579' : (lhs, rhs) => lhs === rhs,
-        'kotlin.wasm.internal.externrefHashCode_1710570627' : 
+        'kotlin.wasm.internal.externrefToString_521598890' : ref => String(ref),
+        'kotlin.wasm.internal.externrefEquals_2114739842' : (lhs, rhs) => lhs === rhs,
+        'kotlin.wasm.internal.externrefHashCode_-489388957' : 
         (() => {
         const dataView = new DataView(new ArrayBuffer(8));
         function numberHashCode(obj) {
@@ -100,88 +100,88 @@ export async function instantiate(imports={}, runInitializer=true) {
             }
         }
         })(),
-        'kotlin.wasm.internal.isNullish_725686881' : (ref) => ref == null,
-        'kotlin.wasm.internal.tryGetOrSetExternrefBox_$external_fun_934003788' : (p0, p1) => tryGetOrSetExternrefBox(p0, p1),
-        'kotlin.js.unsafeCastJs_-666024052' : (x) => x,
-        'kotlin.io.printError_1607334675' : (error) => console.error(error),
-        'kotlin.io.printlnImpl_-2043817153' : (message) => console.log(message),
-        'kotlin.js.__callJsClosure_34ruur_915308267' : (f, p0) => f(p0),
-        'kotlin.js.__callJsClosure_m1p02x_1619074284' : (f, p0) => f(p0),
-        'kotlin.js.__convertKotlinClosureToJsClosure_f8atpi_-1878028974' : (f) => () => wasmExports.__callFunction_f8atpi(f, ),
-        'kotlin.random.initialSeed_438533727' : () => ((Math.random() * Math.pow(2, 32)) | 0),
-        'kotlin.js.js_847693986' : (s) => eval(s),
-        'kotlinx.browser.window_$external_prop_getter_-1601339022' : () => window,
-        'kotlinx.browser.document_$external_prop_getter_-882398873' : () => document,
-        'org.khronos.webgl.byteLength_$external_prop_getter_1986035398' : (_this) => _this.byteLength,
-        'org.khronos.webgl.ArrayBuffer_$external_class_instanceof_1222517358' : (x) => x instanceof ArrayBuffer,
-        'org.khronos.webgl.Int8Array_$external_fun_-528582698' : (p0, p1, p2, isDefault0, isDefault1) => new Int8Array(p0, isDefault0 ? undefined : p1, isDefault1 ? undefined : p2, ),
-        'org.khronos.webgl.length_$external_prop_getter_754627429' : (_this) => _this.length,
-        'org.w3c.dom.clipboard.writeText_$external_fun_-487369044' : (_this, p0) => _this.writeText(p0),
-        'org.w3c.dom.clipboard.__convertKotlinClosureToJsClosure_7dkcj2_1587247647' : (f) => (p0) => wasmExports.__callFunction_7dkcj2(f, p0),
-        'org.w3c.dom.css.height_$external_prop_setter_1499934304' : (_this, v) => _this.height = v,
-        'org.w3c.dom.css.width_$external_prop_setter_1897113185' : (_this, v) => _this.width = v,
-        'org.w3c.dom.css.style_$external_prop_getter_1473042635' : (_this) => _this.style,
-        'org.w3c.dom.encryptedmedia.__convertKotlinClosureToJsClosure_m6pyui_403605032' : (f) => (p0) => wasmExports.__callFunction_m6pyui(f, p0),
-        'org.w3c.dom.events.timeStamp_$external_prop_getter_-1647533623' : (_this) => _this.timeStamp,
-        'org.w3c.dom.events.preventDefault_$external_fun_-1072430933' : (_this, ) => _this.preventDefault(),
-        'org.w3c.dom.events.Event_$external_class_instanceof_393135544' : (x) => x instanceof Event,
-        'org.w3c.dom.events.addEventListener_$external_fun_806466279' : (_this, p0, p1, p2, isDefault0) => _this.addEventListener(p0, p1, isDefault0 ? undefined : p2, ),
-        'org.w3c.dom.events.ctrlKey_$external_prop_getter_-1284039505' : (_this) => _this.ctrlKey,
-        'org.w3c.dom.events.shiftKey_$external_prop_getter_-181255034' : (_this) => _this.shiftKey,
-        'org.w3c.dom.events.altKey_$external_prop_getter_793777005' : (_this) => _this.altKey,
-        'org.w3c.dom.events.metaKey_$external_prop_getter_-512710967' : (_this) => _this.metaKey,
-        'org.w3c.dom.events.button_$external_prop_getter_809848650' : (_this) => _this.button,
-        'org.w3c.dom.events.offsetX_$external_prop_getter_-2002844267' : (_this) => _this.offsetX,
-        'org.w3c.dom.events.offsetY_$external_prop_getter_2037386484' : (_this) => _this.offsetY,
-        'org.w3c.dom.events.MouseEvent_$external_class_instanceof_-871868333' : (x) => x instanceof MouseEvent,
-        'org.w3c.dom.events.key_$external_prop_getter_500792549' : (_this) => _this.key,
-        'org.w3c.dom.events.location_$external_prop_getter_-1152046043' : (_this) => _this.location,
-        'org.w3c.dom.events.ctrlKey_$external_prop_getter_-2018989075' : (_this) => _this.ctrlKey,
-        'org.w3c.dom.events.shiftKey_$external_prop_getter_-916204604' : (_this) => _this.shiftKey,
-        'org.w3c.dom.events.altKey_$external_prop_getter_58827435' : (_this) => _this.altKey,
-        'org.w3c.dom.events.metaKey_$external_prop_getter_-1247660537' : (_this) => _this.metaKey,
-        'org.w3c.dom.events.charCode_$external_prop_getter_1192391863' : (_this) => _this.charCode,
-        'org.w3c.dom.events.keyCode_$external_prop_getter_-380614514' : (_this) => _this.keyCode,
-        'org.w3c.dom.events.DOM_KEY_LOCATION_RIGHT_$external_prop_getter_947697321' : (_this) => _this.DOM_KEY_LOCATION_RIGHT,
-        'org.w3c.dom.events.Companion_$external_object_getInstance_293166396' : () => KeyboardEvent,
-        'org.w3c.dom.events.KeyboardEvent_$external_class_instanceof_-17353199' : (x) => x instanceof KeyboardEvent,
-        'org.w3c.dom.events.deltaX_$external_prop_getter_1381185220' : (_this) => _this.deltaX,
-        'org.w3c.dom.events.deltaY_$external_prop_getter_1126448675' : (_this) => _this.deltaY,
-        'org.w3c.dom.events.WheelEvent_$external_class_instanceof_1995502429' : (x) => x instanceof WheelEvent,
-        'org.w3c.dom.navigator_$external_prop_getter_-1562885106' : (_this) => _this.navigator,
-        'org.w3c.dom.devicePixelRatio_$external_prop_getter_-268726466' : (_this) => _this.devicePixelRatio,
-        'org.w3c.dom.requestAnimationFrame_$external_fun_-1469131290' : (_this, p0) => _this.requestAnimationFrame(p0),
-        'org.w3c.dom.__convertKotlinClosureToJsClosure_gqn7nm_-236386718' : (f) => (p0) => wasmExports.__callFunction_gqn7nm(f, p0),
-        'org.w3c.dom.clipboard_$external_prop_getter_1077840470' : (_this) => _this.clipboard,
-        'org.w3c.dom.setTimeout_$external_fun_313540480' : (_this, p0, p1, p2, isDefault0, isDefault1) => _this.setTimeout(p0, isDefault0 ? undefined : p1, ...p2, ),
-        'org.w3c.dom.clearTimeout_$external_fun_1332137226' : (_this, p0, isDefault0) => _this.clearTimeout(isDefault0 ? undefined : p0, ),
-        'org.w3c.dom.documentElement_$external_prop_getter_-1699842129' : (_this) => _this.documentElement,
-        'org.w3c.dom.getElementById_$external_fun_1214887675' : (_this, p0) => _this.getElementById(p0),
-        'org.w3c.dom.clientWidth_$external_prop_getter_-823911604' : (_this) => _this.clientWidth,
-        'org.w3c.dom.clientHeight_$external_prop_getter_607586517' : (_this) => _this.clientHeight,
-        'org.w3c.dom.setAttribute_$external_fun_-229751136' : (_this, p0, p1) => _this.setAttribute(p0, p1),
-        'org.w3c.dom.language_$external_prop_getter_-1997741620' : (_this) => _this.language,
-        'org.w3c.dom.width_$external_prop_getter_1611768670' : (_this) => _this.width,
-        'org.w3c.dom.width_$external_prop_setter_206651454' : (_this, v) => _this.width = v,
-        'org.w3c.dom.height_$external_prop_getter_1214589789' : (_this) => _this.height,
-        'org.w3c.dom.height_$external_prop_setter_-190527427' : (_this, v) => _this.height = v,
-        'org.w3c.dom.HTMLCanvasElement_$external_class_instanceof_-621459626' : (x) => x instanceof HTMLCanvasElement,
-        'org.w3c.performance.performance_$external_prop_getter_-1775386154' : (_this) => _this.performance,
-        'org.w3c.performance.now_$external_fun_905985071' : (_this, ) => _this.now(),
-        'org.w3c.xhr.XMLHttpRequest_$external_fun_-677228055' : () => new XMLHttpRequest(),
-        'org.w3c.xhr.responseType_$external_prop_setter_765931166' : (_this, v) => _this.responseType = v,
-        'org.w3c.xhr.response_$external_prop_getter_-421756988' : (_this) => _this.response,
-        'org.w3c.xhr.open_$external_fun_-1891328033' : (_this, p0, p1, p2, p3, p4, isDefault0, isDefault1) => _this.open(p0, p1, p2, isDefault0 ? undefined : p3, isDefault1 ? undefined : p4, ),
-        'org.w3c.xhr.send_$external_fun_146054357' : (_this, p0, isDefault0) => _this.send(isDefault0 ? undefined : p0, ),
-        'org.w3c.xhr.onload_$external_prop_setter_-536951021' : (_this, v) => _this.onload = v,
-        'kotlinx.coroutines.tryGetProcess_-2019837262' : () => (typeof(process) !== 'undefined' && typeof(process.nextTick) === 'function') ? process : null,
-        'kotlinx.coroutines.tryGetWindow_-663389189' : () => (typeof(window) !== 'undefined' && window != null && typeof(window.addEventListener) === 'function') ? window : null,
-        'kotlinx.coroutines.nextTick_$external_fun_1165047361' : (_this, p0) => _this.nextTick(p0),
-        'kotlinx.coroutines.toDynamicHandle_-1242203612' : (handle) => handle,
-        'kotlinx.coroutines.createScheduleMessagePoster_-1179272049' : (process) => () => Promise.resolve(0).then(process),
-        'kotlinx.coroutines.__callJsClosure_f8atpi_1449134824' : (f, ) => f(),
-        'kotlinx.coroutines.createRescheduleMessagePoster_-1627443245' : (window) => () => window.postMessage('dispatchCoroutine', '*'),
-        'kotlinx.coroutines.subscribeToWindowMessages_-1055027780' : (window, process) => {
+        'kotlin.wasm.internal.isNullish_-963615053' : (ref) => ref == null,
+        'kotlin.wasm.internal.tryGetOrSetExternrefBox_$external_fun_683743225' : (p0, p1) => tryGetOrSetExternrefBox(p0, p1),
+        'kotlin.js.unsafeCastJs_432093484' : (x) => x,
+        'kotlin.io.printError_-81967259' : (error) => console.error(error),
+        'kotlin.io.printlnImpl_561848209' : (message) => console.log(message),
+        'kotlin.js.__callJsClosure_tgckou_562889340' : (f, p0) => f(p0),
+        'kotlin.js.__callJsClosure_ee4jvu_1949993280' : (f, p0) => f(p0),
+        'kotlin.js.__convertKotlinClosureToJsClosure_4lslzs_-419163226' : (f) => () => wasmExports.__callFunction_4lslzs(f, ),
+        'kotlin.random.initialSeed_1175091358' : () => ((Math.random() * Math.pow(2, 32)) | 0),
+        'kotlin.js.js_1945811522' : (s) => eval(s),
+        'kotlinx.browser.window_$external_prop_getter_1922638079' : () => window,
+        'kotlinx.browser.document_$external_prop_getter_-1653389068' : () => document,
+        'org.khronos.webgl.byteLength_$external_prop_getter_-213924186' : (_this) => _this.byteLength,
+        'org.khronos.webgl.ArrayBuffer_$external_class_instanceof_-466784576' : (x) => x instanceof ArrayBuffer,
+        'org.khronos.webgl.Int8Array_$external_fun_-1343779644' : (p0, p1, p2, isDefault0, isDefault1) => new Int8Array(p0, isDefault0 ? undefined : p1, isDefault1 ? undefined : p2, ),
+        'org.khronos.webgl.length_$external_prop_getter_-1445332155' : (_this) => _this.length,
+        'org.w3c.dom.clipboard.writeText_$external_fun_-226971957' : (_this, p0) => _this.writeText(p0),
+        'org.w3c.dom.clipboard.__convertKotlinClosureToJsClosure_a03o1_-392724732' : (f) => (p0) => wasmExports.__callFunction_a03o1(f, p0),
+        'org.w3c.dom.css.height_$external_prop_setter_-1027088079' : (_this, v) => _this.height = v,
+        'org.w3c.dom.css.width_$external_prop_setter_-629909198' : (_this, v) => _this.width = v,
+        'org.w3c.dom.css.style_$external_prop_getter_2060502521' : (_this) => _this.style,
+        'org.w3c.dom.encryptedmedia.__convertKotlinClosureToJsClosure_w23li5_645038894' : (f) => (p0) => wasmExports.__callFunction_w23li5(f, p0),
+        'org.w3c.dom.events.timeStamp_$external_prop_getter_447474089' : (_this) => _this.timeStamp,
+        'org.w3c.dom.events.preventDefault_$external_fun_1022576779' : (_this, ) => _this.preventDefault(),
+        'org.w3c.dom.events.Event_$external_class_instanceof_-1296166390' : (x) => x instanceof Event,
+        'org.w3c.dom.events.addEventListener_$external_fun_1492953749' : (_this, p0, p1, p2, isDefault0) => _this.addEventListener(p0, p1, isDefault0 ? undefined : p2, ),
+        'org.w3c.dom.events.ctrlKey_$external_prop_getter_810968207' : (_this) => _this.ctrlKey,
+        'org.w3c.dom.events.shiftKey_$external_prop_getter_1913752678' : (_this) => _this.shiftKey,
+        'org.w3c.dom.events.altKey_$external_prop_getter_-1406182579' : (_this) => _this.altKey,
+        'org.w3c.dom.events.metaKey_$external_prop_getter_1582296745' : (_this) => _this.metaKey,
+        'org.w3c.dom.events.button_$external_prop_getter_-1390110934' : (_this) => _this.button,
+        'org.w3c.dom.events.offsetX_$external_prop_getter_92163445' : (_this) => _this.offsetX,
+        'org.w3c.dom.events.offsetY_$external_prop_getter_-162573100' : (_this) => _this.offsetY,
+        'org.w3c.dom.events.MouseEvent_$external_class_instanceof_1733797029' : (x) => x instanceof MouseEvent,
+        'org.w3c.dom.events.key_$external_prop_getter_1088252435' : (_this) => _this.key,
+        'org.w3c.dom.events.location_$external_prop_getter_942961669' : (_this) => _this.location,
+        'org.w3c.dom.events.ctrlKey_$external_prop_getter_76018637' : (_this) => _this.ctrlKey,
+        'org.w3c.dom.events.shiftKey_$external_prop_getter_1178803108' : (_this) => _this.shiftKey,
+        'org.w3c.dom.events.altKey_$external_prop_getter_-2141132149' : (_this) => _this.altKey,
+        'org.w3c.dom.events.metaKey_$external_prop_getter_847347175' : (_this) => _this.metaKey,
+        'org.w3c.dom.events.charCode_$external_prop_getter_-1007567721' : (_this) => _this.charCode,
+        'org.w3c.dom.events.keyCode_$external_prop_getter_1714393198' : (_this) => _this.keyCode,
+        'org.w3c.dom.events.DOM_KEY_LOCATION_RIGHT_$external_prop_getter_-1252262263' : (_this) => _this.DOM_KEY_LOCATION_RIGHT,
+        'org.w3c.dom.events.Companion_$external_object_getInstance_-477823799' : () => KeyboardEvent,
+        'org.w3c.dom.events.KeyboardEvent_$external_class_instanceof_-1706655133' : (x) => x instanceof KeyboardEvent,
+        'org.w3c.dom.events.deltaX_$external_prop_getter_-818774364' : (_this) => _this.deltaX,
+        'org.w3c.dom.events.deltaY_$external_prop_getter_-1073510909' : (_this) => _this.deltaY,
+        'org.w3c.dom.events.WheelEvent_$external_class_instanceof_306200495' : (x) => x instanceof WheelEvent,
+        'org.w3c.dom.navigator_$external_prop_getter_-975425220' : (_this) => _this.navigator,
+        'org.w3c.dom.devicePixelRatio_$external_prop_getter_1826281246' : (_this) => _this.devicePixelRatio,
+        'org.w3c.dom.requestAnimationFrame_$external_fun_-211844027' : (_this, p0) => _this.requestAnimationFrame(p0),
+        'org.w3c.dom.__convertKotlinClosureToJsClosure_932rgj_1029174423' : (f) => (p0) => wasmExports.__callFunction_932rgj(f, p0),
+        'org.w3c.dom.clipboard_$external_prop_getter_1665300356' : (_this) => _this.clipboard,
+        'org.w3c.dom.setTimeout_$external_fun_-487245423' : (_this, p0, p1, p2, isDefault0, isDefault1) => _this.setTimeout(p0, isDefault0 ? undefined : p1, ...p2, ),
+        'org.w3c.dom.clearTimeout_$external_fun_-1905072950' : (_this, p0, isDefault0) => _this.clearTimeout(isDefault0 ? undefined : p0, ),
+        'org.w3c.dom.documentElement_$external_prop_getter_-1112382243' : (_this) => _this.documentElement,
+        'org.w3c.dom.getElementById_$external_fun_1475284762' : (_this, p0) => _this.getElementById(p0),
+        'org.w3c.dom.clientWidth_$external_prop_getter_1271096108' : (_this) => _this.clientWidth,
+        'org.w3c.dom.clientHeight_$external_prop_getter_-1592373067' : (_this) => _this.clientHeight,
+        'org.w3c.dom.setAttribute_$external_fun_-10818400' : (_this, p0, p1) => _this.setAttribute(p0, p1),
+        'org.w3c.dom.language_$external_prop_getter_-1410281734' : (_this) => _this.language,
+        'org.w3c.dom.width_$external_prop_getter_-588190914' : (_this) => _this.width,
+        'org.w3c.dom.width_$external_prop_setter_1463938717' : (_this, v) => _this.width = v,
+        'org.w3c.dom.height_$external_prop_getter_-985369795' : (_this) => _this.height,
+        'org.w3c.dom.height_$external_prop_setter_1066759836' : (_this, v) => _this.height = v,
+        'org.w3c.dom.HTMLCanvasElement_$external_class_instanceof_1984205736' : (x) => x instanceof HTMLCanvasElement,
+        'org.w3c.performance.performance_$external_prop_getter_-1187926268' : (_this) => _this.performance,
+        'org.w3c.performance.now_$external_fun_-1293974513' : (_this, ) => _this.now(),
+        'org.w3c.xhr.XMLHttpRequest_$external_fun_-1448218250' : () => new XMLHttpRequest(),
+        'org.w3c.xhr.responseType_$external_prop_setter_2023218429' : (_this, v) => _this.responseType = v,
+        'org.w3c.xhr.response_$external_prop_getter_165702898' : (_this) => _this.response,
+        'org.w3c.xhr.open_$external_fun_748917406' : (_this, p0, p1, p2, p3, p4, isDefault0, isDefault1) => _this.open(p0, p1, p2, isDefault0 ? undefined : p3, isDefault1 ? undefined : p4, ),
+        'org.w3c.xhr.send_$external_fun_-145670557' : (_this, p0, isDefault0) => _this.send(isDefault0 ? undefined : p0, ),
+        'org.w3c.xhr.onload_$external_prop_setter_1230993892' : (_this, v) => _this.onload = v,
+        'kotlinx.coroutines.tryGetProcess_1504139839' : () => (typeof(process) !== 'undefined' && typeof(process.nextTick) === 'function') ? process : null,
+        'kotlinx.coroutines.tryGetWindow_-1434379384' : () => (typeof(window) !== 'undefined' && window != null && typeof(window.addEventListener) === 'function') ? window : null,
+        'kotlinx.coroutines.nextTick_$external_fun_-1872632672' : (_this, p0) => _this.nextTick(p0),
+        'kotlinx.coroutines.toDynamicHandle_-654743726' : (handle) => handle,
+        'kotlinx.coroutines.createScheduleMessagePoster_-591812163' : (process) => () => Promise.resolve(0).then(process),
+        'kotlinx.coroutines.__callJsClosure_4lslzs_-1386966724' : (f, ) => f(),
+        'kotlinx.coroutines.createRescheduleMessagePoster_-1039983359' : (window) => () => window.postMessage('dispatchCoroutine', '*'),
+        'kotlinx.coroutines.subscribeToWindowMessages_202259483' : (window, process) => {
             const handler = (event) => {
                 if (event.source == window && event.data == 'dispatchCoroutine') {
                     event.stopPropagation();
@@ -190,17 +190,17 @@ export async function instantiate(imports={}, runInitializer=true) {
             }
             window.addEventListener('message', handler, true)
         },
-        'kotlinx.coroutines.clearTimeout_1143151965' : typeof clearTimeout === 'undefined' ? (handle) => {} : clearTimeout,
-        'kotlinx.coroutines.setTimeout_$external_fun_-134721580' : (p0, p1) => setTimeout(p0, p1),
-        'org.jetbrains.skia.impl._releaseLocalCallbackScope_$external_fun_-1832221901' : () => _releaseLocalCallbackScope(),
-        'org.jetbrains.skiko.wasm.createContext_$external_fun_1937946503' : (_this, p0, p1) => _this.createContext(p0, p1),
-        'org.jetbrains.skiko.wasm.makeContextCurrent_$external_fun_1127400343' : (_this, p0) => _this.makeContextCurrent(p0),
-        'org.jetbrains.skiko.wasm.GL_$external_object_getInstance_1402446117' : () => GL,
-        'org.jetbrains.skia.impl.FinalizationRegistry_$external_fun_-1947904342' : (p0) => new FinalizationRegistry(p0),
-        'org.jetbrains.skia.impl.__convertKotlinClosureToJsClosure_etlewy_-1235652765' : (f) => (p0) => wasmExports.__callFunction_etlewy(f, p0),
-        'org.jetbrains.skia.impl.register_$external_fun_-1706612812' : (_this, p0, p1) => _this.register(p0, p1),
-        'org.jetbrains.skia.impl.unregister_$external_fun_1737404023' : (_this, p0) => _this.unregister(p0),
-        'org.jetbrains.skiko.wasm.createDefaultContextAttributes_494598626' : () => {
+        'kotlinx.coroutines.clearTimeout_-1056807619' : typeof clearTimeout === 'undefined' ? (handle) => {} : clearTimeout,
+        'kotlinx.coroutines.setTimeout_$external_fun_1122565683' : (p0, p1) => setTimeout(p0, p1),
+        'org.jetbrains.skia.impl._releaseLocalCallbackScope_$external_fun_-1095664270' : () => _releaseLocalCallbackScope(),
+        'org.jetbrains.skiko.wasm.createContext_$external_fun_-1299263673' : (_this, p0, p1) => _this.createContext(p0, p1),
+        'org.jetbrains.skiko.wasm.makeContextCurrent_$external_fun_-1910279690' : (_this, p0) => _this.makeContextCurrent(p0),
+        'org.jetbrains.skiko.wasm.GL_$external_object_getInstance_631455922' : () => GL,
+        'org.jetbrains.skia.impl.FinalizationRegistry_$external_fun_-1360444456' : (p0) => new FinalizationRegistry(p0),
+        'org.jetbrains.skia.impl.__convertKotlinClosureToJsClosure_mh5v41_521056948' : (f) => (p0) => wasmExports.__callFunction_mh5v41(f, p0),
+        'org.jetbrains.skia.impl.register_$external_fun_-648855692' : (_this, p0, p1) => _this.register(p0, p1),
+        'org.jetbrains.skia.impl.unregister_$external_fun_-1300276010' : (_this, p0) => _this.unregister(p0),
+        'org.jetbrains.skiko.wasm.createDefaultContextAttributes_-276391569' : () => {
             return {
                 alpha: 1,
                 depth: 1,
@@ -217,14 +217,14 @@ export async function instantiate(imports={}, runInitializer=true) {
             }
         }
         ,
-        'com.example.jetsnack.ui.components.jsExportInt8ArrayToWasm_1618061897' :  (src, size, dstAddr) => {
+        'com.example.jetsnack.ui.components.jsExportInt8ArrayToWasm_-1619148279' :  (src, size, dstAddr) => {
                 const mem8 = new Int8Array(wasmExports.memory.buffer, dstAddr, size);
                 mem8.set(src);
             }
         ,
-        'com.example.jetsnack.ui.utils.NumberFormat_$external_fun_1621333016' : (p0, p1) => new Intl.NumberFormat(p0, p1),
-        'com.example.jetsnack.ui.utils.format_$external_fun_1112335893' : (_this, p0) => _this.format(p0),
-        'jsExportInt8ArrayToWasm_-1470236719' :  (src, size, dstAddr) => {
+        'com.example.jetsnack.ui.utils.NumberFormat_$external_fun_21590419' : (p0, p1) => new Intl.NumberFormat(p0, p1),
+        'com.example.jetsnack.ui.utils.format_$external_fun_-1274471875' : (_this, p0) => _this.format(p0),
+        'jsExportInt8ArrayToWasm_-412479599' :  (src, size, dstAddr) => {
                 const mem8 = new Int8Array(wasmExports.memory.buffer, dstAddr, size);
                 mem8.set(src);
             }
