@@ -36,15 +36,15 @@ export async function instantiate(imports={}, runInitializer=true) {
                 arrayIndex++;
             }     
              },
-        'kotlin.wasm.internal.externrefToInt' : (ref) => Number(ref),
-        'kotlin.wasm.internal.newJsArray' : () => [],
-        'kotlin.wasm.internal.jsArrayPush' : (array, element) => { array.push(element); },
         'kotlin.wasm.internal.importStringFromWasm' : (address, length, prefix) => { 
             const mem16 = new Uint16Array(wasmExports.memory.buffer, address, length);
             const str = String.fromCharCode.apply(null, mem16);
             return (prefix == null) ? str : prefix + str;
              },
         'kotlin.wasm.internal.getJsEmptyString' : () => '',
+        'kotlin.wasm.internal.externrefToInt' : (ref) => Number(ref),
+        'kotlin.wasm.internal.newJsArray' : () => [],
+        'kotlin.wasm.internal.jsArrayPush' : (array, element) => { array.push(element); },
         'kotlin.wasm.internal.externrefToString' : (ref) => String(ref),
         'kotlin.wasm.internal.externrefEquals' : (lhs, rhs) => lhs === rhs,
         'kotlin.wasm.internal.externrefHashCode' : 
@@ -211,7 +211,6 @@ export async function instantiate(imports={}, runInitializer=true) {
             }
         }
         ,
-        'com.example.jetsnack.ui.components.foo' : () => 'arraybuffer',
         'com.example.jetsnack.ui.components.jsExportInt8ArrayToWasm' :  (src, size, dstAddr) => {
                 const mem8 = new Int8Array(wasmExports.memory.buffer, dstAddr, size);
                 mem8.set(src);
@@ -220,7 +219,6 @@ export async function instantiate(imports={}, runInitializer=true) {
         'com.example.jetsnack.ui.utils.formatAsUSD' : () => ({ style: 'currency', currency: 'USD',}),
         'com.example.jetsnack.ui.utils.NumberFormat_$external_fun' : (p0, p1) => new Intl.NumberFormat(p0, p1),
         'com.example.jetsnack.ui.utils.format_$external_fun' : (_this, p0) => _this.format(p0),
-        'foo' : () => 'arraybuffer',
         'jsExportInt8ArrayToWasm' :  (src, size, dstAddr) => {
                 const mem8 = new Int8Array(wasmExports.memory.buffer, dstAddr, size);
                 mem8.set(src);
