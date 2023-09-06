@@ -1,6 +1,6 @@
 ### Hi!
 
-I'm **Zalim Bashorov**.
+I'm **Zalim Bashorov** (aka [@bashorov](https://twitter.com/bashorov)@𝕏 & [@bashorov@🐘](https://mastodon.online/@bashorov)).
 
 🏷️ I'm interested in compilers, interpreters, VMs, WebAssembly.\
 👨‍💻 I'm working at [@JetBrains](https://twitter.com/jetbrains), writing [@Kotlin](https://twitter.com/kotlin) in Kotlin for more than 10 years 🙀.\
