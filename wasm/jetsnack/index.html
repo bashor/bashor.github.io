@@ -54,9 +54,43 @@
             right: 10px;
             cursor: pointer;
         }
+        
+        #demos {
+            position: absolute;
+            right: 50px;
+        }
+
+        #demos a:link, a:visited {
+            background-color: white;
+            color: black;
+            border: 1px solid #654ff0;
+            padding: 5px 7px;
+            margin-left: -5px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        #demos a:hover, a:active {
+            background-color: #804FF0;
+            color: white;
+            text-decoration: underline;
+        }
+
+        #demos a.current {
+            background-color: #654FF0;
+            color: white;
+        }
     </style>
 </head>
 <body>
+<div id="demos">
+    <a href="/wasm/iv">Image Viewer</a>
+    <a href="/wasm/jetsnack" class="current">JetSnack</a>
+    <a href="/wasm/example">Simple</a>
+    <a href="/wasm/hello">Hello</a>
+</div>
+
 <canvas id="jetsnackCanvas"></canvas>
 
 <div id="warning">
