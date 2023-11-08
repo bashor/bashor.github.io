@@ -2,22 +2,10 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <!-- https://zal.im:443 -->
-    <meta http-equiv="origin-trial" content="AhpE3H+oP0GR7F0eeX3cKK1xEwokOckZbWznACU1r8fBe5RPm2pDe316H/ETCtXgvD5WgQwn41BPuuQDPNjujAEAAABNeyJvcmlnaW4iOiJodHRwczovL3phbC5pbTo0NDMiLCJmZWF0dXJlIjoiV2ViQXNzZW1ibHlHQyIsImV4cGlyeSI6MTcwOTY4MzE5OX0=">
-    <!-- http://localhost:80 -->
-    <meta http-equiv="origin-trial" content="AjytAe1FWUIWH/RzqsOWlXYw7kGwt11ejbvR/ArmAU4QbXIPg69wzpniDhPByiOZ9pdNqsdMsXsoxggVtfGhwwMAAABOeyJvcmlnaW4iOiJodHRwOi8vbG9jYWxob3N0OjgwIiwiZmVhdHVyZSI6IldlYkFzc2VtYmx5R0MiLCJleHBpcnkiOjE2OTg5Njk1OTl9">
-    <!-- http://localhost:8080 -->
-    <meta http-equiv="origin-trial" content="AtSRFRWKTCcQHDFUUQL1VaVz9mjmsK1xm5k0S8etkmvMLa5TsiNeQsle/eDgdZVkm1PM1WmrSMx52kI8yAP2UgEAAABQeyJvcmlnaW4iOiJodHRwOi8vbG9jYWxob3N0OjgwODAiLCJmZWF0dXJlIjoiV2ViQXNzZW1ibHlHQyIsImV4cGlyeSI6MTY5ODk2OTU5OX0=">
-    <!-- http://localhost:8081 -->
-    <meta http-equiv="origin-trial" content="AspyK9xe4tO2aIvJWnr5HTRT9GqpGJID2qZjj+0OvhKHp9JrUP+92PF+Rt11Tyi7cKSEB7OFFGdeVs7Ns5TMhAUAAABQeyJvcmlnaW4iOiJodHRwOi8vbG9jYWxob3N0OjgwODEiLCJmZWF0dXJlIjoiV2ViQXNzZW1ibHlHQyIsImV4cGlyeSI6MTY5ODk2OTU5OX0=">
-    <!-- http://localhost:8082 -->
-    <meta http-equiv="origin-trial" content="AoPGqwBGEQW3twSDYvXt1JHz5zg7Z4o+Orwr8NxdVoXJ68zjwOi2C8/0w4xFYW6UUH8w97eIjykGOa/+jIBfTQMAAABQeyJvcmlnaW4iOiJodHRwOi8vbG9jYWxob3N0OjgwODIiLCJmZWF0dXJlIjoiV2ViQXNzZW1ibHlHQyIsImV4cGlyeSI6MTY5ODk2OTU5OX0=">
-    <!-- http://localhost:8083 -->
-    <meta http-equiv="origin-trial" content="AvV2HYiHMw7lpIVcmGMSVmm6xC0Gzu4W5xBnZExmfHtE5zyNKFszcyNGm5IfCFQ6swnMotbn16lS1ozkJ0QzEAEAAABQeyJvcmlnaW4iOiJodHRwOi8vbG9jYWxob3N0OjgwODMiLCJmZWF0dXJlIjoiV2ViQXNzZW1ibHlHQyIsImV4cGlyeSI6MTY5ODk2OTU5OX0=">
 
     <title>Compose Multiplatform with Kotlin/Wasm Demo</title>
     <script src="skiko.js"> </script>
-    <script type="module" src="load.mjs"> </script>
+    <script type="application/javascript" src="composed.js"> </script>
     <style>
         #views {
             overflow-x: hidden;
@@ -26,7 +14,6 @@
             height: 800px;
             /*scroll-behavior: smooth;*/
             white-space: nowrap;
-            /*border: #4d4d4d solid;*/
         }
 
         #demos a:link, a:visited {
@@ -48,70 +35,163 @@
             background-color: #654FF0;
             color: white;
         }
-        
+
         #warning {
             position: absolute;
             top: 100px;
             left: 100px;
+            max-width: 830px;
             z-index: 100;
+            background-color: white;
+            font-size: initial;
+            display: none;
         }
         #warning li {
             padding-bottom: 15px;
         }
-        
+
         #warning span.code {
             font-family: monospace;
         }
-        
+
         ul {
             margin-top: 0;
             margin-bottom: 15px;
         }
+
+        #footer {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            z-index: 1000;
+            background-color: white;
+            font-size: initial;
+        }
+
+        #close {
+            position: absolute;
+            top: 0;
+            right: 10px;
+            cursor: pointer;
+        }
+        
+        #examples {
+            position: absolute;
+            right: 50px;
+            font-size: initial;
+            z-index: 100;
+        }
+
+        #examples a:link, a:visited {
+            background-color: white;
+            color: black;
+            border: 1px solid #654ff0;
+            padding: 5px 7px;
+            margin-left: -5px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            height: 20px;
+        }
+
+        #examples a:hover, a:active {
+            background-color: #804FF0;
+            color: white;
+            text-decoration: underline;
+        }
+
+        #examples a.current {
+            background-color: #654FF0;
+            color: white;
+        }
+
+        #examples a.icon {
+            padding-top: 0;
+            padding-bottom: 10px;
+            width: 20px;
+            height: 20px;
+            margin-left: 0;
+            background-color: white;
+        }
+
+        #examples a.icon img {
+            position: relative;
+            top: 4px;
+        }
     </style>
 </head>
 <body>
+    <div id="examples"> 
+        More Demos:&nbsp; 
+        <a href="/wasm/iv">Image Viewer</a>
+        <a href="/wasm/jetsnack">JetSnack</a>
+        <a href="/wasm/example">Simple</a>
+        <a href="/wasm/hello">Hello</a>
+        <a href="https://kotl.in/wasm-examples" target="_blank" class="icon" title="https://kotl.in/wasm-examples"> <img src="/resources/github-mark.svg" width="20" alt="github"/> </a>
+    </div>
+
     <span style="font-size: xx-large; font-weight: bold">Compose Multiplatform Kotlin/Wasm Demo</span>
-    <span id="demos"></span>
+    <div>
+        <span id="demos"></span>
+    </div>
     <div id="views"></div>
 
     <div id="warning">
-        ⚠️ This page using <b>experimental Kotlin/Wasm</b> which requires enabling experimental features in your browser.
+        ⚠️ Please make sure that your runtime environment supports the latest version of Wasm GC and Exception-Handling proposals.
+        For more information, see <a href="https://kotl.in/wasm-help" target="_blank">https://kotl.in/wasm-help</a>.
+        <br/>
+        <br/>
         <ul>
-            <li>For <b>Chrome</b> 110 or newer:
-                <ol>
-                    <li>Open <span class="code">chrome://flags/#enable-webassembly-garbage-collection</span> in the browser.</li>
-                    <li>Enable <strong>WebAssembly Garbage Collection</strong>.</li>
-                    <li>Relaunch the browser.</li>
-                </ol>
-                or with Chrome 109 or newer, run the browser with the <span class="code">--js-flags=--experimental-wasm-gc</span> command line argument.</li>
-            <li>For <b>Edge</b> 109 or newer: run the browser with the <span class="code">--js-flags=--experimental-wasm-gc</span> command line argument.</li>
-            <li>For <b>Firefox</b> 112 or newer:
+            <li>For <b>Chrome</b> and <b>Chromium-based</b> browsers (Edge, Brave etc.), it <b>should just work</b> since version 119.</li>
+            <li>For <b>Firefox</b> 120 it <b>should just work</b>.</li>
+            <li>For <b>Firefox</b> 119:
                 <ol>
                     <li>Open <span class="code">about:config</span> in the browser.</li>
-                    <li>Enable <strong>javascript.options.wasm_function_references</strong> and <strong>javascript.options.wasm_gc</strong>.</li>
+                    <li>Enable <strong>javascript.options.wasm_gc</strong>.</li>
                     <li>Refresh this page.</li>
                 </ol>
             </li>
         </ul>
     </div>
-    <div style="float: left;width: 50%">
-        Don't hesitate to ask question and share your opinion:
-        <ul style="">
-            <li>In <code><a href="https://kotlinlang.slack.com/archives/CDFP59223">#webassembly</a></code> channel in Kotlin Slack, to get invite follow <a href="https://kotl.in/slack">kotl.in/slack</a>.</li>
-            <li>In the original <a href="https://twitter.com/bashorov/status/1625437131706363904">twitter thread</a></li>
-        </ul>
-    </div>
-    <div>
-        For future news 
-        <ul>
-            <li>Join <code><a href="https://kotlinlang.slack.com/archives/CDFP59223">#webassembly</a></code> channel in Kotlin Slack, to get invite follow <a href="https://kotl.in/slack">kotl.in/slack</a>.</li>
-            <li>Follow me <a href="/x">https://twitter.com/bashorov/</a></li>
-        </ul>
+
+    <div id="footer">
+<!--        <div style="text-align: center;">-->
+<!--            <img src="/resources/github-mark.svg" width="30"/>-->
+<!--            <span style="position: relative;bottom: 9px;left: 3px;"> Check out sources at <a href="https://kotl.in/wasm-examples" target="_blank">https://kotl.in/wasm-examples</a></span>-->
+<!--        </div>-->
+        <div style="float: left; width: 50%; padding-right: 5px">
+            <span style="padding-left: 20px">Don't hesitate to share your feedback and ask questions:</span>
+            <ul style="">
+                <li>In the Kotlin Slack <code><a href="https://slack-chats.kotlinlang.org/c/webassembly" target="_blank">#webassembly</a></code> channel (if you’re not a member, apply at <a href="https://kotl.in/slack" target="_blank">https://kotl.in/slack</a>).</li>
+            </ul>
+        </div>
+        <div style="float: left; width: 45%;">
+            <span style="padding-left: 20px;">For future news</span>
+            <ul>
+                <li>Join <code><a href="https://slack-chats.kotlinlang.org/c/webassembly" target="_blank">#webassembly</a></code> channel in Kotlin Slack (if you’re not a member, apply at <a href="https://kotl.in/slack" target="_blank">https://kotl.in/slack</a>).</li>
+                <li>Follow <a href="/x" target="_blank">@bashorov</a> on 𝕏 aka Twitter</li>
+            </ul>
+        </div>
+        <div id="close" onclick="document.getElementById('footer').style.display='none'">ⓧ</div>
     </div>
 </body>
 
+<script type="application/javascript" >
+    const unhandledError = (event, error) => {
+        if (error instanceof WebAssembly.CompileError) {
+            document.getElementById("warning").style.display="initial";
+
+            // Hide a Scary Webpack Overlay which is less informative in this case.  
+            const webpackOverlay = document.getElementById("webpack-dev-server-client-overlay");
+            if (webpackOverlay != null) webpackOverlay.style.display="none";
+        }
+    }
+    addEventListener("error", (event) => unhandledError(event, event.error));
+    addEventListener("unhandledrejection", (event) => unhandledError(event, event.reason));
+</script>
+
 <!-- Track visits with respect to privacy -->
 <script data-goatcounter="https://zalim.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
-<noscript><img src="https://zalim.goatcounter.com/count?p=wasm/creative"></noscript>
+<noscript><img src="https://zalim.goatcounter.com/count?p=wasm/creative/"></noscript>
 
 </html>
