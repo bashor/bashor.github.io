@@ -1,0 +1,1 @@
+(this.webpackChunkkotlin_wasm_browser_example=this.webpackChunkkotlin_wasm_browser_example||[]).push([[592],{592:()=>{}}]);
