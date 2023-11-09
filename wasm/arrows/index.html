@@ -156,6 +156,27 @@
         </div>
         <div id="close" onclick="document.getElementById('footer').style.display='none'">ⓧ</div>
     </div>
+
+    <div id="fps" style="position: absolute;right: 0; top: 0; width: 30px;"></div>
+    <script type="application/javascript">
+        let counter = 0;
+        let time = performance.now();
+        let fpsIndicator = document.getElementById("fps")
+        function updateFps() {
+            window.requestAnimationFrame(() => {
+                counter++;
+                const newTime = performance.now();
+                if ((newTime - time) > 1000) {
+                    fpsIndicator.textContent = counter;
+                    time = newTime;
+                    counter = 0;
+                }
+                updateFps();
+            })
+        }
+        
+        updateFps();
+    </script>
 </body>
 
 <script type="application/javascript" >
