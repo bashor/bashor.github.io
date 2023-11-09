@@ -163,9 +163,8 @@
         let time = performance.now();
         let fpsIndicator = document.getElementById("fps")
         function updateFps() {
-            window.requestAnimationFrame(() => {
+            window.requestAnimationFrame((newTime) => {
                 counter++;
-                const newTime = performance.now();
                 if ((newTime - time) > 1000) {
                     fpsIndicator.textContent = counter;
                     time = newTime;
