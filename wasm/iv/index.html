@@ -160,9 +160,17 @@
     }
     addEventListener("error", (event) => unhandledError(event, event.error));
     addEventListener("unhandledrejection", (event) => unhandledError(event, event.reason));
+
 </script>
 
 <!-- Track visits with respect to privacy -->
+<script type="application/javascript" >
+    document.querySelectorAll("a[target=_blank]").forEach((e) => {
+        e.setAttribute("data-goatcounter-click", e.href)
+        e.setAttribute("data-goatcounter-referrer", window.location.pathname)
+        // data-goatcounter-title
+    })
+</script>
 <script data-goatcounter="https://zalim.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 <noscript><img src="https://zalim.goatcounter.com/count?p=wasm/iv/"></noscript>
 
