@@ -169,4 +169,19 @@
 <script data-goatcounter="https://zalim.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 <noscript><img src="https://zalim.goatcounter.com/count?p=wasm/jetsnack/"></noscript>
 
+<script type="application/javascript" >
+    let touchEventFired = false;
+    document.body.addEventListener("touchstart", () => {
+        if (touchEventFired) return;
+
+        touchEventFired = true;
+
+        goatcounter.count({
+            path:  (p) => '#touchstart-fired-' + p,
+            title: 'Touch Event is fired',
+            event: true,
+        })
+    });
+</script>
+
 </html>
