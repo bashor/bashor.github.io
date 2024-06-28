@@ -2,9 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>JetSnack with Kotlin/Wasm</title>
-    <script type="application/javascript" src="skiko.js"></script>
     <script type="application/javascript" src="jetsnackwasmapp.js"></script>
     <style>
         html, body {
@@ -54,64 +53,14 @@
             right: 10px;
             cursor: pointer;
         }
-        
-        #demos {
-            position: absolute;
-            right: 50px;
-        }
-
-        #demos a:link, a:visited {
-            background-color: white;
-            color: black;
-            border: 1px solid #654ff0;
-            padding: 5px 7px;
-            margin-left: -5px;
-            text-align: center;
-            text-decoration: none;
-            display: inline-block;
-            height: 20px;
-        }
-
-        #demos a:hover, a:active {
-            background-color: #804FF0;
-            color: white;
-            text-decoration: underline;
-        }
-
-        #demos a.current {
-            background-color: #654FF0;
-            color: white;
-        }
-        
-        #demos a.icon {
-            padding-top: 0;
-            padding-bottom: 10px;
-            width: 20px;
-            height: 20px;
-            margin-left: 0;
-            background-color: white;
-        }
-
-        #demos a.icon img {
-            position: relative;
-            top: 4px;
-        }
     </style>
 </head>
 <body>
-<div id="demos">
-    <a href="/wasm/iv">Image Viewer</a>
-    <a href="/wasm/jetsnack" class="current">JetSnack</a>
-    <a href="/wasm/example">Simple</a>
-    <a href="/wasm/hello">Hello</a>
-    <a href="https://kotl.in/wasm-examples" target="_blank" class="icon" title="https://kotl.in/wasm-examples"> <img src="/resources/github-mark.svg" width="20" alt="github"/> </a>
-</div>
-
 <canvas id="jetsnackCanvas"></canvas>
 
 <div id="warning">
     ⚠️ Please make sure that your runtime environment supports the latest version of Wasm GC and Exception-Handling proposals.
-    For more information, see <a href="https://kotl.in/wasm-help" target="_blank">https://kotl.in/wasm-help</a>.
+    For more information, see <a href="https://kotl.in/wasm-help">https://kotl.in/wasm-help</a>.
 <br/>
 <br/>
     <ul>
@@ -127,25 +76,18 @@
     </ul>
 </div>
 <div id="footer">
-    <div style="text-align: center;">
-        <img src="/resources/github-mark.svg" width="30"/>
-        <span style="position: relative;bottom: 9px;left: 3px;"> Check out sources at <a href="https://kotl.in/wasm-examples" target="_blank">https://kotl.in/wasm-examples</a></span>
+    <div style="float: left; width: 50%; padding-right: 5px">
+        <span style="padding-left: 20px">Don't hesitate to share your feedback and ask questions:</span>
+        <ul style="">
+            <li>In the Kotlin Slack <code><a href="https://slack-chats.kotlinlang.org/c/webassembly">#webassembly</a></code> channel (if you’re not a member, apply at <a href="https://kotl.in/slack">https://kotl.in/slack</a>).</li>
+        </ul>
     </div>
-    <div>
-        <div style="float: left; width: 50%; padding-right: 5px">
-            <span style="padding-left: 20px">Don't hesitate to share your feedback and ask questions:</span>
-            <ul style="">
-                <li>In the Kotlin Slack <a href="https://slack-chats.kotlinlang.org/c/webassembly" target="_blank">#webassembly</a> & <a href="https://slack-chats.kotlinlang.org/c/compose-web" target="_blank">#compose-web</a> channels (if you’re not a member, apply at <a href="https://kotl.in/slack" target="_blank">https://kotl.in/slack</a>).</li>
-                <li>In <a href="https://twitter.com/bashorov/status/1656419948762210308" target="_blank">the Twitter thread</a></li>
-            </ul>
-        </div>
-        <div style="float: left; width: 45%;">
-            <span style="padding-left: 20px;">For future news</span>
-            <ul>
-                <li>Join <a href="https://slack-chats.kotlinlang.org/c/webassembly" target="_blank">#webassembly</a> & <a href="https://slack-chats.kotlinlang.org/c/compose-web" target="_blank">#compose-web</a> channels in Kotlin Slack (if you’re not a member, apply at <a href="https://kotl.in/slack" target="_blank">https://kotl.in/slack</a>).</li>
-                <li>Follow <a href="/x" target="_blank">@bashorov</a> on 𝕏 aka Twitter</li>
-            </ul>
-        </div>
+    <div style="float: left; width: 45%;">
+        <span style="padding-left: 20px;">For future news</span>
+        <ul>
+            <li>Join <code><a href="https://slack-chats.kotlinlang.org/c/webassembly">#webassembly</a></code> channel in Kotlin Slack (if you’re not a member, apply at <a href="https://kotl.in/slack">https://kotl.in/slack</a>).</li>
+            <li>Follow <a href="https://twitter.com/bashorov/">@bashorov</a> on Twitter</li>
+        </ul>
     </div>
     <div id="close" onclick="document.getElementById('footer').style.display='none'">ⓧ</div>
 </div>
@@ -163,25 +105,6 @@
     }
     addEventListener("error", (event) => unhandledError(event, event.error));
     addEventListener("unhandledrejection", (event) => unhandledError(event, event.reason));
-</script>
-
-<!-- Track visits with respect to privacy -->
-<script data-goatcounter="https://zalim.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
-<noscript><img src="https://zalim.goatcounter.com/count?p=wasm/jetsnack/"></noscript>
-
-<script type="application/javascript" >
-    let touchEventFired = false;
-    document.body.addEventListener("touchstart", () => {
-        if (touchEventFired) return;
-
-        touchEventFired = true;
-
-        goatcounter.count({
-            path:  (p) => '#touchstart-fired-' + p,
-            title: 'Touch Event is fired',
-            event: true,
-        })
-    });
 </script>
 
 </html>
