@@ -148,7 +148,13 @@
 </body>
 
 <script type="application/javascript" >
-    const unhandledError = (event, error) => {
+    const unhandledError = (event, error, type) => {
+        goatcounter.count({
+            path:  (p) => `#${type}-${p}`,
+            title: `${error.name}: ${error.message}`,
+            event: true,
+        })
+
         if (error instanceof WebAssembly.CompileError) {
             document.getElementById("warning").style.display="initial";
 
@@ -157,9 +163,8 @@
             if (webpackOverlay != null) webpackOverlay.style.display="none";
         }
     }
-    addEventListener("error", (event) => unhandledError(event, event.error));
-    addEventListener("unhandledrejection", (event) => unhandledError(event, event.reason));
-
+    addEventListener("error", (event) => unhandledError(event, event.error, "Err"));
+    addEventListener("unhandledrejection", (event) => unhandledError(event, event.reason, "UR"));
 </script>
 
 <!-- Track visits with respect to privacy -->
