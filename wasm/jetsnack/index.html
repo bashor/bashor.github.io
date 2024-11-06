@@ -24,7 +24,7 @@
             top: 100px;
             left: 100px;
             max-width: 830px;
-            z-index: 100;
+            z-index: 10;
             background-color: white;
             font-size: initial;
             display: none;
@@ -46,7 +46,7 @@
             position: fixed;
             bottom: 0;
             width: 100%;
-            z-index: 1000;
+            z-index: 100;
             background-color: white;
             font-size: initial;
         }
@@ -58,11 +58,6 @@
             cursor: pointer;
         }
         
-        #float-panel {
-            position: absolute;
-            right: 50px;
-        }
-
         #float-panel a:link, a:visited {
             background-color: white;
             color: black;
@@ -100,6 +95,20 @@
             top: 4px;
         }
 
+        #demos, #more, #github {
+            position: absolute;
+            top: 0;
+        }
+
+        #demos {
+            right: 90px;
+            width: 285px;
+        }
+
+        #github {
+            right: 50px;
+        }
+        
         #more {
             display: none;
         }
@@ -111,22 +120,20 @@
         }
         
         @media only screen and (max-width: 1000px) {
-            #float-panel {
+            #github {
                 right: 1px;
-            }
-
-            #float-panel a.icon {
-                margin-left: -3px;
             }
 
             #demos {
                 position: absolute;
                 top: 31px;
-                right: 37px;
+                right: 48px;
+                width: 100px;
                 display: none;
                 box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-                z-index: 1;
+                z-index: 1000;
             }
+
             #demos.show {
                 display: block;
             }
@@ -136,11 +143,11 @@
             }
 
             #more {
+                right: 38px;
                 border: 1px solid #654ff0;
-                padding: 4px 1px;
-                margin-left: -5px;
-                height: 22px;
-                display: inline-block;
+                padding: 5px 1px;
+                height: 20px;
+                display: block;
                 background-color: white;
             }
         }
@@ -156,7 +163,7 @@
         <a href="/wasm/example">Simple</a>
         <a href="/wasm/hello">Hello</a>
     </span>
-    <a href="https://kotl.in/wasm-examples" target="_blank" class="icon" title="https://kotl.in/wasm-examples"> <img src="/resources/github-mark.svg" width="20" alt="github"/> </a>
+    <a id="github" href="https://kotl.in/wasm-examples" target="_blank" class="icon" title="https://kotl.in/wasm-examples"> <img src="/resources/github-mark.svg" width="20" alt="github"/> </a>
 </div>
 <script type="application/javascript">
     let demos = document.getElementById("demos");
