@@ -20,10 +20,10 @@ h4
 production/example_js/index.html
 
 s
-/slides/piterjs20/
+/
 
 t
-/slides/holyjs17/
+/
 
 slides/webhackfest23
 https://docs.google.com/presentation/d/1sLnTFNBmRcfahgtbVA1cwoVp5Y1NVk2FMxHhLfZ0U1g/
