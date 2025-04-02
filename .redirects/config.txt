@@ -19,6 +19,9 @@ https://bsky.app/profile/bashorov.com
 bs
 https://bsky.app/profile/bashorov.com
 
+mastodon
+https://mastodon.online/@bashorov
+
 dropbox
 https://www.dropbox.com/sh/7vqi8u3x4ooytpf/p7gy093FcZ
 
