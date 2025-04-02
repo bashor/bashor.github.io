@@ -22,6 +22,18 @@ https://bsky.app/profile/bashorov.com
 mastodon
 https://mastodon.online/@bashorov
 
+wasm.news/x
+https://x.com/wazm_news
+
+wasm.news/bsky
+https://bsky.app/profile/wazm.news
+
+wasm.news/mastodon
+https://mastodon.social/@wazm_news
+
+wasm.news/linkedin
+https://www.linkedin.com/company/wazm-news/posts/
+
 dropbox
 https://www.dropbox.com/sh/7vqi8u3x4ooytpf/p7gy093FcZ
 
