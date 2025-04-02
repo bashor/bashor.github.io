@@ -1,20 +1,8 @@
-/*
-Please help me to write a script to generate redirects from `./config.txt` 
-Format of the file is the following:
-* Skip empty lines and lines starting with # and lines containing only spaces.
-* Each rule consists of two lines, the first line is a target address, the second line is an address to redirect. 
-* An empty line between rules is required.
-
-Use `../redirect_template/index.html` as a template for generating redirects. 
-
- */
-
 import fs from "fs";
 import path from "path";
 
-// Paths
-const configPath = path.resolve("./config.txt");
-const templatePath = path.resolve("redirect_template/index.html");
+const configFile = path.resolve("./config.txt");
+const templateFile = path.resolve("redirect_template/index.html");
 const outputDir = path.resolve("..");
 
 // Parse the configuration file
@@ -145,25 +133,15 @@ const findRedirectDifferences = (actual, expected) => {
     return diff;
 };
 
-// Fetch rules' targets as directory paths
-const getRuleDirectories = (rules, outputDir) =>
-    rules.map(({target}) =>
-        path.join(outputDir, target.replace(/^\//, "").replace(/\/$/, ""))
-    );
-
-// Prompt user for action
-const promptUser = (question) =>
-    new Promise((resolve) => rl.question(question, (ans) => resolve(ans.toLowerCase())));
-
 // Main function to coordinate parsing and file generation
 const main = () => {
     try {
-        console.log(`Parsing ${configPath}...`);
-        const rules = parseConfig(configPath);
+        console.log(`Parsing ${configFile}...`);
+        const rules = parseConfig(configFile);
         console.log(`Parsed ${rules.length} redirect rules.`);
 
         console.log("Update redirects...");
-        generateRedirects(rules, templatePath, outputDir);
+        generateRedirects(rules, templateFile, outputDir);
 
         console.log("✅ Redirects Updated.");
 
