@@ -155,6 +155,10 @@
 </head>
 <body>
 
+<div id="jetsnackApp" style="width: 100%; height: 100%; outline: 2px solid #c31414">
+    <canvas id="jetsnackCanvas"></canvas>
+</div>
+
 <div id="float-panel">
     <span id="more">More ▾</span>
     <span id="demos">
@@ -171,8 +175,6 @@
         demos.classList.toggle("show")
     });
 </script>
-
-<canvas id="jetsnackCanvas"></canvas>
 
 <div id="warning">
     ⚠️ Please make sure that your runtime environment supports the latest version of Wasm GC and Exception-Handling proposals.
@@ -224,44 +226,46 @@
         "montserrat_semibold.ttf",
         "karla_regular.ttf",
         "karla_bold.ttf",
-
-        "images/almonds.jpg",
-        "images/apple_chips.jpg",
-        "images/apple_juice.jpg",
-        "images/apple_pie.jpg",
-        "images/apple_sauce.jpg",
-        "images/apples.jpg",
-        "images/cheese.jpg",
-        "images/chips.jpg",
-        "images/cupcake.jpg",
-        "images/desserts.jpg",
-        "images/donut.jpg",
-        "images/eclair.jpg",
-        "images/froyo.jpg",
-        "images/fruit.jpg",
-        "images/gingerbread.jpg",
-        "images/gluten_free.jpg",
-        "images/grapes.jpg",
-        "images/honeycomb.jpg",
-        "images/ice_cream_sandwich.jpg",
-        "images/jelly_bean.jpg",
-        "images/kitkat.jpg",
-        "images/kiwi.jpg",
-        "images/lollipop.jpg",
-        "images/mango.jpg",
-        "images/marshmallow.jpg",
-        "images/nougat.jpg",
-        "images/nuts.jpg",
-        "images/oreo.jpg",
-        "images/organic.jpg",
-        "images/paleo.jpg",
-        "images/pie.jpg",
-        "images/placeholder.jpg",
-        "images/popcorn.jpg",
-        "images/pretzels.jpg",
-        "images/smoothies.jpg",
-        "images/vegan.jpg",
-    ];
+    ].concat(
+            [
+                "almonds.jpg",
+                "apple_chips.jpg",
+                "apple_juice.jpg",
+                "apple_pie.jpg",
+                "apple_sauce.jpg",
+                "apples.jpg",
+                "cheese.jpg",
+                "chips.jpg",
+                "cupcake.jpg",
+                "desserts.jpg",
+                "donut.jpg",
+                "eclair.jpg",
+                "froyo.jpg",
+                "fruit.jpg",
+                "gingerbread.jpg",
+                "gluten_free.jpg",
+                "grapes.jpg",
+                "honeycomb.jpg",
+                "ice_cream_sandwich.jpg",
+                "jelly_bean.jpg",
+                "kitkat.jpg",
+                "kiwi.jpg",
+                "lollipop.jpg",
+                "mango.jpg",
+                "marshmallow.jpg",
+                "nougat.jpg",
+                "nuts.jpg",
+                "oreo.jpg",
+                "organic.jpg",
+                "paleo.jpg",
+                "pie.jpg",
+                "placeholder.jpg",
+                "popcorn.jpg",
+                "pretzels.jpg",
+                "smoothies.jpg",
+                "vegan.jpg",
+            ].map((f) => `composeResources/com.example.common.generated.resources/files/${f}`)
+    )
 
     const head = document.head;
     files.forEach((f) => {
