@@ -57,9 +57,15 @@
             right: 10px;
             cursor: pointer;
         }
+
+        #composeApp {
+            width: 100%;
+            height: 100%;
+        }
         
         #demos {
             position: absolute;
+            top: 0;
             right: 50px;
         }
 
@@ -113,6 +119,9 @@
     </style>
 </head>
 <body>
+
+<div id="composeApp"></div>
+
 <div id="demos">
     <a href="/wasm/iv" class="current">Image Viewer</a>
     <a href="/wasm/jetsnack">JetSnack</a>
@@ -120,8 +129,6 @@
     <a href="/wasm/hello">Hello</a>
     <a href="https://kotl.in/wasm-examples" target="_blank" class="icon" title="https://kotl.in/wasm-examples"> <img src="/resources/github-mark.svg" width="20" alt="github"/> </a>
 </div>
-
-<canvas id="ComposeTarget"></canvas>
 
 <div id="warning">
     ⚠️ Please make sure that your runtime environment supports the latest version of Wasm GC and Exception-Handling proposals.
