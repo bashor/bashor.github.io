@@ -10,7 +10,7 @@ UID:0b3f22b7b7d785aa7b8ec884746ce4b7@wasm.io
 DTSTAMP:20260318T221644Z
 DTSTART;TZID=Europe/Madrid:20260319T081500
 DTEND;TZID=Europe/Madrid:20260319T085900
-SUMMARY:Registration
+SUMMARY:📝 Registration
 DESCRIPTION:Track: Track 1\nAgenda: https://wasm.io/sessions/
 LOCATION:Track 1
 STATUS:CONFIRMED
@@ -20,7 +20,7 @@ UID:cbd0e442eb479601ef0bd78bdb0762f6@wasm.io
 DTSTAMP:20260318T221644Z
 DTSTART;TZID=Europe/Madrid:20260319T090000
 DTEND;TZID=Europe/Madrid:20260319T091500
-SUMMARY:Opening
+SUMMARY:🚀 Opening
 DESCRIPTION:Speaker: Sergi Almar\nTrack: Track 1\nAgenda: https://wasm.io/sessions/
 LOCATION:Track 1
 STATUS:CONFIRMED
@@ -60,7 +60,7 @@ UID:43002bc6f7801932dfee42b7c4d52de0@wasm.io
 DTSTAMP:20260318T221644Z
 DTSTART;TZID=Europe/Madrid:20260319T105500
 DTEND;TZID=Europe/Madrid:20260319T112500
-SUMMARY:Coffee break
+SUMMARY:☕Coffee break
 DESCRIPTION:Track: Track 1\nAgenda: https://wasm.io/sessions/
 LOCATION:Track 1
 STATUS:CONFIRMED
@@ -110,7 +110,7 @@ UID:d75fdd12c90820d37735e4da7d62899d@wasm.io
 DTSTAMP:20260318T221644Z
 DTSTART;TZID=Europe/Madrid:20260319T130500
 DTEND;TZID=Europe/Madrid:20260319T140500
-SUMMARY:Lunch
+SUMMARY:🍽 Lunch
 DESCRIPTION:Track: Track 1\nAgenda: https://wasm.io/sessions/
 LOCATION:Track 1
 STATUS:CONFIRMED
@@ -160,7 +160,7 @@ UID:be2aabbde74fb91df26a5e4ae97f66a8@wasm.io
 DTSTAMP:20260318T221644Z
 DTSTART;TZID=Europe/Madrid:20260319T154500
 DTEND;TZID=Europe/Madrid:20260319T161500
-SUMMARY:Coffee-Break
+SUMMARY:☕ Coffee break
 DESCRIPTION:Track: Track 1\nAgenda: https://wasm.io/sessions/
 LOCATION:Track 1
 STATUS:CONFIRMED
@@ -199,9 +199,9 @@ BEGIN:VEVENT
 UID:5f06aa86a7f2a13b82f38636855f81e6@wasm.io
 DTSTAMP:20260318T221644Z
 DTSTART;TZID=Europe/Madrid:20260319T180000
-DTEND;TZID=Europe/Madrid:20260319T200000
-SUMMARY:After-Party / Networking
-DESCRIPTION:Sponsored by Microsoft Azure\nTrack: Track 1\nAgenda: https://wasm.io/sessions/\nEnd time not listed on the agenda\; set to 20:00.
+DTEND;TZID=Europe/Madrid:20260319T210000
+SUMMARY:🎉 After-Party / 💬 Networking
+DESCRIPTION:Sponsored by Microsoft Azure\nTrack: Track 1\nAgenda: https://wasm.io/sessions/\nEnd time not listed on the agenda\; set to 21:00.
 LOCATION:Track 1
 STATUS:CONFIRMED
 END:VEVENT
@@ -240,7 +240,7 @@ UID:f337bb43c5bff0907131d68ff55c740f@wasm.io
 DTSTAMP:20260318T221644Z
 DTSTART;TZID=Europe/Madrid:20260320T104000
 DTEND;TZID=Europe/Madrid:20260320T111000
-SUMMARY:Coffee break
+SUMMARY:☕ Coffee break
 DESCRIPTION:Track: Track 1\nAgenda: https://wasm.io/sessions/
 LOCATION:Track 1
 STATUS:CONFIRMED
@@ -290,7 +290,7 @@ UID:50e4bf361fbf26fd4ec9e0010055e305@wasm.io
 DTSTAMP:20260318T221644Z
 DTSTART;TZID=Europe/Madrid:20260320T125000
 DTEND;TZID=Europe/Madrid:20260320T135000
-SUMMARY:Lunch
+SUMMARY:🍽 Lunch
 DESCRIPTION:Track: Track 1\nAgenda: https://wasm.io/sessions/
 LOCATION:Track 1
 STATUS:CONFIRMED
@@ -340,7 +340,7 @@ UID:d22d89b5faa203f997bcb78f99151cc6@wasm.io
 DTSTAMP:20260318T221644Z
 DTSTART;TZID=Europe/Madrid:20260320T153000
 DTEND;TZID=Europe/Madrid:20260320T160000
-SUMMARY:Coffee-Break
+SUMMARY:☕ Coffee break
 DESCRIPTION:Track: Track 1\nAgenda: https://wasm.io/sessions/
 LOCATION:Track 1
 STATUS:CONFIRMED
@@ -380,7 +380,7 @@ UID:b507a80a1a182b972e60357b372aac7e@wasm.io
 DTSTAMP:20260318T221644Z
 DTSTART;TZID=Europe/Madrid:20260320T174000
 DTEND;TZID=Europe/Madrid:20260320T175000
-SUMMARY:Closing
+SUMMARY:🏁 Closing
 DESCRIPTION:Track: Track 1\nAgenda: https://wasm.io/sessions/
 LOCATION:Track 1
 STATUS:CONFIRMED
