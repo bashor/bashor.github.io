@@ -1,0 +1,386 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//OpenAI//WASM IO 2026 Combined Agenda//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:0b3f22b7b7d785aa7b8ec884746ce4b7@wasm.io
+DTSTAMP:20260318T221644Z
+DTSTART;TZID=Europe/Madrid:20260319T081500
+DTEND;TZID=Europe/Madrid:20260319T085900
+SUMMARY:Registration
+DESCRIPTION:Track: Track 1\nAgenda: https://wasm.io/sessions/
+LOCATION:Track 1
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:cbd0e442eb479601ef0bd78bdb0762f6@wasm.io
+DTSTAMP:20260318T221644Z
+DTSTART;TZID=Europe/Madrid:20260319T090000
+DTEND;TZID=Europe/Madrid:20260319T091500
+SUMMARY:Opening
+DESCRIPTION:Speaker: Sergi Almar\nTrack: Track 1\nAgenda: https://wasm.io/sessions/
+LOCATION:Track 1
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:78e61ef75c5946f079d56c1dede9c6fc@wasm.io
+DTSTAMP:20260318T221644Z
+DTSTART;TZID=Europe/Madrid:20260319T091500
+DTEND;TZID=Europe/Madrid:20260319T094500
+SUMMARY:Towards a Component Model 1.0
+DESCRIPTION:Speakers: Luke Wagner\nTrack: Track 1\nSession link: https://2026.wasm.io/sessions/towards-a-component-model-10/
+LOCATION:Track 1
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:a9d8a917d5beda09d8aac77c4dfa5b77@wasm.io
+DTSTAMP:20260318T221644Z
+DTSTART;TZID=Europe/Madrid:20260319T095000
+DTEND;TZID=Europe/Madrid:20260319T102000
+SUMMARY:Beyond Performance: 5 Years of Improving JavaScript on WebAssembly
+DESCRIPTION:Speakers: Saúl Cabrera\nTrack: Track 1\nSession link: https://2026.wasm.io/sessions/beyond-performance-5-years-of-improving-javascript-on-webassembly/
+LOCATION:Track 1
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:d2d40b99c8fa7d4587e73e68873e2b1e@wasm.io
+DTSTAMP:20260318T221644Z
+DTSTART;TZID=Europe/Madrid:20260319T102500
+DTEND;TZID=Europe/Madrid:20260319T105500
+SUMMARY:The Exacting Details of "Hello\, World!" in Wasmtime
+DESCRIPTION:Speakers: Nick Fitzgerald\nTrack: Track 1\nSession link: https://2026.wasm.io/sessions/the-exacting-details-of-hello-world-in-wasmtime/
+LOCATION:Track 1
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:43002bc6f7801932dfee42b7c4d52de0@wasm.io
+DTSTAMP:20260318T221644Z
+DTSTART;TZID=Europe/Madrid:20260319T105500
+DTEND;TZID=Europe/Madrid:20260319T112500
+SUMMARY:Coffee break
+DESCRIPTION:Track: Track 1\nAgenda: https://wasm.io/sessions/
+LOCATION:Track 1
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:e00645af5f0ca83985c623a19c6a8da3@wasm.io
+DTSTAMP:20260318T221644Z
+DTSTART;TZID=Europe/Madrid:20260319T112500
+DTEND;TZID=Europe/Madrid:20260319T115500
+SUMMARY:Running Python Greenlets fully in WebAssembly thanks to JSPI
+DESCRIPTION:Speakers: Syrus Akbary\nTrack: Track 1\nSession link: https://2026.wasm.io/sessions/running-python-greenlets-fully-in-webassembly-thanks-to-jspi/
+LOCATION:Track 1
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:89169ad4c5db7db13aaf4c44b8a32c9c@wasm.io
+DTSTAMP:20260318T221644Z
+DTSTART;TZID=Europe/Madrid:20260319T112500
+DTEND;TZID=Europe/Madrid:20260319T130500
+SUMMARY:Hands-On with Hyperlight and Wasm [Workshop]
+DESCRIPTION:Speakers: Lucy Menon\, Ralph Squillace\, Tomasz Andrzejak\nTrack: Track 2\nSession link: https://2026.wasm.io/sessions/hands-on-with-hyperlight-and-wasm-workshop/
+LOCATION:Track 2
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:b4052247e370ddb487268accd95095bd@wasm.io
+DTSTAMP:20260318T221644Z
+DTSTART;TZID=Europe/Madrid:20260319T120000
+DTEND;TZID=Europe/Madrid:20260319T123000
+SUMMARY:Rust & JavaScript Interoperability @ Cloudflare
+DESCRIPTION:Speakers: Guy Bedford\nTrack: Track 1\nSession link: https://2026.wasm.io/sessions/rust-and-javascript-interoperability-cloudflare/
+LOCATION:Track 1
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:3413446d9e71ebcd4f97fa56868739a1@wasm.io
+DTSTAMP:20260318T221644Z
+DTSTART;TZID=Europe/Madrid:20260319T123500
+DTEND;TZID=Europe/Madrid:20260319T130500
+SUMMARY:Co-operative Multithreading and the Component Model
+DESCRIPTION:Speakers: Sy Brand\nTrack: Track 1\nSession link: https://2026.wasm.io/sessions/co-operative-multithreading-and-the-component-model/
+LOCATION:Track 1
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:d75fdd12c90820d37735e4da7d62899d@wasm.io
+DTSTAMP:20260318T221644Z
+DTSTART;TZID=Europe/Madrid:20260319T130500
+DTEND;TZID=Europe/Madrid:20260319T140500
+SUMMARY:Lunch
+DESCRIPTION:Track: Track 1\nAgenda: https://wasm.io/sessions/
+LOCATION:Track 1
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:3fe9d738821f8d94e29faedf1b432612@wasm.io
+DTSTAMP:20260318T221644Z
+DTSTART;TZID=Europe/Madrid:20260319T140500
+DTEND;TZID=Europe/Madrid:20260319T143500
+SUMMARY:Running AI in WebAssembly [Panel]
+DESCRIPTION:Speakers: Oscar Spencer\, Edoardo Vacchi\, Michael Yuan\, Dan Phillips\nTrack: Track 1\nSession link: https://2026.wasm.io/sessions/running-ai-in-webassembly-panel/
+LOCATION:Track 1
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:256681f6319497eb73aa4cbc9ba6a633@wasm.io
+DTSTAMP:20260318T221644Z
+DTSTART;TZID=Europe/Madrid:20260319T140500
+DTEND;TZID=Europe/Madrid:20260319T154500
+SUMMARY:Building Browser-Native AI Runtimes: A Hands-On Workshop with WebLLM\, WASM & WebWorkers [Workshop]
+DESCRIPTION:Speakers: Barış Güler\nTrack: Track 2\nSession link: https://2026.wasm.io/sessions/building-browser-native-ai-runtimes-a-hands-on-workshop-with-webllm-wasm-and-webworkers-workshop/
+LOCATION:Track 2
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:e1ccbd2769fa2db38c0e64770e4be6ea@wasm.io
+DTSTAMP:20260318T221644Z
+DTSTART;TZID=Europe/Madrid:20260319T144000
+DTEND;TZID=Europe/Madrid:20260319T151000
+SUMMARY:The State of Zero-Dependency Wasm: A 2026 Update from wazero and Chicory
+DESCRIPTION:Speakers: Edoardo Vacchi\, Andrea Peruffo\nTrack: Track 1\nSession link: https://2026.wasm.io/sessions/the-state-of-zero-dependency-wasm-a-2026-update-from-wazero-and-chicory/
+LOCATION:Track 1
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:c4bc3de05272e5e9a73c7044d3b198c1@wasm.io
+DTSTAMP:20260318T221644Z
+DTSTART;TZID=Europe/Madrid:20260319T151500
+DTEND;TZID=Europe/Madrid:20260319T154500
+SUMMARY:Lessons Learnt Migrating CDN apps for WebAssembly
+DESCRIPTION:Speakers: Kit Chan\nTrack: Track 1\nSession link: https://2026.wasm.io/sessions/lessons-learnt-migrating-cdn-apps-for-webassembly/
+LOCATION:Track 1
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:be2aabbde74fb91df26a5e4ae97f66a8@wasm.io
+DTSTAMP:20260318T221644Z
+DTSTART;TZID=Europe/Madrid:20260319T154500
+DTEND;TZID=Europe/Madrid:20260319T161500
+SUMMARY:Coffee-Break
+DESCRIPTION:Track: Track 1\nAgenda: https://wasm.io/sessions/
+LOCATION:Track 1
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:029b1fea525497280d17341d3d64052b@wasm.io
+DTSTAMP:20260318T221644Z
+DTSTART;TZID=Europe/Madrid:20260319T161500
+DTEND;TZID=Europe/Madrid:20260319T164500
+SUMMARY:Even More Hoops: Debugging WebAssembly across the Hardware Memory Partition Boundary
+DESCRIPTION:Speakers: Doru Blânzeanu\nTrack: Track 1\nSession link: https://2026.wasm.io/sessions/even-more-hoops-debugging-webassembly-across-the-hardware-memory-partition-boundary/
+LOCATION:Track 1
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:18c95e8fce9a8e772be9ab5fd5b232d3@wasm.io
+DTSTAMP:20260318T221644Z
+DTSTART;TZID=Europe/Madrid:20260319T165000
+DTEND;TZID=Europe/Madrid:20260319T172000
+SUMMARY:Easy\, fast\, and safe: pick all three with Swift for WebAssembly
+DESCRIPTION:Speakers: Max Desiatov\, Yuta Saito\nTrack: Track 1\nSession link: https://2026.wasm.io/sessions/easy-fast-and-safe-pick-all-three-with-swift-for-webassembly/
+LOCATION:Track 1
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:03e845d388645b816529e461e6fabdc0@wasm.io
+DTSTAMP:20260318T221644Z
+DTSTART;TZID=Europe/Madrid:20260319T172500
+DTEND;TZID=Europe/Madrid:20260319T175500
+SUMMARY:How sustainable is server-side WebAssembly in 2026? Continuous resource usage monitoring with the WasmPulse platform
+DESCRIPTION:Speakers: Marcin Ziółkowski\nTrack: Track 1\nSession link: https://2026.wasm.io/sessions/how-sustainable-is-server-side-webassembly-in-2026-continuous-resource-usage-monitoring-with-the-wasmpulse-platform/
+LOCATION:Track 1
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:5f06aa86a7f2a13b82f38636855f81e6@wasm.io
+DTSTAMP:20260318T221644Z
+DTSTART;TZID=Europe/Madrid:20260319T180000
+DTEND;TZID=Europe/Madrid:20260319T200000
+SUMMARY:After-Party / Networking
+DESCRIPTION:Sponsored by Microsoft Azure\nTrack: Track 1\nAgenda: https://wasm.io/sessions/\nEnd time not listed on the agenda\; set to 20:00.
+LOCATION:Track 1
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:7292438f73a6fa3936a67a868f4977f5@wasm.io
+DTSTAMP:20260318T221644Z
+DTSTART;TZID=Europe/Madrid:20260320T090000
+DTEND;TZID=Europe/Madrid:20260320T093000
+SUMMARY:Componentizing Fastly Compute
+DESCRIPTION:Speakers: Erik Rose\nTrack: Track 1\nSession link: https://2026.wasm.io/sessions/componentizing-fastly-compute/
+LOCATION:Track 1
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:a0ab4161d5c275923ce2a7a5d299f3ed@wasm.io
+DTSTAMP:20260318T221644Z
+DTSTART;TZID=Europe/Madrid:20260320T093500
+DTEND;TZID=Europe/Madrid:20260320T100500
+SUMMARY:Building Modern Web Apps with Kotlin and WebAssembly
+DESCRIPTION:Speakers: Zalim Bashorov\nTrack: Track 1\nSession link: https://2026.wasm.io/sessions/building-modern-web-apps-with-kotlin-and-webassembly/
+LOCATION:Track 1
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:75054a8555593300f36606deed0bd613@wasm.io
+DTSTAMP:20260318T221644Z
+DTSTART;TZID=Europe/Madrid:20260320T101000
+DTEND;TZID=Europe/Madrid:20260320T104000
+SUMMARY:No Better Sandbox: Wasm and the Future of AI Agent Runtimes
+DESCRIPTION:Speakers: Dan Phillips\nTrack: Track 1\nSession link: https://2026.wasm.io/sessions/no-better-sandbox-wasm-and-the-future-of-ai-agent-runtimes/
+LOCATION:Track 1
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:f337bb43c5bff0907131d68ff55c740f@wasm.io
+DTSTAMP:20260318T221644Z
+DTSTART;TZID=Europe/Madrid:20260320T104000
+DTEND;TZID=Europe/Madrid:20260320T111000
+SUMMARY:Coffee break
+DESCRIPTION:Track: Track 1\nAgenda: https://wasm.io/sessions/
+LOCATION:Track 1
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:08682db65e63333855bf3b781ccda4e4@wasm.io
+DTSTAMP:20260318T221644Z
+DTSTART;TZID=Europe/Madrid:20260320T111000
+DTEND;TZID=Europe/Madrid:20260320T114000
+SUMMARY:Kernel-in-a-Tab: Building Multi-Process Linux Environments in the Browser
+DESCRIPTION:Speakers: Yuri Iozzelli\nTrack: Track 1\nSession link: https://2026.wasm.io/sessions/kernel-in-a-tab-building-multi-process-linux-environments-in-the-browser/
+LOCATION:Track 1
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:76d1953cd39ed0ed36a66c76099d31a2@wasm.io
+DTSTAMP:20260318T221644Z
+DTSTART;TZID=Europe/Madrid:20260320T111000
+DTEND;TZID=Europe/Madrid:20260320T125000
+SUMMARY:Private Voice AI agent on Edge Devices [Workshop]
+DESCRIPTION:Speakers: Michael Yuan\nTrack: Track 2\nSession link: https://2026.wasm.io/sessions/private-voice-ai-agent-on-edge-devices-workshop/
+LOCATION:Track 2
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:fe8bcf3c7cf3e132b25a52a2fa2792b2@wasm.io
+DTSTAMP:20260318T221644Z
+DTSTART;TZID=Europe/Madrid:20260320T114500
+DTEND;TZID=Europe/Madrid:20260320T121500
+SUMMARY:OTel Me About It: Latest Updates in WASI OTel
+DESCRIPTION:Speakers: Andrew Steurer\nTrack: Track 1\nSession link: https://2026.wasm.io/sessions/otel-me-about-it-latest-updates-in-wasi-otel/
+LOCATION:Track 1
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:a5909e60b6e653e66646aeeadb23de07@wasm.io
+DTSTAMP:20260318T221644Z
+DTSTART;TZID=Europe/Madrid:20260320T122000
+DTEND;TZID=Europe/Madrid:20260320T125000
+SUMMARY:Building databases in WebAssembly
+DESCRIPTION:Speakers: Kevin Burns\nTrack: Track 1\nSession link: https://2026.wasm.io/sessions/building-databases-in-webassembly/
+LOCATION:Track 1
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:50e4bf361fbf26fd4ec9e0010055e305@wasm.io
+DTSTAMP:20260318T221644Z
+DTSTART;TZID=Europe/Madrid:20260320T125000
+DTEND;TZID=Europe/Madrid:20260320T135000
+SUMMARY:Lunch
+DESCRIPTION:Track: Track 1\nAgenda: https://wasm.io/sessions/
+LOCATION:Track 1
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:44a45266c7b95ee485e29ec1eb8a02f1@wasm.io
+DTSTAMP:20260318T221644Z
+DTSTART;TZID=Europe/Madrid:20260320T135000
+DTEND;TZID=Europe/Madrid:20260320T142000
+SUMMARY:Helm Meets WebAssembly: Secure Extensibility Without Replacing Kubernetes
+DESCRIPTION:Speakers: Shivay Lamba\, Bruce Gain\nTrack: Track 1\nSession link: https://2026.wasm.io/sessions/helm-meets-webassembly-secure-extensibility-without-replacing-kubernetes/
+LOCATION:Track 1
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:a7fe0b41c1b1852126883c5388fd6b34@wasm.io
+DTSTAMP:20260318T221644Z
+DTSTART;TZID=Europe/Madrid:20260320T135000
+DTEND;TZID=Europe/Madrid:20260320T153000
+SUMMARY:Wait\, That’s Not a Container? Wasm on Kubernetes with Spin & SpinKube [Workshop]
+DESCRIPTION:Speakers: Thorsten Hans\nTrack: Track 2\nSession link: https://2026.wasm.io/sessions/wait-thats-not-a-container-wasm-on-kubernetes-with-spin-and-spinkube-workshop/
+LOCATION:Track 2
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:c9c1b2aea8fc72f06e18588208ea4c50@wasm.io
+DTSTAMP:20260318T221644Z
+DTSTART;TZID=Europe/Madrid:20260320T142500
+DTEND;TZID=Europe/Madrid:20260320T145500
+SUMMARY:WebAssembly on MCUs: What We Learned Evaluating Embedded Runtimes
+DESCRIPTION:Speakers: Fedor Smirnov\nTrack: Track 1\nSession link: https://2026.wasm.io/sessions/webassembly-on-mcus-what-we-learned-evaluating-embedded-runtimes/
+LOCATION:Track 1
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:e49ce6c96a33195bbfceb17e502f3279@wasm.io
+DTSTAMP:20260318T221644Z
+DTSTART;TZID=Europe/Madrid:20260320T150000
+DTEND;TZID=Europe/Madrid:20260320T153000
+SUMMARY:Build MCP servers as WebAssembly components
+DESCRIPTION:Speakers: Ian McDonald\, Corey Ryan\nTrack: Track 1\nSession link: https://2026.wasm.io/sessions/build-mcp-servers-as-webassembly-components/
+LOCATION:Track 1
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:d22d89b5faa203f997bcb78f99151cc6@wasm.io
+DTSTAMP:20260318T221644Z
+DTSTART;TZID=Europe/Madrid:20260320T153000
+DTEND;TZID=Europe/Madrid:20260320T160000
+SUMMARY:Coffee-Break
+DESCRIPTION:Track: Track 1\nAgenda: https://wasm.io/sessions/
+LOCATION:Track 1
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:55fec364f19371f5ecf0735ea14596ba@wasm.io
+DTSTAMP:20260318T221644Z
+DTSTART;TZID=Europe/Madrid:20260320T160000
+DTEND;TZID=Europe/Madrid:20260320T163000
+SUMMARY:PHP at the Edge: Running the biggest CMS on the Web with WASM
+DESCRIPTION:Speakers: Fellyph Cintra\nTrack: Track 1\nSession link: https://2026.wasm.io/sessions/php-at-the-edge-running-the-biggest-cms-on-the-web-with-wasm/
+LOCATION:Track 1
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:37342c5c19f3086df3580ed7b0367cff@wasm.io
+DTSTAMP:20260318T221644Z
+DTSTART;TZID=Europe/Madrid:20260320T160500
+DTEND;TZID=Europe/Madrid:20260320T170500
+SUMMARY:P2P Distributed LLM Inference Across Browsers With llama.cpp And WebRTC
+DESCRIPTION:Speakers: Kohei Tokunaga\nTrack: Track 2\nSession link: https://2026.wasm.io/sessions/p2p-distributed-llm-inference-across-browsers-with-llamacpp-and-webrtc/
+LOCATION:Track 2
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:40a78ffb83b88bd37bfb011e8a3f5781@wasm.io
+DTSTAMP:20260318T221644Z
+DTSTART;TZID=Europe/Madrid:20260320T171000
+DTEND;TZID=Europe/Madrid:20260320T174000
+SUMMARY:WASM in the Kernel: evolving threat detection at runtime
+DESCRIPTION:Speakers: Mikhail Katychev\, Salman Saghafi\nTrack: Track 1\nSession link: https://2026.wasm.io/sessions/wasm-in-the-kernel-evolving-threat-detection-at-runtime/
+LOCATION:Track 1
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:b507a80a1a182b972e60357b372aac7e@wasm.io
+DTSTAMP:20260318T221644Z
+DTSTART;TZID=Europe/Madrid:20260320T174000
+DTEND;TZID=Europe/Madrid:20260320T175000
+SUMMARY:Closing
+DESCRIPTION:Track: Track 1\nAgenda: https://wasm.io/sessions/
+LOCATION:Track 1
+STATUS:CONFIRMED
+END:VEVENT
+END:VCALENDAR
