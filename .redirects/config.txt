@@ -1,3 +1,13 @@
+# Redirects
+# ========================
+#
+# Each redirect rule consists of 2–3 lines, separated by blank lines:
+# 1. <target_path> -- required. The path where the redirect will be created.
+# 2. <redirect_url> -- required. The destination URL. Can be absolute (https://...) or relative (/path/to/page).
+# 3. <display_text> -- optional. Custom text to display in the browser title and link text.
+#
+# Comments start with '#' and are ignored.
+
 cv
 https://docs.google.com/document/d/1Qk9TZZBQDWo9Dh6Ri0uOZHlKcMCmkQp9ePBjmpX_vBs/edit?usp=sharing
 
