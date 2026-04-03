@@ -71,3 +71,4 @@ wasmio
 
 slides/wasmio26
 /slides/wasmio26/Wasm IO 26 - Building Web Apps with Kotlin and Wasm.pdf
+Building Web Apps with Kotlin and Wasm.pdf
