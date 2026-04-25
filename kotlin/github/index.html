@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Bookmarklets for Kotlin PRs on GitHub</title>
+
+    <style type="text/css">
+        body {
+            background-color: #f0f0f0;
+            margin: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        .container {
+            max-width: 920px;
+            margin: 0 auto;
+            padding: 20px;
+            background: linear-gradient(to bottom, #ffffff 0%, #f8f8f8 100%);
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            min-height: 100%;
+        }
+
+        .bookmarklet {
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 16px;
+            margin-bottom: 16px;
+            background: #fff;
+        }
+
+        .bookmarklet-link {
+            /*font-size: 1.1em;*/
+            /*font-weight: bold;*/
+            /*text-decoration: none;*/
+            color: #7F52FF;
+        }
+
+        .bookmarklet-link:hover {
+            text-decoration: underline;
+        }
+
+        .bookmarklet-action {
+            display: inline-block;
+            margin-top: 6px;
+            padding: 2px 8px;
+            background: #f0ecff;
+            border: 1px solid #d8d0f0;
+            border-radius: 4px;
+            font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+            font-size: 0.8em;
+            /*color: #5a3fbf;*/
+        }
+
+        .bookmarklet-description {
+            margin-top: 8px;
+            color: #555;
+            line-height: 1.5;
+        }
+
+        .prefix-input {
+            width: 100%;
+            box-sizing: border-box;
+            padding: 10px 12px;
+            margin-bottom: 16px;
+            font-size: 1em;
+            font-family: inherit;
+            border: 1px solid #d8d0f0;
+            border-radius: 8px;
+            background: #f5f2ff;
+            color: #333;
+            outline: none;
+        }
+
+        .prefix-input:focus {
+            border-color: #7F52FF;
+            box-shadow: 0 0 0 2px rgba(127, 82, 255, 0.15);
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1 style="color: #7F52FF;">Bookmarklets for Kotlin Pull requests on GitHub</h1>
+
+    <strong>How to use:</strong>
+    <ol style="margin-top: 6px; padding-left: 20px; color: #444; line-height: 1.7;">
+        <li>Drag a bookmarklet link below to your browser's bookmarks bar.</li>
+        <li>Navigate to a pull request page on GitHub.</li>
+        <li>Click the bookmarklet in the Bookmarks Bar. It will post the corresponding command into the PR comment field and submit it.<br/>
+            Uncheck the following checkbox if you don't want the command to be submitted automatically.</li>
+    </ol>
+    <label style="display: inline-flex; align-items: center; gap: 6px; margin-bottom: 16px; font-size: 0.95em; color: #555; cursor: pointer;">
+        <input id="submit-command" type="checkbox" checked> Submit commands immediately.
+    </label>
+
+    <p style="color: #444; line-height: 1.7; margin-top: 4px;">
+        <strong>Tip:</strong> A bookmarklet can also be invoked from the address bar: activate it with a click or a shortcut (<code>Cmd + L</code> / <code>Ctrl + L</code>), start typing the bookmark's name, select it, and press Enter.
+        <br/>
+        <strong>Tip:</strong> Add a unique prefix (e.g. "<code>k__ </code>") using the input below so your bookmarklets are easy to find.
+    </p>
+
+    <input id="prefix" class="prefix-input" type="text" placeholder="Bookmarklets title prefix">
+    
+    <div id="bookmarklets">
+    </div>
+</div>
+</body>
+<script type="module">
+    function command(action, title, description) {
+        return { action, title, description };
+    }
+    
+    function htmlfy(string) {
+        return string
+            .replace(/\n/g, "<br/>")
+            .replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>")
+    }
+    
+    const commands = [
+        command('/test-public', 'Start public Aggregate', 'Starts public Aggregate (when targeting release, it will start public release Aggregate for a matching release).'),
+        command('/dry-run', 'Start safe-merge in dry run', 'Starts safe-merge in dry run, which will run a full set of checks with the rebased latest master (not allowed when targeting release branch).'),
+        command('/safe-merge', 'Start safe-merge with “rebase and merge” mode', 'Starts safe-merge with “rebase and merge” mode, with optional parameter:\n**--fixup** will first try to squash fixups and force push the branch, then trigger safe merge\nExample: \n/**safe-merge --fixup**.'),
+        command('/safe-merge --fixup', 'Autosquash of "fixup!" commits and start safe-merge with “rebase and merge” mode', 'Starts safe-merge with “rebase and merge” mode, with optional parameter:\n**--fixup** will first try to squash fixups and force push the branch, then trigger safe merge\nExample: \n/**safe-merge --fixup**.'),
+        command('/safe-squash-merge', 'Start safe-merge with "squash" mode', 'Starts safe-merge with "squash" mode, with two optional parameters:\n**--title=** sets the first-line commit title, if not specified, the PR title is used\n**--message=** sets the commit body message, if not specified, the PR description is used\nExample: \n**/safe-squash-merge --title="Update dependency X to version Y" --message="^KT-XYZ"**.'),
+        command('/codeowners', 'Trigger code owners verification', 'Triggers code owners verification. Useful if the previous check failed unexpectedly or is missing.'),
+        command('/fixup', 'Perform autosquash of "fixup!" commits and force-push the branch', 'Performs autosquash of "fixup!" commits and force-pushes the branch. It\'s not supported for contributions from forks.')
+    ];
+
+    let bookmarklets = document.getElementById("bookmarklets");
+    let prefixInput = document.getElementById("prefix");
+    let submitCheckbox = document.getElementById("submit-command");
+    const submitCode = `document.querySelector('#new_comment_form button.btn-primary.btn').click();`
+
+    function showBookmarklets() {
+        const prefix = prefixInput.value;
+        bookmarklets.innerHTML  = '';
+        for (const command of commands) {
+            const title = '' + prefix + command.title;
+            const submit = submitCheckbox.checked ? submitCode : '';
+
+            // language=JavaScript
+            const js = `(() => {
+                if (!/^https:\\/\\/github\\.com\\/JetBrains\\/kotlin\\/pull\\/\\d+$/.test(location.href)) {
+                    alert('Nothing to do on this page.');
+                    return;
+                }
+                let t = '${command.action}';
+                let f = document.querySelector('#new_comment_field');
+                if (f.value) {
+                    alert('The input for comments is not empty!');
+                    return;
+                }
+                f.value = t;
+                f.dispatchEvent(new Event('change', {bubbles: true}));
+                ${submit}
+            })()`.replace(/\s+/g, ' ');
+
+            let node = document.createElement('div');
+
+            // language=HTML
+            node.innerHTML = 
+                `<div class="bookmarklet">
+                    <a class="bookmarklet-link" href="javascript:${js}">${title}</a>
+                    <div><code class="bookmarklet-action">${command.action}</code></div>
+                    <div class="bookmarklet-description">
+                        ${htmlfy(command.description)}
+                    </div>
+                </div>`;
+            bookmarklets.appendChild(node);
+        }
+    }
+
+    prefixInput.addEventListener('input', showBookmarklets);
+    submitCheckbox.addEventListener('change', showBookmarklets);
+    showBookmarklets();
+</script>
+</html>
