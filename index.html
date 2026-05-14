@@ -41,8 +41,8 @@
 
       .live-dot {
         display: inline-flex;
-        width: 8px;
-        height: 8px;
+        width: 11px;
+        height: 11px;
         background-color: #ff3333;
         border-radius: 50%;
         animation: blink 1.5s infinite;
@@ -52,13 +52,22 @@
         0%, 100% { opacity: 1; }
         50% { opacity: 0.3; }
       }
+
+      #live-indicator {
+        color: #ff3333;
+        font-weight: bold;
+      }
+
+      .talk-title {
+        font-weight: bold;
+      }
     </style>
   </head>
   <body>
 
   <div class="announcement" id="announcement">
-    <span id="live-indicator"><span class="live-dot"></span><strong> Live: </strong></span>
-    ⚡️ Building AI‑Powered Web Apps in Kotlin/Wasm @ KotlinConf 2026
+    <span id="live-indicator"><span class="live-dot"></span> NOW </span>
+    ⚡️ <span class="talk-title">Building AI‑Powered Web Apps in Kotlin/Wasm</span> @ KotlinConf 2026
     <span id="live-links">
     | <a href="/slides/kotlinconf26">Slides</a>
       <!--      | <a href="#">Video</a>-->
