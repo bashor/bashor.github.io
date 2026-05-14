@@ -69,6 +69,9 @@ Try Wasm GC with Chrome Origin Trials
 wasmio
 /wasm/creative/
 
+slides/kotlinconf24
+https://docs.google.com/presentation/d/1_nDXYypLGFQWDXCmSKsoHiwbrAv6sbuvSphzSM7RyS0/
+
 slides/wasmio26
 /slides/wasmio26/Wasm IO 26 - Building Web Apps with Kotlin and Wasm.pdf
 Building Web Apps with Kotlin and Wasm.pdf
