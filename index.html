@@ -16,21 +16,103 @@
         margin: 0;
       }
 
-      .container {
+      .container, .announcement {
         max-width: 920px;
         margin: 0 auto;
         padding: 20px;
         background: linear-gradient(to bottom, #ffffff 0%, #f8f8f8 100%);
+      }
+
+      .container {
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         min-height: 100%;
+      }
+
+      .announcement {
+        margin-bottom: 8px;
+        text-align: center;
+        position: relative;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15), 0 5px 10px rgba(0, 0, 0, 0.1);
       }
 
       .nowrap {
         white-space: nowrap
       }
+
+      .live-dot {
+        display: inline-flex;
+        width: 8px;
+        height: 8px;
+        background-color: #ff3333;
+        border-radius: 50%;
+        animation: blink 1.5s infinite;
+      }
+
+      @keyframes blink {
+        0%, 100% { opacity: 1; }
+        50% { opacity: 0.3; }
+      }
     </style>
   </head>
   <body>
+
+  <div class="announcement" id="announcement">
+    <span id="live-indicator"><span class="live-dot"></span><strong> Live: </strong></span>
+    ⚡️ Building AI‑Powered Web Apps in Kotlin/Wasm @ KotlinConf 2026
+    <span id="live-links">
+    | <a href="/slides/kotlinconf26">Slides</a>
+      <!--      | <a href="#">Video</a>-->
+  </span>
+  </div>
+
+  <script type="module">
+    (function() {
+      // Default configuration for the announcement
+      const defaults = {
+        ANNOUNCEMENT_START_DATE: '2026-05-20',
+        ANNOUNCEMENT_END_DATE: '2026-05-31',
+        LIVE_DATE: '2026-05-21',
+        LIVE_TIME_START: '14:15',
+        LIVE_TIME_END: '15:00',
+        TZ: '+02:00' // CEST
+      };
+
+      const config = {}
+
+      // Parse URL hash parameters (e.g., #LIVE_DATE=2026-05-22&LIVE_TIME_START=10:00)
+      // All parameters: #ANNOUNCEMENT_START_DATE=2026-05-20&ANNOUNCEMENT_END_DATE=2026-05-31&LIVE_DATE=2026-05-21&LIVE_TIME_START=14:15&LIVE_TIME_END=15:00
+      const params = new URLSearchParams(window.location.hash.slice(1));
+
+      for (const name in defaults) {
+        config[name] = params.get(name) ?? defaults[name];
+      }
+
+      const announcementStart = new Date(`${config.ANNOUNCEMENT_START_DATE}T00:00:00${config.TZ}`);
+      const announcementEnd = new Date(`${config.ANNOUNCEMENT_END_DATE}T23:59:59${config.TZ}`);
+      const liveStart = new Date(`${config.LIVE_DATE}T${config.LIVE_TIME_START}:00${config.TZ}`);
+      const liveEnd = new Date(`${config.LIVE_DATE}T${config.LIVE_TIME_END}:00${config.TZ}`);
+      const linksStart = liveStart;
+      const linksEnd = announcementEnd;
+
+      const now = new Date();
+
+      // Hide announcement if outside announcement period
+      if (now < announcementStart || now > announcementEnd) {
+        document.getElementById('announcement').style.display = 'none';
+      }
+
+      // Hide live indicator if outside live period
+      if (now < liveStart || now > liveEnd) {
+        document.getElementById('live-indicator').style.display = 'none';
+      }
+
+      // Hide links if outside links period
+      if (now < linksStart || now > linksEnd) {
+        document.getElementById('live-links').style.display = 'none';
+      }
+    })();
+  </script>
+
   <div class="container">
 <!--  Generated from index.md using https://marked.js.org/demo/ -->
   <h3 id="hi">Hi!</h3>
