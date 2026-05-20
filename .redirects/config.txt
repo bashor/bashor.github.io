@@ -77,4 +77,5 @@ slides/wasmio26
 Building Web Apps with Kotlin and Wasm.pdf
 
 slides/kotlinconf26
-/
+slides/kotlinconf26/KotlinConf 26 - Building AI‑Powered Web Apps in Kotlin Wasm.pdf
+Building AI‑Powered Web Apps in Kotlin Wasm.pdf
