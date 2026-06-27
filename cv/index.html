@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zalim Bashorov — CV</title>
+    <style>
+        /* Base reset */
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, sans-serif;
+            font-size: 15px;
+            line-height: 1.6;
+            color: #1a1a1a;
+            background: #f9f9f9;
+            padding: 2rem 1rem;
+        }
+
+        #cv-root {
+            max-width: 920px;
+            margin: 0 auto;
+            background: #fff;
+            padding: 2.5rem 3rem;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+        }
+
+        /* Header */
+        .cv-header {
+            margin-bottom: 2rem;
+            border-bottom: 2px solid #1a1a1a;
+            padding-bottom: 1rem;
+        }
+
+        .cv-header h1 {
+            font-size: 2rem;
+            font-weight: 700;
+        }
+
+        .cv-header .cv-subtitle {
+            font-size: 1rem;
+            color: #555;
+            margin-top: 0.25rem;
+        }
+
+        .cv-header a {
+            color: #1a1a1a;
+        }
+
+        /* Section */
+        .cv-section {
+            margin-bottom: 2rem;
+        }
+
+        .cv-section-title {
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: #666;
+            border-bottom: 1px solid #e0e0e0;
+            padding-bottom: 0.3rem;
+            margin-bottom: 1.25rem;
+        }
+
+        /* Company block */
+        .cv-company {
+            margin-bottom: 1.75rem;
+        }
+
+        .cv-company-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            flex-wrap: wrap;
+            gap: 0.25rem;
+        }
+
+        .cv-company-name {
+            font-weight: 700;
+            font-size: 1rem;
+        }
+
+        .cv-company-meta {
+            font-size: 0.8rem;
+            color: #888;
+            text-align: right;
+        }
+
+        /* Role block */
+        .cv-role {
+            margin-top: 0.75rem;
+            padding-left: 1rem;
+            border-left: 2px solid #e8e8e8;
+        }
+
+        .cv-role-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            flex-wrap: wrap;
+            gap: 0.25rem;
+            margin-bottom: 0.35rem;
+        }
+
+        .cv-role-title {
+            font-weight: 600;
+            font-size: 0.95rem;
+            font-style: italic;
+        }
+
+        .cv-role-dates {
+            font-size: 0.8rem;
+            color: #888;
+        }
+
+        .cv-role ul {
+            padding-left: 1.25rem;
+        }
+
+        .cv-role li {
+            margin-bottom: 0.2rem;
+            font-size: 0.9rem;
+            color: #333;
+        }
+
+        /* Education */
+        .cv-edu-item {
+            margin-bottom: 1rem;
+        }
+
+        .cv-edu-item .cv-edu-header {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 0.25rem;
+        }
+
+        .cv-edu-item .cv-edu-name {
+            font-weight: 600;
+        }
+
+        .cv-edu-item .cv-edu-years {
+            font-size: 0.8rem;
+            color: #888;
+        }
+
+        .cv-edu-item .cv-edu-degree {
+            font-size: 0.9rem;
+            color: #555;
+            margin-top: 0.1rem;
+        }
+
+        /* Skills */
+        .cv-skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .cv-skill {
+            background: #f0f0f0;
+            border-radius: 3px;
+            padding: 0.2rem 0.6rem;
+            font-size: 0.85rem;
+        }
+
+        /* Certificates */
+        .cv-cert-item {
+            margin-bottom: 0.6rem;
+            font-size: 0.9rem;
+        }
+
+        .cv-cert-item a {
+            color: #1a1a1a;
+        }
+
+        .cv-cert-score {
+            color: #888;
+            font-size: 0.8rem;
+            margin-left: 0.4rem;
+        }
+
+        .cv-cert-date {
+            color: #aaa;
+            font-size: 0.8rem;
+            margin-left: 0.4rem;
+        }
+
+        /* Languages */
+        .cv-lang-list {
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .cv-lang-item {
+            font-size: 0.9rem;
+        }
+
+        .cv-lang-prof {
+            color: #888;
+            margin-left: 0.3rem;
+        }
+
+        @media (max-width: 600px) {
+            #cv-root {
+                padding: 1.5rem 1.25rem;
+            }
+
+            .cv-company-header, .cv-role-header, .cv-edu-item .cv-edu-header {
+                flex-direction: column;
+            }
+
+            .cv-company-meta, .cv-role-dates, .cv-edu-item .cv-edu-years {
+                text-align: left;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!--language=JSON-->
+<pre id="cv-json">
+{
+    "name": "Zalim Bashorov",
+    "title": "(Lead/Senior) Software Engineer",
+    "email": "bashorov@gmail.com",
+    "workExperience": [
+        {
+            "company": "JetBrains (JetBrains N.V.)",
+            "startDate": "Aug 2021",
+            "endDate": "Present",
+            "location": "Netherlands, Amsterdam",
+            "roles": [
+                {
+                    "title": "Team Lead for Kotlin Wasm",
+                    "startDate": "Oct 2022",
+                    "endDate": "Present",
+                    "responsibilities": []
+                },
+                {
+                    "title": "Tech Lead for Kotlin Compiler Backends",
+                    "startDate": "Aug 2021",
+                    "endDate": "Oct 2022",
+                    "responsibilities": [
+                        "Design and evolution of common compiler infrastructure."
+                    ]
+                },
+                {
+                    "title": "Team Lead for Kotlin JS & Wasm",
+                    "startDate": "Feb 2018",
+                    "endDate": "Oct 2022",
+                    "responsibilities": [
+                        "(Same as below)"
+                    ]
+                }
+            ]
+        },
+        {
+            "company": "JetBrains (IntelliJ Labs Co Ltd.)",
+            "startDate": "Oct 2012",
+            "endDate": "Jul 2021",
+            "location": "Russia, Saint-Petersburg",
+            "roles": [
+                {
+                    "title": "Team Lead for Kotlin JS & Wasm",
+                    "startDate": "Feb 2018",
+                    "endDate": "Jul 2021",
+                    "responsibilities": [
+                        "Actively worked on the design of Kotlin/JS interop.",
+                        {
+                            "text": "Worked on the new Kotlin/JS compiler backend (as tech lead).",
+                            "items": [
+                                "Made various improvements in DCE optimization.",
+                                "Implemented sourcemap generation."
+                            ]
+                        },
+                        "Actively participated in the common compiler infrastructure design.",
+                        "* Common Intermediate Representation and utilities around it",
+                        "* Drove works on klib (the new Kotlin library format).",
+                        "Was responsible for planning and prioritizing tasks with the following execution.",
+                        "Was involved in hiring processes:",
+                        "* Interviewed candidates.",
+                        "* Prepared trial assignment tasks.",
+                        "* Verified candidates' works.",
+                        "Build and optimize processes inside the team.",
+                        "Worked closely with users by helping them and processing their feedback.",
+                        "Advocated supporting wasm as another compilation target and started a new compiler backend for that."
+                    ]
+                },
+                {
+                    "title": "Coordinator for Kotlin Build Infrastructure",
+                    "startDate": "Dec 2018",
+                    "endDate": "Jun 2019",
+                    "responsibilities": [
+                        "Helped to coordinate and prioritize tasks due to team being left without a manager.",
+                        "Started the hiring process and found and recommended a person as Team Lead of the team.",
+                        "Actively pushed the process of getting regular green builds."
+                    ]
+                },
+                {
+                    "title": "Software Engineer in Kotlin",
+                    "startDate": "May 2013",
+                    "endDate": "Feb 2018",
+                    "responsibilities": [
+                        "Worked on precise incremental compilation for Kotlin/JVM as coordinator and de facto tech lead.",
+                        "* Designed base principles.",
+                        "* Refactored critical compiler parts to make it possible to collect the required information.",
+                        "Helped fix bugs and implement various features in frontend and JVM compiler backend while preparing for the first release of Kotlin.",
+                        "De facto for a long time was Project Manager and Tech Lead of Kotlin/JS target:",
+                        "* Actively worked on design of Kotlin/JS interop",
+                        "* Implemented features and fixed bugs",
+                        "* Prioritized and coordinated tasks.",
+                        "Supervised an internship work on inline support in Kotlin/JS compiler backend."
+                    ]
+                },
+                {
+                    "title": "Intern in Kotlin Project",
+                    "startDate": "Oct 2012",
+                    "endDate": "May 2013",
+                    "responsibilities": [
+                        "Worked on implementing features and fixing bugs for Kotlin/JS.",
+                        "Analyzed performance of code generated by Kotlin/JS compiler on various scenarios and proposed changes to improve performance.",
+                        "Actively participated in the Kotlin Community."
+                    ]
+                }
+            ]
+        },
+        {
+            "company": "BFS corp.",
+            "startDate": "Jan 2010",
+            "endDate": "Aug 2011",
+            "location": "Russia, Nalchik",
+            "roles": [
+                {
+                    "title": "Software Engineer",
+                    "startDate": "Jan 2010",
+                    "endDate": "Aug 2011",
+                    "responsibilities": [
+                        "Developed drivers on Windows and macOS to update firmwares using the DFU protocol and integrated it with the UI part.",
+                        "Worked on a service to take a snapshot of sites by schedule.",
+                        "Some other fixes and improvements in customer systems."
+                    ]
+                }
+            ]
+        },
+        {
+            "company": "ITV Group / AxxonSoft",
+            "startDate": "Oct 2008",
+            "endDate": "Nov 2009",
+            "location": "Russia, Nalchik",
+            "roles": [
+                {
+                    "title": "Software Engineer",
+                    "startDate": "Oct 2008",
+                    "endDate": "Nov 2009",
+                    "responsibilities": [
+                        "Worked on supporting IP and other CCTV cameras in software products developed by the company."
+                    ]
+                }
+            ]
+        },
+        {
+            "company": "Kabardino-Balkarian State University",
+            "startDate": "Sep 2005",
+            "endDate": "Sep 2008",
+            "location": "Russia, Nalchik",
+            "roles": [
+                {
+                    "title": "Engineer",
+                    "startDate": "Sep 2005",
+                    "endDate": "Sep 2008",
+                    "responsibilities": [
+                        "Helped users with their daily work.",
+                        "Installed, updated, and set up software.",
+                        "Wrote some tools to automate daily routines."
+                    ]
+                }
+            ]
+        }
+    ],
+    "education": [
+        {
+            "institution": "Saint Petersburg Academic University",
+            "startYear": 2011,
+            "endYear": 2013,
+            "degree": "Master of Applied Mathematics and Physics (Software Engineering Program)"
+        },
+        {
+            "institution": "Kabardino-Balkarian State University",
+            "startYear": 2003,
+            "endYear": 2008,
+            "degree": "Engineer of Automated Systems of Processing and Control Information"
+        }
+    ],
+    "skills": [
+        "Kotlin",
+        "Java",
+        "C++",
+        "Compilers",
+        "Interpreters",
+        "Virtual Machines"
+    ],
+    "certificates": [
+        {
+            "title": "Brainbench C++ Fundamentals",
+            "date": "09 March 2012",
+            "score": "4.69 / 5",
+            "url": "https://www.brainbench.com/content/transcript/topicdetail.do?testid=12321604"
+        },
+        {
+            "title": "Brainbench C++",
+            "date": "09 March 2012",
+            "score": "4.25 / 5",
+            "url": "https://www.brainbench.com/content/transcript/topicdetail.do?testid=12322725"
+        }
+    ],
+    "languages": [
+        {
+            "language": "English",
+            "proficiency": "B2+"
+        },
+        {
+            "language": "Russian",
+            "proficiency": "Native"
+        }
+    ]
+}
+</pre>
+
+<script>
+    (function () {
+        const raw = document.getElementById('cv-json');
+        const cv = JSON.parse(raw.textContent);
+
+        // Hide raw JSON
+        raw.style.display = 'none';
+
+        function el(tag, cls, text) {
+            const e = document.createElement(tag);
+            if (cls) e.className = cls;
+            if (text != null) e.textContent = text;
+            return e;
+        }
+
+        function dateRange(start, end) {
+            return start + ' – ' + end;
+        }
+
+        const root = document.createElement('div');
+        root.id = 'cv-root';
+
+        // ── Header ──────────────────────────────────────────────
+        const header = el('header', 'cv-header');
+        header.appendChild(el('h1', null, cv.name));
+        const subtitle = el('p', 'cv-subtitle');
+        subtitle.textContent = cv.title + ' · ';
+        const mailto = document.createElement('a');
+        mailto.href = 'mailto:' + cv.email;
+        mailto.textContent = cv.email;
+        subtitle.appendChild(mailto);
+        header.appendChild(subtitle);
+        root.appendChild(header);
+
+        // ── Work Experience ──────────────────────────────────────
+        const workSection = el('section', 'cv-section');
+        workSection.appendChild(el('h2', 'cv-section-title', 'Work Experience'));
+
+        for (const job of cv.workExperience) {
+            const company = el('div', 'cv-company');
+
+            const compHeader = el('div', 'cv-company-header');
+            compHeader.appendChild(el('span', 'cv-company-name', job.company));
+            const meta = el('span', 'cv-company-meta');
+            meta.innerHTML = dateRange(job.startDate, job.endDate) + '<br>' + job.location;
+            compHeader.appendChild(meta);
+            company.appendChild(compHeader);
+
+            for (const role of job.roles) {
+                const roleDiv = el('div', 'cv-role');
+
+                const roleHeader = el('div', 'cv-role-header');
+                roleHeader.appendChild(el('span', 'cv-role-title', role.title));
+                roleHeader.appendChild(el('span', 'cv-role-dates', dateRange(role.startDate, role.endDate)));
+                roleDiv.appendChild(roleHeader);
+
+                if (role.responsibilities.length > 0) {
+                    const ul = el('ul');
+                    for (const r of role.responsibilities) {
+                        ul.appendChild(el('li', null, r));
+                    }
+                    roleDiv.appendChild(ul);
+                }
+
+                company.appendChild(roleDiv);
+            }
+
+            workSection.appendChild(company);
+        }
+        root.appendChild(workSection);
+
+        // ── Education ────────────────────────────────────────────
+        const eduSection = el('section', 'cv-section');
+        eduSection.appendChild(el('h2', 'cv-section-title', 'Education'));
+
+        for (const edu of cv.education) {
+            const item = el('div', 'cv-edu-item');
+            const eduHeader = el('div', 'cv-edu-header');
+            eduHeader.appendChild(el('span', 'cv-edu-name', edu.institution));
+            eduHeader.appendChild(el('span', 'cv-edu-years', edu.startYear + ' – ' + edu.endYear));
+            item.appendChild(eduHeader);
+            item.appendChild(el('div', 'cv-edu-degree', edu.degree));
+            eduSection.appendChild(item);
+        }
+        root.appendChild(eduSection);
+
+        // ── Skills ───────────────────────────────────────────────
+        const skillsSection = el('section', 'cv-section');
+        skillsSection.appendChild(el('h2', 'cv-section-title', 'Skills & Interests'));
+        const skillsDiv = el('div', 'cv-skills');
+        for (const s of cv.skills) {
+            skillsDiv.appendChild(el('span', 'cv-skill', s));
+        }
+        skillsSection.appendChild(skillsDiv);
+        root.appendChild(skillsSection);
+
+        // ── Certificates ─────────────────────────────────────────
+        const certSection = el('section', 'cv-section');
+        certSection.appendChild(el('h2', 'cv-section-title', 'Certificates'));
+        for (const cert of cv.certificates) {
+            const item = el('div', 'cv-cert-item');
+            const link = document.createElement('a');
+            link.href = cert.url;
+            link.textContent = cert.title;
+            item.appendChild(link);
+            item.appendChild(el('span', 'cv-cert-score', 'Score: ' + cert.score));
+            item.appendChild(el('span', 'cv-cert-date', cert.date));
+            certSection.appendChild(item);
+        }
+        root.appendChild(certSection);
+
+        // ── Languages ────────────────────────────────────────────
+        const langSection = el('section', 'cv-section');
+        langSection.appendChild(el('h2', 'cv-section-title', 'Languages'));
+        const langList = el('div', 'cv-lang-list');
+        for (const lang of cv.languages) {
+            const item = el('span', 'cv-lang-item');
+            item.textContent = lang.language;
+            item.appendChild(el('span', 'cv-lang-prof', '(' + lang.proficiency + ')'));
+            langList.appendChild(item);
+        }
+        langSection.appendChild(langList);
+        root.appendChild(langSection);
+
+        document.body.appendChild(root);
+    })();
+</script>
+
+</body>
+
+<!-- Track visits with respect to privacy -->
+<script data-goatcounter="https://zalim.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+<noscript><img src="https://zalim.goatcounter.com/count?p=cv"></noscript>
+</html>
