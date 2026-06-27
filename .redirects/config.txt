@@ -8,9 +8,6 @@
 #
 # Comments start with '#' and are ignored.
 
-cv
-https://docs.google.com/document/d/1Qk9TZZBQDWo9Dh6Ri0uOZHlKcMCmkQp9ePBjmpX_vBs/edit?usp=sharing
-
 x
 https://x.com/bashorov/
 
