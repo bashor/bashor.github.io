@@ -509,7 +509,18 @@
                 if (role.responsibilities.length > 0) {
                     const ul = el('ul');
                     for (const r of role.responsibilities) {
-                        ul.appendChild(el('li', null, r));
+                        const li = el('li');
+                        if (typeof r === 'string') {
+                            li.textContent = r;
+                        } else {
+                            li.textContent = r.text;
+                            const subUl = el('ul');
+                            for (const sub of r.items) {
+                                subUl.appendChild(el('li', null, sub));
+                            }
+                            li.appendChild(subUl);
+                        }
+                        ul.appendChild(li);
                     }
                     roleDiv.appendChild(ul);
                 }
