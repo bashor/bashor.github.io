@@ -262,9 +262,47 @@
       reader.readAsText(file);
     }
 
-    function saveFile(name, html) {
+    // localStorage values are stored gzipped and base64-encoded, prefixed to
+    // tell them apart from values written by older versions (raw HTML).
+    const GZIP_PREFIX = 'gzip:';
+
+    async function compress(text) {
+      if (typeof CompressionStream === 'undefined') return null;
+      const stream = new Blob([text]).stream().pipeThrough(new CompressionStream('gzip'));
+      return new Uint8Array(await new Response(stream).arrayBuffer());
+    }
+
+    async function decompress(bytes) {
+      const stream = new Blob([bytes]).stream().pipeThrough(new DecompressionStream('gzip'));
+      return new Response(stream).text();
+    }
+
+    function bytesToBase64(bytes) {
+      let binary = '';
+      const chunkSize = 0x8000;
+      for (let i = 0; i < bytes.length; i += chunkSize) {
+        binary += String.fromCharCode.apply(null, bytes.subarray(i, i + chunkSize));
+      }
+      return btoa(binary);
+    }
+
+    function base64ToBytes(str) {
+      const binary = atob(str);
+      const bytes = new Uint8Array(binary.length);
+      for (let i = 0; i < binary.length; i++) {
+        bytes[i] = binary.charCodeAt(i);
+      }
+      return bytes;
+    }
+
+    async function saveFile(name, html) {
       try {
-        localStorage.setItem(name, html);
+        let value = html; // Fallback: store as-is when compression is unavailable
+        const compressed = await compress(html);
+        if (compressed !== null) {
+          value = GZIP_PREFIX + bytesToBase64(compressed);
+        }
+        localStorage.setItem(name, value);
       } catch (err) {
         // Quota exceeded or storage unavailable — viewing still works without persistence
         console.warn('Could not save "' + name + '" to localStorage:', err);
@@ -278,7 +316,7 @@
       renderContent();
     }
 
-    function loadFromUrl() {
+    async function loadFromUrl() {
       const params = new URLSearchParams(location.hash.slice(1));
       const name = params.get('file');
       if (!name) return;
@@ -288,9 +326,16 @@
       } catch (err) {
         return;
       }
-      if (saved !== null) {
-        openFile(name, saved);
+      if (saved === null) return;
+      if (saved.startsWith(GZIP_PREFIX)) {
+        try {
+          saved = await decompress(base64ToBytes(saved.slice(GZIP_PREFIX.length)));
+        } catch (err) {
+          console.warn('Could not decompress "' + name + '" from localStorage:', err);
+          return;
+        }
       }
+      openFile(name, saved);
     }
 
     fileInput.addEventListener('change', (e) => {
