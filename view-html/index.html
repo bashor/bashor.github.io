@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Local HTML Renderer</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --surface: #1e293b;
+      --border: #334155;
+      --text: #f8fafc;
+      --muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-hover: #0284c7;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    header {
+      background-color: var(--surface);
+      border-bottom: 1px solid var(--border);
+      padding: 10px 14px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 10px;
+      z-index: 10;
+    }
+
+    .file-btn {
+      background-color: var(--accent);
+      color: #0f172a;
+      font-weight: 600;
+      font-size: 14px;
+      padding: 8px 14px;
+      border-radius: 8px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      border: none;
+      transition: background-color 0.15s ease;
+    }
+
+    .file-btn:hover {
+      background-color: var(--accent-hover);
+      color: #fff;
+    }
+
+    input[type="file"] {
+      display: none;
+    }
+
+    .mode-switch {
+      display: inline-flex;
+      background-color: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 2px;
+    }
+
+    .mode-switch button {
+      background: transparent;
+      border: none;
+      color: var(--muted);
+      padding: 6px 12px;
+      font-size: 13px;
+      font-weight: 500;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    .mode-switch button.active {
+      background-color: var(--surface);
+      color: var(--text);
+      box-shadow: 0 1px 2px rgba(0,0,0,0.3);
+    }
+
+    .meta {
+      font-size: 13px;
+      color: var(--muted);
+      margin-left: auto;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 45vw;
+    }
+
+    main {
+      flex: 1;
+      position: relative;
+      background-color: #ffffff;
+      overflow: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    #placeholder {
+      position: absolute;
+      inset: 0;
+      background-color: var(--bg);
+      color: var(--muted);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 24px;
+      gap: 12px;
+    }
+
+    #placeholder.hidden {
+      display: none;
+    }
+
+    .drop-zone {
+      border: 2px dashed var(--border);
+      border-radius: 14px;
+      padding: 36px 24px;
+      max-width: 420px;
+      width: 100%;
+    }
+
+    .drop-zone h2 {
+      margin: 0 0 8px 0;
+      color: var(--text);
+      font-size: 18px;
+    }
+
+    .drop-zone p {
+      margin: 0;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      display: block;
+      background: #fff;
+    }
+
+    #shadow-host {
+      width: 100%;
+      min-height: 100%;
+      background: #fff;
+      color: #000;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <label class="file-btn">
+      <span>Open HTML File</span>
+      <input type="file" id="fileInput" accept=".html,.htm,text/html" />
+    </label>
+
+    <div class="mode-switch" role="group" aria-label="Render mode">
+      <button type="button" id="btnIframe" class="active">Iframe (Full Isolation)</button>
+      <button type="button" id="btnShadow">Shadow DOM (In-Place)</button>
+    </div>
+
+    <div class="meta" id="fileName">No file loaded</div>
+  </header>
+
+  <main id="dropArea">
+    <div id="placeholder">
+      <div class="drop-zone">
+        <h2>Render Local HTML in Place</h2>
+        <p>Tap <strong>Open HTML File</strong> above to pick an <code>.html</code> file from your device or Files app, or drag and drop one here.</p>
+      </div>
+    </div>
+
+    <iframe id="iframeViewer" class="hidden" sandbox="allow-scripts allow-forms allow-modals allow-popups allow-same-origin"></iframe>
+    <div id="shadow-host" class="hidden"></div>
+  </main>
+
+  <script>
+    const fileInput = document.getElementById('fileInput');
+    const btnIframe = document.getElementById('btnIframe');
+    const btnShadow = document.getElementById('btnShadow');
+    const fileNameDisplay = document.getElementById('fileName');
+    const placeholder = document.getElementById('placeholder');
+    const iframeViewer = document.getElementById('iframeViewer');
+    const shadowHost = document.getElementById('shadow-host');
+    const dropArea = document.getElementById('dropArea');
+
+    let currentHtml = '';
+    let renderMode = 'iframe'; // 'iframe' or 'shadow'
+    const shadowRoot = shadowHost.attachShadow({ mode: 'open' });
+
+    function renderContent() {
+      if (!currentHtml) return;
+
+      placeholder.classList.add('hidden');
+
+      if (renderMode === 'iframe') {
+        shadowHost.classList.add('hidden');
+        shadowRoot.innerHTML = '';
+        iframeViewer.classList.remove('hidden');
+        iframeViewer.srcdoc = currentHtml;
+      } else {
+        iframeViewer.classList.add('hidden');
+        iframeViewer.srcdoc = '';
+        shadowHost.classList.remove('hidden');
+
+        // Parse HTML so styles and scripts execute cleanly inside Shadow DOM
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(currentHtml, 'text/html');
+
+        shadowRoot.innerHTML = '';
+
+        // Copy head styles/links into shadowRoot
+        doc.head.querySelectorAll('style, link[rel="stylesheet"]').forEach(node => {
+          shadowRoot.appendChild(node.cloneNode(true));
+        });
+
+        // Create wrapper for body content
+        const bodyContainer = document.createElement('div');
+        bodyContainer.innerHTML = doc.body.innerHTML;
+        shadowRoot.appendChild(bodyContainer);
+
+        // Re-create and execute inline scripts inside Shadow DOM context
+        const scripts = doc.querySelectorAll('script');
+        scripts.forEach(oldScript => {
+          const newScript = document.createElement('script');
+          Array.from(oldScript.attributes).forEach(attr => {
+            newScript.setAttribute(attr.name, attr.value);
+          });
+          newScript.textContent = oldScript.textContent;
+          shadowRoot.appendChild(newScript);
+        });
+      }
+    }
+
+    function loadFile(file) {
+      if (!file) return;
+      fileNameDisplay.textContent = file.name;
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        currentHtml = e.target.result;
+        renderContent();
+      };
+      reader.readAsText(file);
+    }
+
+    fileInput.addEventListener('change', (e) => {
+      loadFile(e.target.files[0]);
+    });
+
+    btnIframe.addEventListener('click', () => {
+      if (renderMode === 'iframe') return;
+      renderMode = 'iframe';
+      btnIframe.classList.add('active');
+      btnShadow.classList.remove('active');
+      renderContent();
+    });
+
+    btnShadow.addEventListener('click', () => {
+      if (renderMode === 'shadow') return;
+      renderMode = 'shadow';
+      btnShadow.classList.add('active');
+      btnIframe.classList.remove('active');
+      renderContent();
+    });
+
+    // Drag and drop support
+    dropArea.addEventListener('dragover', (e) => {
+      e.preventDefault();
+    });
+
+    dropArea.addEventListener('drop', (e) => {
+      e.preventDefault();
+      if (e.dataTransfer.files && e.dataTransfer.files.length > 0) {
+        loadFile(e.dataTransfer.files[0]);
+      }
+    });
+  </script>
+</body>
+</html>
