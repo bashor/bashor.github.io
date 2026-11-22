@@ -254,34 +254,67 @@
 
     function loadFile(file) {
       if (!file) return;
-      fileNameDisplay.textContent = file.name;
       const reader = new FileReader();
       reader.onload = (e) => {
-        currentHtml = e.target.result;
-        renderContent();
+        saveFile(file.name, e.target.result);
+        openFile(file.name, e.target.result);
       };
       reader.readAsText(file);
+    }
+
+    function saveFile(name, html) {
+      try {
+        localStorage.setItem(name, html);
+      } catch (err) {
+        // Quota exceeded or storage unavailable — viewing still works without persistence
+        console.warn('Could not save "' + name + '" to localStorage:', err);
+      }
+    }
+
+    function openFile(name, html) {
+      currentHtml = html;
+      fileNameDisplay.textContent = name;
+      history.replaceState(null, '', '#file=' + encodeURIComponent(name));
+      renderContent();
+    }
+
+    function loadFromUrl() {
+      const params = new URLSearchParams(location.hash.slice(1));
+      const name = params.get('file');
+      if (!name) return;
+      let saved = null;
+      try {
+        saved = localStorage.getItem(name);
+      } catch (err) {
+        return;
+      }
+      if (saved !== null) {
+        openFile(name, saved);
+      }
     }
 
     fileInput.addEventListener('change', (e) => {
       loadFile(e.target.files[0]);
     });
 
-    btnIframe.addEventListener('click', () => {
-      if (renderMode === 'iframe') return;
-      renderMode = 'iframe';
-      btnIframe.classList.add('active');
-      btnShadow.classList.remove('active');
-      renderContent();
-    });
+    // Mode switch buttons are currently commented out in the markup
+    if (btnIframe && btnShadow) {
+      btnIframe.addEventListener('click', () => {
+        if (renderMode === 'iframe') return;
+        renderMode = 'iframe';
+        btnIframe.classList.add('active');
+        btnShadow.classList.remove('active');
+        renderContent();
+      });
 
-    btnShadow.addEventListener('click', () => {
-      if (renderMode === 'shadow') return;
-      renderMode = 'shadow';
-      btnShadow.classList.add('active');
-      btnIframe.classList.remove('active');
-      renderContent();
-    });
+      btnShadow.addEventListener('click', () => {
+        if (renderMode === 'shadow') return;
+        renderMode = 'shadow';
+        btnShadow.classList.add('active');
+        btnIframe.classList.remove('active');
+        renderContent();
+      });
+    }
 
     // Drag and drop support
     dropArea.addEventListener('dragover', (e) => {
@@ -294,6 +327,9 @@
         loadFile(e.dataTransfer.files[0]);
       }
     });
+
+    // Restore the file referenced by the URL hash (#file=<file-name>) on load
+    loadFromUrl();
   </script>
 </body>
 </html>
