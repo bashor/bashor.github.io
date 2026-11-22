@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Local HTML Renderer</title>
+  <title>HTML Renderer</title>
   <style>
     :root {
       --bg: #0f172a;
@@ -63,6 +63,56 @@
 
     input[type="file"] {
       display: none;
+    }
+
+    .url-box {
+      display: inline-flex;
+      align-items: stretch;
+      width: min(320px, 100%);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background-color: var(--bg);
+      overflow: hidden;
+    }
+
+    .url-box input {
+      flex: 1;
+      min-width: 0;
+      background: transparent;
+      border: none;
+      outline: none;
+      color: var(--text);
+      font-size: 13px;
+      padding: 8px 10px;
+    }
+
+    .url-box input::placeholder {
+      color: var(--muted);
+    }
+
+    .url-box button {
+      background-color: var(--surface);
+      border: none;
+      border-left: 1px solid var(--border);
+      color: var(--text);
+      font-size: 13px;
+      font-weight: 600;
+      padding: 8px 12px;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
+    .url-box button:hover {
+      background-color: var(--accent-hover);
+      color: #fff;
+    }
+
+    .drop-zone .error {
+      margin-top: 14px;
+      color: #f87171;
+      font-size: 13px;
+      line-height: 1.5;
+      word-break: break-word;
     }
 
     .mode-switch {
@@ -174,19 +224,25 @@
       <input type="file" id="fileInput" accept=".html,.htm,text/html" />
     </label>
 
+    <div class="url-box">
+      <input type="url" id="urlInput" placeholder="https://example.com/page.html" spellcheck="false" autocapitalize="off" autocomplete="off" enterkeyhint="go" aria-label="URL of an HTML page" />
+      <button type="button" id="btnOpenUrl">Open URL</button>
+    </div>
+
 <!--    <div class="mode-switch" role="group" aria-label="Render mode">-->
 <!--      <button type="button" id="btnIframe" class="active">Iframe (Full Isolation)</button>-->
 <!--      <button type="button" id="btnShadow">Shadow DOM (In-Place)</button>-->
 <!--    </div>-->
 
-    <div class="meta" id="fileName">No file loaded</div>
+    <div class="meta" id="fileName">Nothing loaded</div>
   </header>
 
   <main id="dropArea">
     <div id="placeholder">
       <div class="drop-zone">
-        <h2>Render Local HTML in Place</h2>
-        <p>Tap <strong>Open HTML File</strong> above to pick an <code>.html</code> file from your device or Files app, or drag and drop one here.</p>
+        <h2>Render HTML in Place</h2>
+        <p>Tap <strong>Open HTML File</strong> above to pick an <code>.html</code> file from your device or Files app, drag and drop a file or a link here, or paste a URL to render a remote page.</p>
+        <div id="loadError" class="error hidden"></div>
       </div>
     </div>
 
@@ -196,15 +252,19 @@
 
   <script>
     const fileInput = document.getElementById('fileInput');
+    const urlInput = document.getElementById('urlInput');
+    const btnOpenUrl = document.getElementById('btnOpenUrl');
     const btnIframe = document.getElementById('btnIframe');
     const btnShadow = document.getElementById('btnShadow');
     const fileNameDisplay = document.getElementById('fileName');
     const placeholder = document.getElementById('placeholder');
+    const loadError = document.getElementById('loadError');
     const iframeViewer = document.getElementById('iframeViewer');
     const shadowHost = document.getElementById('shadow-host');
     const dropArea = document.getElementById('dropArea');
 
     let currentHtml = '';
+    let loadToken = 0; // superseeded async loads are dropped
     let renderMode = 'iframe'; // 'iframe' or 'shadow'
     const shadowRoot = shadowHost.attachShadow({ mode: 'open' });
 
@@ -212,6 +272,7 @@
       if (!currentHtml) return;
 
       placeholder.classList.add('hidden');
+      loadError.classList.add('hidden');
 
       if (renderMode === 'iframe') {
         shadowHost.classList.add('hidden');
@@ -254,8 +315,10 @@
 
     function loadFile(file) {
       if (!file) return;
+      const token = ++loadToken;
       const reader = new FileReader();
       reader.onload = (e) => {
+        if (token !== loadToken) return; // a newer load has started meanwhile
         saveFile(file.name, e.target.result);
         openFile(file.name, e.target.result);
       };
@@ -310,36 +373,124 @@
     }
 
     function openFile(name, html) {
+      openContent(name, html, '#file=' + encodeURIComponent(name), false);
+    }
+
+    // Remote pages are never written to localStorage — they are re-fetched
+    // on every visit through the #url= hash. They also run in a stricter
+    // sandbox (no allow-same-origin) so their scripts cannot read this
+    // site's localStorage, where opened files are kept.
+    function openUrl(url, html) {
+      openContent(url, html, '#url=' + encodeURIComponent(url), true);
+    }
+
+    function openContent(name, html, hash, remote) {
       currentHtml = html;
       fileNameDisplay.textContent = name;
-      history.replaceState(null, '', '#file=' + encodeURIComponent(name));
+      iframeViewer.setAttribute('sandbox', remote
+        ? 'allow-scripts allow-forms allow-modals allow-popups'
+        : 'allow-scripts allow-forms allow-modals allow-popups allow-same-origin');
+      history.replaceState(null, '', hash);
       renderContent();
     }
 
-    async function loadFromUrl() {
-      const params = new URLSearchParams(location.hash.slice(1));
-      const name = params.get('file');
-      if (!name) return;
-      let saved = null;
+    function showError(message) {
+      loadError.textContent = message;
+      loadError.classList.remove('hidden');
+      placeholder.classList.remove('hidden');
+    }
+
+    function normalizeUrl(value) {
+      if (!/^https?:\/\//i.test(value)) {
+        // Scheme present but not http(s) — not supported
+        if (/^[a-z][a-z0-9+.-]*:/i.test(value)) return null;
+        value = 'https://' + value;
+      }
       try {
-        saved = localStorage.getItem(name);
+        return new URL(value).href;
       } catch (err) {
+        return null;
+      }
+    }
+
+    // Give remote pages a <base> pointing at their own URL so relative
+    // resources resolve against the source site, not this viewer
+    function withBase(html, url) {
+      if (/<base\s/i.test(html)) return html; // respect the page's own <base>
+      const tag = '<base href="' + url.replace(/"/g, '&quot;') + '">';
+      if (/<head[^>]*>/i.test(html)) return html.replace(/<head[^>]*>/i, (head) => head + tag);
+      if (/<html[^>]*>/i.test(html)) return html.replace(/<html[^>]*>/i, (htmlTag) => htmlTag + '<head>' + tag + '</head>');
+      return tag + html;
+    }
+
+    async function fetchAndOpenUrl(rawUrl) {
+      const token = ++loadToken;
+      const url = normalizeUrl(rawUrl);
+      if (!url) {
+        fileNameDisplay.textContent = 'Invalid URL';
+        showError('Invalid URL: ' + rawUrl);
         return;
       }
-      if (saved === null) return;
-      if (saved.startsWith(GZIP_PREFIX)) {
+      fileNameDisplay.textContent = 'Loading ' + url + '…';
+      try {
+        const response = await fetch(url);
+        if (!response.ok) {
+          throw new Error('HTTP ' + response.status + (response.statusText ? ' ' + response.statusText : ''));
+        }
+        const html = await response.text();
+        if (token !== loadToken) return; // a newer load has started meanwhile
+        openUrl(url, withBase(html, url));
+      } catch (err) {
+        if (token !== loadToken) return;
+        fileNameDisplay.textContent = 'Could not load ' + url;
+        console.warn('Could not load "' + url + '":', err);
+        showError('Could not load ' + url + '. ' + err.message +
+          (err instanceof TypeError ? ' The server may not allow cross-origin (CORS) access to the page.' : ''));
+      }
+    }
+
+    // Restore content referenced by the URL hash:
+    // #file=<name> — from localStorage, #url=<url> — fetched fresh, never cached
+    async function restoreFromHash() {
+      const params = new URLSearchParams(location.hash.slice(1));
+      const name = params.get('file');
+      if (name) {
+        let saved = null;
         try {
-          saved = await decompress(base64ToBytes(saved.slice(GZIP_PREFIX.length)));
+          saved = localStorage.getItem(name);
         } catch (err) {
-          console.warn('Could not decompress "' + name + '" from localStorage:', err);
           return;
         }
+        if (saved === null) return;
+        if (saved.startsWith(GZIP_PREFIX)) {
+          try {
+            saved = await decompress(base64ToBytes(saved.slice(GZIP_PREFIX.length)));
+          } catch (err) {
+            console.warn('Could not decompress "' + name + '" from localStorage:', err);
+            return;
+          }
+        }
+        openFile(name, saved);
+        return;
       }
-      openFile(name, saved);
+      const url = params.get('url');
+      if (url) {
+        urlInput.value = url;
+        fetchAndOpenUrl(url);
+      }
     }
 
     fileInput.addEventListener('change', (e) => {
       loadFile(e.target.files[0]);
+    });
+
+    btnOpenUrl.addEventListener('click', () => {
+      const value = urlInput.value.trim();
+      if (value) fetchAndOpenUrl(value);
+    });
+
+    urlInput.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') btnOpenUrl.click();
     });
 
     // Mode switch buttons are currently commented out in the markup
@@ -370,11 +521,15 @@
       e.preventDefault();
       if (e.dataTransfer.files && e.dataTransfer.files.length > 0) {
         loadFile(e.dataTransfer.files[0]);
+        return;
       }
+      // Dropped link (address bar, text link) instead of a file
+      const text = e.dataTransfer.getData('text/uri-list') || e.dataTransfer.getData('text/plain');
+      const url = text.split('\n').map((line) => line.trim()).find((line) => line && !line.startsWith('#'));
+      if (url) fetchAndOpenUrl(url);
     });
 
-    // Restore the file referenced by the URL hash (#file=<file-name>) on load
-    loadFromUrl();
+    restoreFromHash();
   </script>
 </body>
 </html>
